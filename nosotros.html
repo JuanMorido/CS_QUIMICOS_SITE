@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nosotros — CS Químicos</title>
+    <link rel="icon" href="csqicongold.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <!-- ══════════════════════════════════════════════════════════
+     NAV — Active: Nosotros
+     ══════════════════════════════════════════════════════════ -->
+    <nav class="nav">
+      <a href="index.html" class="nav__logo"
+        >CS&nbsp;<span class="nav__logo-accent">Químicos</span></a
+      >
+      <ul class="nav__links">
+        <li><a href="productos.html" class="nav__link">Productos</a></li>
+        <li>
+          <a href="nosotros.html" class="nav__link nav__link--active"
+            >Nosotros</a
+          >
+        </li>
+        <li><a href="recursos.html" class="nav__link">Recursos</a></li>
+        <li><a href="contacto.html" class="nav__link">Contáctenos</a></li>
+        <li>
+          <button class="nav__cart" id="cart-open" data-cart-open title="Ver carrito">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="8" width="18" height="14" rx="2" />
+              <path d="M8 8V6a4 4 0 018 0v2" />
+            </svg>
+            <span class="nav__cart-badge" id="cart-badge"></span>
+          </button>
+        </li>
+      </ul>
+      <button class="nav__burger" id="nav-burger" aria-label="Abrir menú">
+        <span class="nav__burger-line"></span
+        ><span class="nav__burger-line"></span
+        ><span class="nav__burger-line"></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="productos.html" class="mobile-menu__link">Productos</a>
+      <a href="nosotros.html" class="mobile-menu__link">Nosotros</a>
+      <a href="recursos.html" class="mobile-menu__link">Recursos</a>
+      <a href="contacto.html" class="mobile-menu__link">Contáctenos</a>
+      <button class="mobile-menu__link" data-cart-open>Ver carrito</button>
+    </div>
+
+    <div class="page">
+      <!-- ── PAGE HERO ──────────────────────────────────────────
+       Dark banner with page title. Hex pattern in background.
+       ──────────────────────────────────────────────────── -->
+      <div class="page-hero">
+        <div class="hex-bg"></div>
+        <span class="page-hero__eyebrow reveal">Quiénes somos</span>
+        <h1 class="page-hero__title reveal">
+          Ciencia,<br /><em>compromiso</em><br />y territorio.
+        </h1>
+      </div>
+
+      <!-- ── COMPROMISO AMBIENTAL ───────────────────────────────
+       TODO: Fill in the 3 environmental practices below.
+       TODO: Replace image placeholder with a real photo.
+       ──────────────────────────────────────────────────── -->
+      <section class="env">
+        <div class="hex-bg" style="opacity: 0.025"></div>
+        <div class="env__layout">
+          <!-- Text column -->
+          <div class="reveal">
+            <div class="section-header">
+              <span class="section-header__eyebrow">Medio Ambiente</span>
+              <h2 class="section-header__title">
+                Nuestro compromiso<br />con <em>el planeta.</em>
+              </h2>
+              <p class="section-header__desc">
+                <!-- TODO: Escriba aquí su declaración de compromiso ambiental.
+                 Ejemplo: fórmulas biodegradables, manejo responsable de residuos,
+                 preservación de fuentes hídricas, etc. -->
+                [Contenido por completar]
+              </p>
+            </div>
+
+            <div class="env__practices">
+              <!-- TODO: Replace all three practices with real content -->
+              <div class="env__practice">
+                <span class="env__practice-icon">🌿</span>
+                <div>
+                  <span class="env__practice-title"
+                    >[Práctica ambiental 1]</span
+                  >
+                  <p class="env__practice-desc">[Descripción]</p>
+                </div>
+              </div>
+              <div class="env__practice">
+                <span class="env__practice-icon">💧</span>
+                <div>
+                  <span class="env__practice-title"
+                    >[Práctica ambiental 2]</span
+                  >
+                  <p class="env__practice-desc">[Descripción]</p>
+                </div>
+              </div>
+              <div class="env__practice">
+                <span class="env__practice-icon">♻️</span>
+                <div>
+                  <span class="env__practice-title"
+                    >[Práctica ambiental 3]</span
+                  >
+                  <p class="env__practice-desc">[Descripción]</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Image column -->
+          <!-- TODO: Replace this placeholder div with:
+           <img src="images/laboratorio.jpg" alt="Laboratorio CS Químicos" style="width:100%;"> -->
+          <div class="env__image reveal reveal--delay-1">
+            <div class="env__image-placeholder">
+              <div class="hex-bg" style="opacity: 0.06"></div>
+              <div class="env__image-placeholder-inner">
+                <span class="env__image-placeholder-icon">🌱</span>
+                <span class="env__image-placeholder-label"
+                  >Insertar foto aquí</span
+                >
+              </div>
+            </div>
+            <div class="env__image-border"></div>
+          </div>
+        </div>
+      </section>
+      <!-- /.env -->
+
+      <!-- ── HISTORIA ───────────────────────────────────────────
+       Timeline of company milestones. Items alternate L/R.
+       TODO: Fill in all [Año], [Hito] and description fields.
+       ──────────────────────────────────────────────────── -->
+      <section class="timeline">
+        <div class="section-header section-header--center reveal">
+          <span class="section-header__eyebrow">Historia</span>
+          <h2 class="section-header__title">
+            De laboratorio<br />a <em>negocio propio.</em>
+          </h2>
+        </div>
+
+        <div class="timeline__track">
+          <!-- Item 1 — LEFT side -->
+          <div class="timeline__item reveal">
+            <div class="timeline__side timeline__side--left">
+              <span class="timeline__year">[Año]</span>
+              <h3 class="timeline__title">[Hito 1]</h3>
+              <p class="timeline__desc">
+                [Descripción — cómo comenzó la idea, formación, primer producto,
+                etc.]
+              </p>
+            </div>
+            <div class="timeline__dot"></div>
+            <div class="timeline__side timeline__side--empty"></div>
+          </div>
+
+          <!-- Item 2 — RIGHT side -->
+          <div class="timeline__item reveal">
+            <div class="timeline__side timeline__side--empty"></div>
+            <div class="timeline__dot"></div>
+            <div class="timeline__side timeline__side--right">
+              <span class="timeline__year">[Año]</span>
+              <h3 class="timeline__title">[Hito 2]</h3>
+              <p class="timeline__desc">
+                [Fundación formal, primer cliente, apertura del laboratorio,
+                etc.]
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 3 — LEFT side -->
+          <div class="timeline__item reveal">
+            <div class="timeline__side timeline__side--left">
+              <span class="timeline__year">[Año]</span>
+              <h3 class="timeline__title">[Hito 3]</h3>
+              <p class="timeline__desc">
+                [Expansión de líneas, nuevos productos estrella, crecimiento del
+                equipo, etc.]
+              </p>
+            </div>
+            <div class="timeline__dot"></div>
+            <div class="timeline__side timeline__side--empty"></div>
+          </div>
+
+          <!-- Item 4 — RIGHT side (current) -->
+          <div class="timeline__item reveal">
+            <div class="timeline__side timeline__side--empty"></div>
+            <div class="timeline__dot timeline__dot--current"></div>
+            <div class="timeline__side timeline__side--right">
+              <span class="timeline__year">Hoy</span>
+              <h3 class="timeline__title">La química sigue creciendo</h3>
+              <p class="timeline__desc">
+                [Presente y visión de futuro — presencia digital, nuevos
+                mercados, expansión de catálogo.]
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- /.timeline__track -->
+      </section>
+      <!-- /.timeline -->
+    </div>
+    <!-- /.page -->
+
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside class="cart" id="cart" role="dialog" aria-label="Carrito de compras">
+      <div class="cart__header">
+        <span class="cart__title">Su Pedido</span>
+        <button class="cart__close" id="cart-close">✕</button>
+      </div>
+      <div class="cart__items" id="cart-items"></div>
+      <div class="cart__footer">
+        <div class="cart__total">
+          <span class="cart__total-label">Total estimado</span>
+          <span class="cart__total-value" id="cart-total">$0</span>
+        </div>
+        <p class="cart__note">
+          Precios orientativos. Confirmamos disponibilidad y precio final por
+          WhatsApp.
+        </p>
+        <div class="cart__actions">
+          <button class="btn btn--whatsapp btn--full" id="cart-send">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+              />
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.528 5.855L0 24l6.335-1.521A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.677-.487-5.22-1.341l-.374-.218-3.752.901.928-3.651-.241-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"
+              />
+            </svg>
+            Enviar Pedido por WhatsApp
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ══════════════════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════════════════ -->
+    <footer class="footer">
+      <div class="footer__main">
+        <div>
+          <span class="footer__nav-title">Páginas</span>
+          <ul class="footer__nav-list">
+            <li><a href="index.html" class="footer__nav-link">Inicio</a></li>
+            <li>
+              <a href="nosotros.html" class="footer__nav-link">Nosotros</a>
+            </li>
+            <li>
+              <a href="productos.html" class="footer__nav-link">Productos</a>
+            </li>
+            <li>
+              <a href="recursos.html" class="footer__nav-link">Recursos</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__brand">
+          <img
+            src="images/CS_Quimicos_Logo_transparent.png"
+            alt="CS Químicos"
+            style="width: 64px; height: auto"
+          />
+          <span class="footer__brand-name">CS <span>Químicos</span></span>
+          <span class="footer__brand-tagline">La química perfecta.</span>
+        </div>
+        <div class="footer__contact">
+          <address class="footer__address" style="font-style: normal">
+            <span class="footer__address-label">Dirección</span>
+            Calle 14 #27a-12, Acacías, Meta
+          </address>
+          <a
+            href="https://wa.me/573203188602?text=Hola,%20quiero%20contactarlos"
+            target="_blank"
+            class="btn btn--whatsapp btn--sm"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+              />
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.528 5.855L0 24l6.335-1.521A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.677-.487-5.22-1.341l-.374-.218-3.752.901.928-3.651-.241-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"
+              />
+            </svg>
+            Contáctenos
+          </a>
+        </div>
+      </div>
+      <div class="footer__copy">
+        <span class="footer__copy-text"
+          >© 2026 EASI Soluciones · Acacías, Colombia</span
+        >
+        <span class="footer__copy-text">Todos los derechos reservados</span>
+      </div>
+    </footer>
+
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script src="js/shared.js"></script>
+  </body>
+</html>

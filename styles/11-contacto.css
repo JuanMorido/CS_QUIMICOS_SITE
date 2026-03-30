@@ -1,0 +1,165 @@
+/* ============================================================
+   11-contacto.css
+   Sections used exclusively on contacto.html:
+     .contact        →  map + form two-column layout
+     .contact-info   →  three info cards (address, phone, email)
+   ============================================================ */
+
+/* ── Contact section ──────────────────────────────────────── */
+.contact {
+  padding: var(--section-pad);
+  background: var(--color-cream);
+}
+
+.contact__layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Map column */
+.contact__map {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.12);
+  min-height: 460px;
+}
+
+.contact__map iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 460px;
+  display: block;
+  border: none;
+}
+
+/* Form column */
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+/* Two inputs side by side */
+.contact__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+/* Underline-style field */
+.contact__field input,
+.contact__field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.35);
+  padding: 0.55rem 0;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--color-black);
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.contact__field input::placeholder,
+.contact__field textarea::placeholder {
+  color: var(--color-gray);
+}
+
+.contact__field input:focus,
+.contact__field textarea:focus {
+  border-bottom-color: var(--color-gold);
+}
+
+.contact__field textarea {
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.6;
+}
+
+.contact__submit {
+  margin-top: 0.5rem;
+  width: 100%;
+  justify-content: center;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  padding: 1rem;
+}
+
+/* ── Info cards ───────────────────────────────────────────── */
+.contact-info {
+  padding: 4rem 7rem;
+  background: var(--color-cream-dark);
+}
+
+.contact-info__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-info__card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem 1.75rem;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 8px;
+  background: var(--color-cream);
+}
+
+.contact-info__icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  color: var(--color-gold);
+}
+
+.contact-info__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.contact-info__label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.contact-info__value {
+  font-size: 0.8rem;
+  color: var(--color-charcoal);
+  line-height: 1.65;
+}
+
+.contact-info__value a {
+  color: var(--color-charcoal);
+  transition: color var(--transition);
+}
+.contact-info__value a:hover {
+  color: var(--color-gold);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .contact-info { padding: 3rem 2rem; }
+}
+
+@media (max-width: 767px) {
+  .contact { padding: 3rem 1.5rem; }
+  .contact__layout { grid-template-columns: 1fr; }
+  .contact__map { min-height: 300px; }
+  .contact__map iframe { min-height: 300px; }
+  .contact__row { grid-template-columns: 1fr; gap: 1.4rem; }
+  .contact-info { padding: 2.5rem 1.5rem; }
+  .contact-info__grid { grid-template-columns: 1fr; }
+}

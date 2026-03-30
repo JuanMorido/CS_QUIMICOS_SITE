@@ -1,0 +1,2182 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Productos — CS Químicos</title>
+    <link rel="icon" href="csqicongold.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <!-- ══════════════════════════════════════════════════════════
+     NAV — Active: Productos
+     NOTE: Cart button here opens the slide-in cart panel (JS below),
+           instead of linking to the page like on other pages.
+     ══════════════════════════════════════════════════════════ -->
+    <nav class="nav">
+      <a href="index.html" class="nav__logo"
+        >CS&nbsp;<span class="nav__logo-accent">Químicos</span></a
+      >
+      <ul class="nav__links">
+        <li>
+          <a href="productos.html" class="nav__link nav__link--active"
+            >Productos</a
+          >
+        </li>
+        <li><a href="nosotros.html" class="nav__link">Nosotros</a></li>
+        <li><a href="recursos.html" class="nav__link">Recursos</a></li>
+        <li><a href="contacto.html" class="nav__link">Contáctenos</a></li>
+        <li>
+          <!-- Cart button: triggers panel, not a link -->
+          <button
+            class="nav__cart"
+            id="cart-open"
+            data-cart-open
+            title="Ver carrito"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="8" width="18" height="14" rx="2" />
+              <path d="M8 8V6a4 4 0 018 0v2" />
+            </svg>
+            <span class="nav__cart-badge" id="cart-badge"></span>
+          </button>
+        </li>
+      </ul>
+      <button class="nav__burger" id="nav-burger" aria-label="Abrir menú">
+        <span class="nav__burger-line"></span
+        ><span class="nav__burger-line"></span
+        ><span class="nav__burger-line"></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="productos.html" class="mobile-menu__link">Productos</a>
+      <a href="nosotros.html" class="mobile-menu__link">Nosotros</a>
+      <a href="recursos.html" class="mobile-menu__link">Recursos</a>
+      <a href="contacto.html" class="mobile-menu__link">Contáctenos</a>
+      <button class="mobile-menu__link" data-cart-open>Ver carrito</button>
+    </div>
+
+    <div class="page">
+      <!-- ── PAGE HERO ────────────────────────────────────────── -->
+      <div class="page-hero">
+        <div class="hex-bg"></div>
+        <span class="page-hero__eyebrow reveal">Catálogo 2025</span>
+        <h1 class="page-hero__title reveal">
+          Nuestros<br /><em>Productos.</em>
+        </h1>
+        <p class="page-hero__desc reveal">
+          Seleccione su producto, elija la presentación y agréguelo al carrito.
+          Le contactamos para coordinar entrega y pago.
+        </p>
+      </div>
+
+      <!-- ── FILTER BAR ────────────────────────────────────────
+       Category buttons. JS handles show/hide of product cards.
+       Active state: filter-bar__btn--active (toggled by JS).
+       ──────────────────────────────────────────────────── -->
+      <div class="filter-bar">
+        <button
+          class="filter-bar__btn filter-bar__btn--active"
+          data-filter="all"
+        >
+          Todos
+        </button>
+        <button class="filter-bar__btn" data-filter="aseo">Aseo</button>
+        <button class="filter-bar__btn" data-filter="aromas">Aromas</button>
+        <button class="filter-bar__btn" data-filter="piscinas">Piscinas</button>
+        <button class="filter-bar__btn" data-filter="utensilios">
+          Utensilios
+        </button>
+        <button class="filter-bar__btn" data-filter="materias">
+          Materias Primas
+        </button>
+      </div>
+
+      <!-- ── PRODUCTS GRID ─────────────────────────────────────
+       Each card has:
+         data-cat="..."      → used by filter JS
+         data-id="..."       → unique ID for cart system
+         data-name="..."     → display name in cart
+       Each <option> has:
+         value="..."         → size label shown in cart
+
+       ──────────────────────────────────────────────────── -->
+      <section class="products">
+        <div class="products__grid" id="products-grid">
+          <!-- ════ ASEO: LÍQUIDOS ════════════════════════════ -->
+          <div class="products__subcategory" data-cat="aseo">
+            <span class="products__subcategory-title"
+              >Aseo · Productos Líquidos</span
+            >
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Gel Lavaplatos</h3>
+            <p class="product-card__desc">
+              Agente arrancagrasa natural. Cuida y humecta las manos.
+            </p>
+            <select class="product-card__select">
+              <option value="1L" data-price="11000">1L</option>
+              <option value="2L" data-price="18000">2L</option>
+              <option value="4L" data-price="32000">4L</option>
+              <option value="20L" data-price="115000">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="gel-lavaplatos"
+              data-name="Gel Lavaplatos"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image">
+              <img
+                src="images/desengrasante.png"
+                alt="Desengrasante Industrial"
+              />
+            </div>
+            <h3 class="product-card__name">Desengrasante Industrial</h3>
+            <p class="product-card__desc">
+              Alta concentración. Elimina grasas y suciedad pesada en cualquier
+              superficie.
+            </p>
+            <select class="product-card__select">
+              <option value="500ml" data-price="8000">500ml</option>
+              <option value="2L" data-price="14000">2L</option>
+              <option value="4L" data-price="25000">4L</option>
+              <option value="20L" data-price="95000">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="desengrasante-industrial"
+              data-name="Desengrasante Industrial"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Desengrasante Petroquímico</h3>
+            <p class="product-card__desc">
+              Formulación especializada para grasas de origen industrial y
+              petroquímico.
+            </p>
+            <select class="product-card__select">
+              <option value="4L" data-price="0">4L</option>
+              <option value="20L" data-price="0">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="desengrasante-petroquimico"
+              data-name="Desengrasante Petroquímico"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Bio Varsol Emulsionado</h3>
+            <p class="product-card__desc">
+              Solvente de base vegetal. Limpia sin residuos agresivos.
+            </p>
+            <select class="product-card__select">
+              <option value="500ml" data-price="0">500ml</option>
+              <option value="1L" data-price="0">1L</option>
+              <option value="4L" data-price="0">4L</option>
+              <option value="20L" data-price="0">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="bio-varsol-emulsionado"
+              data-name="Bio Varsol Emulsionado"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Limpiador Desinfectante</h3>
+            <p class="product-card__desc">
+              Multiusos con bicarbonato. Elimina bacterias y malos olores.
+            </p>
+            <div class="product-card__fragrances">
+              <button
+                class="product-card__frag product-card__frag--active"
+                data-frag="Citronela"
+              >
+                Citronela
+              </button>
+              <button class="product-card__frag" data-frag="Canela">
+                Canela
+              </button>
+              <button class="product-card__frag" data-frag="Baby">Baby</button>
+              <button class="product-card__frag" data-frag="Lavanda">
+                Lavanda
+              </button>
+              <button class="product-card__frag" data-frag="Limón">
+                Limón
+              </button>
+            </div>
+            <select class="product-card__select">
+              <option value="1L" data-price="10000">1L</option>
+              <option value="2L" data-price="0">2L</option>
+              <option value="20L" data-price="100000">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="limpiador-desinfectante"
+              data-name="Limpiador Desinfectante"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Jabón de Manos</h3>
+            <p class="product-card__desc">
+              Limpia e hidrata. Formulación suave para uso frecuente.
+            </p>
+            <div class="product-card__fragrances">
+              <button
+                class="product-card__frag product-card__frag--active"
+                data-frag="Coco"
+              >
+                Coco
+              </button>
+              <button class="product-card__frag" data-frag="Frutos Verdes">
+                Frutos Verdes
+              </button>
+              <button class="product-card__frag" data-frag="Verbena">
+                Verbena
+              </button>
+              <button class="product-card__frag" data-frag="Neutro">
+                Neutro
+              </button>
+            </div>
+            <select class="product-card__select">
+              <option value="500ml" data-price="7000">500ml</option>
+              <option value="1L" data-price="0">1L</option>
+              <option value="2L" data-price="18000">2L</option>
+              <option value="4L" data-price="30000">4L</option>
+              <option value="20L" data-price="110000">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="jabon-manos"
+              data-name="Jabón de Manos"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Jabón Azul Líquido</h3>
+            <p class="product-card__desc">
+              Jabón multiusos de uso industrial y doméstico.
+            </p>
+            <select class="product-card__select">
+              <option value="1L" data-price="0">1L</option>
+              <option value="2L" data-price="0">2L</option>
+              <option value="4L" data-price="0">4L</option>
+              <option value="20L" data-price="0">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="jabon-azul-liquido"
+              data-name="Jabón Azul Líquido"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Detergente Revitacolor</h3>
+            <p class="product-card__desc">
+              Alta eficiencia con oxígeno activo. Solo 40ml por lavada. Cuida
+              colores y tejidos.
+            </p>
+            <div class="product-card__fragrances">
+              <button
+                class="product-card__frag product-card__frag--active"
+                data-frag="Suavecito"
+              >
+                Suavecito
+              </button>
+              <button class="product-card__frag" data-frag="Sofi">Sofi</button>
+            </div>
+            <select class="product-card__select">
+              <option value="2L" data-price="0">2L</option>
+              <option value="4L" data-price="0">4L</option>
+              <option value="20L" data-price="0">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="detergente-revitacolor"
+              data-name="Detergente Revitacolor"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Suavizante Textil</h3>
+            <p class="product-card__desc">
+              Concentrado. Refresca tejidos, facilita el planchado. Aroma que
+              perdura.
+            </p>
+            <div class="product-card__fragrances">
+              <button
+                class="product-card__frag product-card__frag--active"
+                data-frag="Suavecito"
+              >
+                Suavecito
+              </button>
+              <button class="product-card__frag" data-frag="Manzana Verde">
+                Manzana Verde
+              </button>
+            </div>
+            <select class="product-card__select">
+              <option value="2L" data-price="17000">2L</option>
+              <option value="4L" data-price="28000">4L</option>
+              <option value="20L" data-price="100000">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="suavizante-textil"
+              data-name="Suavizante Textil"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Limpiavidrios Industrial</h3>
+            <p class="product-card__desc">
+              Limpieza efectiva de vidrios y espejos sin dejar manchas.
+            </p>
+            <select class="product-card__select">
+              <option value="1L" data-price="0">1L</option>
+              <option value="2L" data-price="0">2L</option>
+              <option value="4L" data-price="0">4L</option>
+              <option value="20L" data-price="0">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="limpiavidrios-industrial"
+              data-name="Limpiavidrios Industrial"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Silicona Líquida</h3>
+            <p class="product-card__desc">
+              Protege y abrillanta superficies plásticas, caucho y madera.
+            </p>
+            <select class="product-card__select">
+              <option value="500ml" data-price="0">500ml</option>
+              <option value="2L" data-price="0">2L</option>
+              <option value="4L" data-price="0">4L</option>
+              <option value="20L" data-price="0">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="silicona-liquida"
+              data-name="Silicona Líquida"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Cera Autobrillante</h3>
+            <p class="product-card__desc">
+              Protección y brillo duradero para pisos.
+            </p>
+            <select class="product-card__select">
+              <option value="1L" data-price="0">1L</option>
+              <option value="4L" data-price="0">4L</option>
+              <option value="20L" data-price="0">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="cera-autobrillante"
+              data-name="Cera Autobrillante"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Sellador de Pisos</h3>
+            <p class="product-card__desc">
+              Protege y sella superficies para mayor durabilidad.
+            </p>
+            <select class="product-card__select">
+              <option value="1L" data-price="0">1L</option>
+              <option value="4L" data-price="0">4L</option>
+              <option value="20L" data-price="0">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="sellador-pisos"
+              data-name="Sellador de Pisos"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Vinagre Industrial</h3>
+            <p class="product-card__desc">
+              Descalcificante y desinfectante natural para múltiples usos.
+            </p>
+            <select class="product-card__select">
+              <option value="2L" data-price="0">2L</option>
+              <option value="4L" data-price="0">4L</option>
+              <option value="20L" data-price="0">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="vinagre-industrial"
+              data-name="Vinagre Industrial"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Cloro 5%</h3>
+            <p class="product-card__desc">
+              Blanqueador y desinfectante de uso general para hogar e industria.
+            </p>
+            <select class="product-card__select">
+              <option value="2L" data-price="0">2L</option>
+              <option value="4L" data-price="0">4L</option>
+              <option value="20L" data-price="0">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="cloro-5"
+              data-name="Cloro 5%"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Hipoclorito al 15%</h3>
+            <p class="product-card__desc">
+              Alta concentración para desinfección de superficies y agua.
+            </p>
+            <select class="product-card__select">
+              <option value="4L" data-price="0">4L</option>
+              <option value="20L" data-price="0">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="hipoclorito-15"
+              data-name="Hipoclorito al 15%"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Creolina</h3>
+            <p class="product-card__desc">
+              Desinfectante veterinario e industrial. Eficaz contra bacterias y
+              hongos.
+            </p>
+            <select class="product-card__select">
+              <option value="250ml" data-price="0">250ml</option>
+              <option value="1L" data-price="0">1L</option>
+              <option value="2L" data-price="0">2L</option>
+              <option value="4L" data-price="0">4L</option>
+              <option value="20L" data-price="0">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="creolina"
+              data-name="Creolina"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Cancún</h3>
+            <p class="product-card__desc">
+              Insecticida natural. Eficaz contra mosquitos, zancudos y otros
+              insectos.
+            </p>
+            <select class="product-card__select">
+              <option value="300ml" data-price="0">300ml</option>
+              <option value="500ml" data-price="0">500ml</option>
+              <option value="1L" data-price="0">1L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="cancun-insecticida"
+              data-name="Cancún"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Varsol Puro</h3>
+            <p class="product-card__desc">
+              Solvente de petróleo para limpieza de piezas y desengrase
+              industrial.
+            </p>
+            <select class="product-card__select">
+              <option value="1L" data-price="0">1L</option>
+              <option value="2L" data-price="0">2L</option>
+              <option value="4L" data-price="0">4L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="varsol-puro"
+              data-name="Varsol Puro"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Etanol 96%</h3>
+            <p class="product-card__desc">
+              Alcohol etílico de alta pureza para desinfección y uso industrial.
+            </p>
+            <select class="product-card__select">
+              <option value="1L" data-price="0">1L</option>
+              <option value="2L" data-price="0">2L</option>
+              <option value="4L" data-price="0">4L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="etanol-96"
+              data-name="Etanol 96%"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Peróxido de Hidrógeno 50%</h3>
+            <p class="product-card__desc">
+              Oxidante y blanqueador industrial. Uso en desinfección y
+              tratamiento de agua.
+            </p>
+            <select class="product-card__select">
+              <option value="1L" data-price="0">1L</option>
+              <option value="2L" data-price="0">2L</option>
+              <option value="4L" data-price="0">4L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="peroxido-hidrogeno-50"
+              data-name="Peróxido de Hidrógeno 50%"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Ácido Muriático</h3>
+            <p class="product-card__desc">
+              Para piscinas, baños, eliminación de cal y óxido en superficies.
+            </p>
+            <select class="product-card__select">
+              <option value="500ml" data-price="10000">500ml</option>
+              <option value="4L" data-price="32000">4L</option>
+              <option value="20L" data-price="130000">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="acido-muriatico"
+              data-name="Ácido Muriático"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Ácido Nítrico</h3>
+            <p class="product-card__desc">
+              Reactivo industrial de alta pureza para limpieza y procesos
+              químicos.
+            </p>
+            <select class="product-card__select">
+              <option value="500ml" data-price="0">500ml</option>
+              <option value="4L" data-price="0">4L</option>
+              <option value="20L" data-price="0">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="acido-nitrico"
+              data-name="Ácido Nítrico"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Amoniaco</h3>
+            <p class="product-card__desc">
+              Limpiador multiusos. Desengrasante y quitamanchas para superficies
+              duras.
+            </p>
+            <select class="product-card__select">
+              <option value="4L" data-price="0">4L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="amoniaco"
+              data-name="Amoniaco"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <!-- ════ ASEO: SÓLIDOS Y POLVOS ════════════════════════ -->
+          <div class="products__subcategory" data-cat="aseo">
+            <span class="products__subcategory-title"
+              >Aseo · Sólidos y Polvos</span
+            >
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Jabón en Polvo</h3>
+            <p class="product-card__desc">
+              Para lavado de ropa a mano y a máquina.
+            </p>
+            <select class="product-card__select">
+              <option value="1Kg" data-price="0">1Kg</option>
+              <option value="5Kg" data-price="0">5Kg</option>
+              <option value="10Kg" data-price="0">10Kg</option>
+              <option value="20Kg" data-price="0">20Kg</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="jabon-polvo"
+              data-name="Jabón en Polvo"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Oxígeno Activo</h3>
+            <p class="product-card__desc">
+              Blanqueador sin cloro. Elimina manchas difíciles en ropa blanca y
+              de color.
+            </p>
+            <select class="product-card__select">
+              <option value="500g" data-price="0">500g</option>
+              <option value="1Kg" data-price="0">1Kg</option>
+              <option value="25Kg" data-price="0">25Kg</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="oxigeno-activo"
+              data-name="Oxígeno Activo"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Bicarbonato de Sodio</h3>
+            <p class="product-card__desc">
+              Versátil: limpieza, cocina, cuidado personal. Neutraliza olores y
+              limpia manchas.
+            </p>
+            <select class="product-card__select">
+              <option value="500g" data-price="5000">500g</option>
+              <option value="1Kg" data-price="9000">1Kg</option>
+              <option value="25Kg" data-price="180000">25Kg</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="bicarbonato-sodio"
+              data-name="Bicarbonato de Sodio"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Ácido Oxálico</h3>
+            <p class="product-card__desc">
+              Quitamanchas de óxido y descalcificante para madera y metal.
+            </p>
+            <select class="product-card__select">
+              <option value="1Kg" data-price="0">1Kg</option>
+              <option value="25Kg" data-price="0">25Kg</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="acido-oxalico"
+              data-name="Ácido Oxálico"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Ácido Bórico</h3>
+            <p class="product-card__desc">
+              Insecticida y antiséptico de uso doméstico e industrial.
+            </p>
+            <select class="product-card__select">
+              <option value="500g" data-price="0">500g</option>
+              <option value="1Kg" data-price="0">1Kg</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="acido-borico"
+              data-name="Ácido Bórico"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Azufre</h3>
+            <p class="product-card__desc">
+              Fungicida y acaricida natural para uso agrícola y de jardinería.
+            </p>
+            <select class="product-card__select">
+              <option value="1Kg" data-price="0">1Kg</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="azufre"
+              data-name="Azufre"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Naftalina</h3>
+            <p class="product-card__desc">
+              Repelente de polillas para armarios y almacenamiento de ropa.
+            </p>
+            <select class="product-card__select">
+              <option value="Sobre x5u" data-price="0">Sobre x5u</option>
+              <option value="1Kg" data-price="0">1Kg</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="naftalina"
+              data-name="Naftalina"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Pastillas para Baño</h3>
+            <p class="product-card__desc">
+              Desinfectantes y aromatizantes para sanitarios de larga duración.
+            </p>
+            <select class="product-card__select">
+              <option value="Unidad" data-price="0">Unidad</option>
+              <option value="Paquete x24" data-price="0">Paquete x24</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="pastillas-bano"
+              data-name="Pastillas para Baño"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Jabón Rey en Barra</h3>
+            <p class="product-card__desc">
+              Jabón en barra tradicional para lavado a mano de ropa y
+              superficies.
+            </p>
+            <select class="product-card__select">
+              <option value="Unidad" data-price="0">Unidad</option>
+              <option value="Caja x25" data-price="0">Caja x25</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="jabon-rey-barra"
+              data-name="Jabón Rey en Barra"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aseo">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Jabón Brillaollas</h3>
+            <p class="product-card__desc">
+              Limpiagrasa en pasta para ollas y utensilios de cocina.
+            </p>
+            <select class="product-card__select">
+              <option value="500g" data-price="0">500g</option>
+              <option value="1Kg" data-price="0">1Kg</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="jabon-brillaollas"
+              data-name="Jabón Brillaollas"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <!-- ════ AROMAS ═══════════════════════════════════════ -->
+          <div class="products__subcategory" data-cat="aromas">
+            <span class="products__subcategory-title">Aromas</span>
+          </div>
+
+          <div class="product-card reveal" data-cat="aromas">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Esencias / Fragancias</h3>
+            <p class="product-card__desc">
+              +30 fragancias exclusivas para fabricación de productos. Lavanda,
+              Invictus, Baby, Bambú y más.
+            </p>
+            <select class="product-card__select">
+              <option value="1oz" data-price="8000">1oz</option>
+              <option value="125g" data-price="18000">125g</option>
+              <option value="250g" data-price="0">250g</option>
+              <option value="500g" data-price="55000">500g</option>
+              <option value="1Kg" data-price="95000">1Kg</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="esencias-fragancias"
+              data-name="Esencias / Fragancias"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aromas">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Ambientador Textil</h3>
+            <p class="product-card__desc">
+              +30 fragancias exclusivas. Aroma de larga duración para ropa y
+              textiles.
+            </p>
+            <select class="product-card__select">
+              <option value="500ml" data-price="15000">500ml</option>
+              <option value="1L" data-price="22000">1L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="ambientador-textil"
+              data-name="Ambientador Textil"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aromas">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Ambientador Varitas</h3>
+            <p class="product-card__desc">
+              Aromatizante en frasco con esterillas difusoras. Decorativo y
+              duradero.
+            </p>
+            <select class="product-card__select">
+              <option value="Frasco con esterillas" data-price="0">
+                Frasco con esterillas
+              </option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="ambientador-varitas"
+              data-name="Ambientador Varitas"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="aromas">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Lámpara Pebetero</h3>
+            <p class="product-card__desc">
+              Aromatizador de ambiente artesanal. Ideal para espacios pequeños y
+              medianos.
+            </p>
+            <select class="product-card__select">
+              <option value="Unidad" data-price="0">Unidad</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="lampara-pebetero"
+              data-name="Lámpara Pebetero"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <!-- ════ PISCINAS ════════════════════════════════════ -->
+          <div class="products__subcategory" data-cat="piscinas">
+            <span class="products__subcategory-title">Piscinas</span>
+          </div>
+
+          <div class="product-card reveal" data-cat="piscinas">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Cloro Granulado 91%</h3>
+            <p class="product-card__desc">
+              Desinfección de choque. Elimina bacterias, algas y
+              microorganismos.
+            </p>
+            <select class="product-card__select">
+              <option value="1Kg" data-price="28000">1Kg</option>
+              <option value="25Kg" data-price="580000">25Kg</option>
+              <option value="50Kg" data-price="1050000">50Kg</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="cloro-granulado-91"
+              data-name="Cloro Granulado 91%"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="piscinas">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Cloro Granulado 70%</h3>
+            <p class="product-card__desc">
+              Desinfectante de mantenimiento. Concentración media para uso
+              regular.
+            </p>
+            <select class="product-card__select">
+              <option value="500g" data-price="0">500g</option>
+              <option value="1Kg" data-price="0">1Kg</option>
+              <option value="45Kg" data-price="0">45Kg</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="cloro-granulado-70"
+              data-name="Cloro Granulado 70%"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="piscinas">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Pastilla Multifuncional</h3>
+            <p class="product-card__desc">
+              Desinfección, alguicida y clarificante en una sola pastilla de
+              acción prolongada.
+            </p>
+            <select class="product-card__select">
+              <option value="Unidad" data-price="0">Unidad</option>
+              <option value="1Kg" data-price="0">1Kg</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="pastilla-multifuncional"
+              data-name="Pastilla Multifuncional"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="piscinas">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Alguicida PQP</h3>
+            <p class="product-card__desc">
+              Elimina y previene la formación de algas en piscinas y estanques.
+            </p>
+            <select class="product-card__select">
+              <option value="1L" data-price="0">1L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="alguicida-pqp"
+              data-name="Alguicida PQP"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="piscinas">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Clarín</h3>
+            <p class="product-card__desc">
+              Clarificador de agua. Agrupa partículas en suspensión para
+              filtrado eficiente.
+            </p>
+            <select class="product-card__select">
+              <option value="4L" data-price="0">4L</option>
+              <option value="20L" data-price="0">20L</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="clarin-clarificador"
+              data-name="Clarín"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="piscinas">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Sulfato de Aluminio Tipo A</h3>
+            <p class="product-card__desc">
+              Coagulante para tratamiento de agua. Reduce turbidez.
+            </p>
+            <select class="product-card__select">
+              <option value="1Kg" data-price="0">1Kg</option>
+              <option value="25Kg" data-price="0">25Kg</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="sulfato-aluminio"
+              data-name="Sulfato de Aluminio Tipo A"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="piscinas">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Soda Cáustica</h3>
+            <p class="product-card__desc">
+              Regulador de pH para piscinas. Corrección de acidez del agua.
+            </p>
+            <select class="product-card__select">
+              <option value="500g" data-price="8000">500g</option>
+              <option value="1Kg" data-price="14000">1Kg</option>
+              <option value="25Kg" data-price="260000">25Kg</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="soda-caustica"
+              data-name="Soda Cáustica"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="piscinas">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Kit Piscina</h3>
+            <p class="product-card__desc">
+              Kit completo para medición y control de parámetros básicos de
+              piscina.
+            </p>
+            <select class="product-card__select">
+              <option value="Unidad" data-price="0">Unidad</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="kit-piscina"
+              data-name="Kit Piscina"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="piscinas">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Gotas Piscina</h3>
+            <p class="product-card__desc">
+              Reactivo de repuesto para kit de medición de cloro y pH.
+            </p>
+            <select class="product-card__select">
+              <option value="Unidad" data-price="0">Unidad</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="gotas-piscina"
+              data-name="Gotas Piscina"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="piscinas">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Tira de pH</h3>
+            <p class="product-card__desc">
+              Medición rápida del pH del agua por comparación de colores.
+            </p>
+            <select class="product-card__select">
+              <option value="Rollo" data-price="0">Rollo</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="tira-ph"
+              data-name="Tira de pH"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="piscinas">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Esponja de Piscina</h3>
+            <p class="product-card__desc">
+              Para limpieza de paredes y bordes sin rayar superficies.
+            </p>
+            <select class="product-card__select">
+              <option value="Unidad" data-price="0">Unidad</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="esponja-piscina"
+              data-name="Esponja de Piscina"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <!-- ════ UTENSILIOS ══════════════════════════════════ -->
+          <div class="products__subcategory" data-cat="utensilios">
+            <span class="products__subcategory-title">Utensilios</span>
+          </div>
+
+          <div class="product-card reveal" data-cat="utensilios">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Escobas</h3>
+            <p class="product-card__desc">
+              Distintos modelos para uso doméstico e industrial.
+            </p>
+            <div class="product-card__fragrances">
+              <button
+                class="product-card__frag product-card__frag--active"
+                data-frag="TR Suave"
+              >
+                TR Suave
+              </button>
+              <button class="product-card__frag" data-frag="TR Dura">
+                TR Dura
+              </button>
+              <button class="product-card__frag" data-frag="Super Danna">
+                Super Danna
+              </button>
+              <button class="product-card__frag" data-frag="Industrial">
+                Industrial
+              </button>
+            </div>
+            <select class="product-card__select">
+              <option value="Unidad" data-price="0">Unidad</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="escobas"
+              data-name="Escoba"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="utensilios">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Traperos</h3>
+            <p class="product-card__desc">
+              Varios materiales y referencias para limpieza de pisos.
+            </p>
+            <div class="product-card__fragrances">
+              <button
+                class="product-card__frag product-card__frag--active"
+                data-frag="Algodón 1000"
+              >
+                Algodón 1000
+              </button>
+              <button class="product-card__frag" data-frag="Algodón 1200">
+                Algodón 1200
+              </button>
+              <button class="product-card__frag" data-frag="Microfibra">
+                Microfibra
+              </button>
+            </div>
+            <select class="product-card__select">
+              <option value="Unidad" data-price="0">Unidad</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="traperos"
+              data-name="Trapero"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="utensilios">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Cepillos</h3>
+            <p class="product-card__desc">
+              Para autos, motos, baños, multihogar y uso de mano.
+            </p>
+            <div class="product-card__fragrances">
+              <button
+                class="product-card__frag product-card__frag--active"
+                data-frag="Lava Autos"
+              >
+                Lava Autos
+              </button>
+              <button class="product-card__frag" data-frag="Telarañero">
+                Telarañero
+              </button>
+              <button class="product-card__frag" data-frag="Lavamotos">
+                Lavamotos
+              </button>
+              <button class="product-card__frag" data-frag="Multihogar">
+                Multihogar
+              </button>
+              <button class="product-card__frag" data-frag="Para Baño">
+                Para Baño
+              </button>
+              <button class="product-card__frag" data-frag="Mano Duro">
+                Mano Duro
+              </button>
+              <button class="product-card__frag" data-frag="Mano Siliconado">
+                Mano Siliconado
+              </button>
+            </div>
+            <select class="product-card__select">
+              <option value="Unidad" data-price="0">Unidad</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="cepillos"
+              data-name="Cepillo"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="utensilios">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Esponjas</h3>
+            <p class="product-card__desc">
+              Para cocina y uso general en distintas texturas.
+            </p>
+            <div class="product-card__fragrances">
+              <button
+                class="product-card__frag product-card__frag--active"
+                data-frag="Metálica"
+              >
+                Metálica
+              </button>
+              <button class="product-card__frag" data-frag="Suave">
+                Suave
+              </button>
+              <button class="product-card__frag" data-frag="Doble Uso">
+                Doble Uso
+              </button>
+            </div>
+            <select class="product-card__select">
+              <option value="Unidad" data-price="0">Unidad</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="esponjas"
+              data-name="Esponja"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="utensilios">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Recogedor con Banda</h3>
+            <p class="product-card__desc">
+              Recogedor resistente con banda de goma para mejor hermeticidad.
+            </p>
+            <select class="product-card__select">
+              <option value="Unidad" data-price="0">Unidad</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="recogedor-banda"
+              data-name="Recogedor con Banda"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="utensilios">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Bolsas para Basura</h3>
+            <p class="product-card__desc">
+              Bolsas de alta resistencia en distintos calibres.
+            </p>
+            <select class="product-card__select">
+              <option value="N°26" data-price="0">N°26</option>
+              <option value="N°28" data-price="0">N°28</option>
+              <option value="N°32" data-price="0">N°32</option>
+              <option value="N°39" data-price="0">N°39</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="bolsas-basura"
+              data-name="Bolsas para Basura"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="utensilios">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Papel Higiénico</h3>
+            <p class="product-card__desc">
+              Referencias Elite Max, Elite Duo y Papel Institucional Jumbo.
+            </p>
+            <div class="product-card__fragrances">
+              <button
+                class="product-card__frag product-card__frag--active"
+                data-frag="Elite Max"
+              >
+                Elite Max
+              </button>
+              <button class="product-card__frag" data-frag="Elite Duo">
+                Elite Duo
+              </button>
+              <button class="product-card__frag" data-frag="Institucional">
+                Institucional
+              </button>
+            </div>
+            <select class="product-card__select">
+              <option value="Unidad / Paca" data-price="0">
+                Unidad / Paca
+              </option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="papel-higienico"
+              data-name="Papel Higiénico"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="utensilios">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Toalla Tipo Z</h3>
+            <p class="product-card__desc">
+              Toalla interdoblada para dispensadores institucionales.
+            </p>
+            <select class="product-card__select">
+              <option value="Paca" data-price="0">Paca</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="toalla-tipo-z"
+              data-name="Toalla Tipo Z"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="utensilios">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Guantes</h3>
+            <p class="product-card__desc">
+              Protección para manos en labores de limpieza y trabajo industrial.
+            </p>
+            <div class="product-card__fragrances">
+              <button
+                class="product-card__frag product-card__frag--active"
+                data-frag="Domésticos"
+              >
+                Domésticos
+              </button>
+              <button class="product-card__frag" data-frag="Industriales">
+                Industriales
+              </button>
+            </div>
+            <select class="product-card__select">
+              <option value="Unidad" data-price="0">Unidad</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="guantes"
+              data-name="Guantes"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <div class="product-card reveal" data-cat="utensilios">
+            <div class="product-card__image"></div>
+            <h3 class="product-card__name">Rastrillo</h3>
+            <p class="product-card__desc">
+              Para barrido de hojas y limpieza de zonas exteriores.
+            </p>
+            <select class="product-card__select">
+              <option value="Unidad" data-price="0">Unidad</option>
+            </select>
+            <button
+              class="product-card__add"
+              data-id="rastrillo"
+              data-name="Rastrillo"
+            >
+              Agregar al carrito
+            </button>
+          </div>
+
+          <!-- ════ MATERIAS PRIMAS ══════════════════════════════ -->
+          <div class="products__subcategory" data-cat="materias">
+            <span class="products__subcategory-title"
+              >Materias Primas · Precio por Kg — Consultar</span
+            >
+          </div>
+
+          <div class="products__catalog" data-cat="materias">
+            <div class="products__catalog-grid">
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Aceite Mineral Blanco</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-aceite-mineral-blanco"
+                  data-name="Aceite Mineral Blanco"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Ácido Acético Glacial</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-acido-acetico-glacial"
+                  data-name="Ácido Acético Glacial"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Ácido Cítrico</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-acido-citrico"
+                  data-name="Ácido Cítrico"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Ácido Nítrico</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-acido-nitrico"
+                  data-name="Ácido Nítrico (MP)"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Ácido Oxálico</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-acido-oxalico"
+                  data-name="Ácido Oxálico (MP)"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Ácido Sulfónico</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-acido-sulfonico"
+                  data-name="Ácido Sulfónico"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Alcohol 96%</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-alcohol-96"
+                  data-name="Alcohol 96% (MP)"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Alcohol Desodorizado</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-alcohol-desodorizado"
+                  data-name="Alcohol Desodorizado"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Amonio Cuaternario</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-amonio-cuaternario"
+                  data-name="Amonio Cuaternario"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Bicarbonato de Sodio</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-bicarbonato-sodio"
+                  data-name="Bicarbonato de Sodio (MP)"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Butil</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-butil"
+                  data-name="Butil"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Carbonato de Calcio</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-carbonato-calcio"
+                  data-name="Carbonato de Calcio"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Ciacoblend DTL 42</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-ciacoblend-dtl42"
+                  data-name="Ciacoblend DTL 42"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Ciacoproblend ST70</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-ciacoproblend-st70"
+                  data-name="Ciacoproblend ST70"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Cloro Granulado 70%</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-cloro-70"
+                  data-name="Cloro Granulado 70% (MP)"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Cloro Granulado 91%</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-cloro-91"
+                  data-name="Cloro Granulado 91% (MP)"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name"
+                  >Cloruro de Benzalconio</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-cloruro-benzalconio"
+                  data-name="Cloruro de Benzalconio"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Cloruro de Sodio</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-cloruro-sodio"
+                  data-name="Cloruro de Sodio"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Cocoamida Líquida</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-cocoamida-liquida"
+                  data-name="Cocoamida Líquida"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Cocoamida Probetaina</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-cocoamida-probetaina"
+                  data-name="Cocoamida Probetaina"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Colorante</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-colorante"
+                  data-name="Colorante"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Colorante Azul</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-colorante-azul"
+                  data-name="Colorante Azul"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Creolina</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-creolina"
+                  data-name="Creolina (MP)"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">D-Limoneno</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-d-limoneno"
+                  data-name="D-Limoneno"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Dehyquart</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-dehyquart"
+                  data-name="Dehyquart"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Dióxido de Titanio</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-dioxido-titanio"
+                  data-name="Dióxido de Titanio"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">EDTA Tetrasódico</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-edta-tetrasodico"
+                  data-name="EDTA Tetrasódico"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Ecorich EN LD 6</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-ecorich-en-ld6"
+                  data-name="Ecorich EN LD 6"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name"
+                  >Emulsión de Silicona 60%</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-emulsion-silicona-60"
+                  data-name="Emulsión de Silicona 60%"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Fosfato Trisódico</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-fosfato-trisodico"
+                  data-name="Fosfato Trisódico"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Glicerina</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-glicerina"
+                  data-name="Glicerina"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Glydant</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-glydant"
+                  data-name="Glydant"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name"
+                  >Hidroxicloruro de Aluminio</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-hidroxicloruro-aluminio"
+                  data-name="Hidroxicloruro de Aluminio"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Hidroxietilcelulosa</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-hidroxietilcelulosa"
+                  data-name="Hidroxietilcelulosa"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Hipoclorito al 15%</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-hipoclorito-15"
+                  data-name="Hipoclorito al 15% (MP)"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Metasilicato</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-metasilicato"
+                  data-name="Metasilicato"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Nacarante</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-nacarante"
+                  data-name="Nacarante"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Nonil Fenol</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-nonil-fenol"
+                  data-name="Nonil Fenol"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Optibright X</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-optibright-x"
+                  data-name="Optibright X"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Oxígeno Activo</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-oxigeno-activo"
+                  data-name="Oxígeno Activo (MP)"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Parafina</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-parafina"
+                  data-name="Parafina"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Peróxido de Hidrógeno</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-peroxido-hidrogeno"
+                  data-name="Peróxido de Hidrógeno (MP)"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Pigmento Rojo</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-pigmento-rojo"
+                  data-name="Pigmento Rojo"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Procide</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-procide"
+                  data-name="Procide"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Soda Cáustica Escamas</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-soda-caustica-escamas"
+                  data-name="Soda Cáustica Escamas"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Soda Líquida</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-soda-liquida"
+                  data-name="Soda Líquida"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Texapon 70</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-texapon-70"
+                  data-name="Texapon 70"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Trietanolamina</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-trietanolamina"
+                  data-name="Trietanolamina"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Varsol</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-varsol"
+                  data-name="Varsol (MP)"
+                >
+                  Agregar
+                </button>
+              </div>
+              <div class="products__catalog-item">
+                <span class="products__catalog-name">Zerasella</span
+                ><button
+                  class="product-card__add"
+                  data-id="mp-zerasella"
+                  data-name="Zerasella"
+                >
+                  Agregar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /#products-grid -->
+
+        <!-- Footer note -->
+        <div class="products__footer">
+          <p class="products__footer-note">
+            ¿No encontró lo que busca? Contáctenos y le ayudamos.
+          </p>
+          <a
+            href="https://wa.me/573203188602?text=Hola,%20quisiera%20ver%20el%20catálogo%20completo"
+            target="_blank"
+            class="btn btn--whatsapp"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+              />
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.528 5.855L0 24l6.335-1.521A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.677-.487-5.22-1.341l-.374-.218-3.752.901.928-3.651-.241-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"
+              />
+            </svg>
+            Solicitar Catálogo Completo
+          </a>
+        </div>
+      </section>
+      <!-- /.products -->
+    </div>
+    <!-- /.page -->
+
+    <!-- ══════════════════════════════════════════════════════════
+     CART — Slide-in panel from the right.
+     Backdrop (.cart-overlay) closes cart on click.
+     JS renders cart items dynamically inside #cart-items.
+     ══════════════════════════════════════════════════════════ -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+    <aside class="cart" id="cart" role="dialog" aria-label="Carrito de compras">
+      <div class="cart__header">
+        <span class="cart__title">Su Pedido</span>
+        <button class="cart__close" id="cart-close">✕</button>
+      </div>
+
+      <!-- JS renders items here -->
+      <div class="cart__items" id="cart-items"></div>
+
+      <div class="cart__footer">
+        <div class="cart__actions">
+          <button class="btn btn--whatsapp btn--full" id="cart-send">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+              />
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.528 5.855L0 24l6.335-1.521A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.677-.487-5.22-1.341l-.374-.218-3.752.901.928-3.651-.241-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"
+              />
+            </svg>
+            Enviar Pedido por WhatsApp
+          </button>
+          <button class="btn btn--outline btn--full" id="cart-clear">
+            Vaciar carrito
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ══════════════════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════════════════ -->
+    <footer class="footer">
+      <div class="footer__main">
+        <div>
+          <span class="footer__nav-title">Páginas</span>
+          <ul class="footer__nav-list">
+            <li><a href="index.html" class="footer__nav-link">Inicio</a></li>
+            <li>
+              <a href="nosotros.html" class="footer__nav-link">Nosotros</a>
+            </li>
+            <li>
+              <a href="productos.html" class="footer__nav-link">Productos</a>
+            </li>
+            <li>
+              <a href="recursos.html" class="footer__nav-link">Recursos</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__brand">
+          <img
+            src="images/CS_Quimicos_Logo_transparent.png"
+            alt="CS Químicos"
+            style="width: 64px; height: auto"
+          />
+          <span class="footer__brand-name">CS <span>Químicos</span></span>
+          <span class="footer__brand-tagline">La química perfecta.</span>
+        </div>
+        <div class="footer__contact">
+          <address class="footer__address" style="font-style: normal">
+            <span class="footer__address-label">Dirección</span>
+            Calle 14 #27a-12, Acacías, Meta
+          </address>
+          <a
+            href="https://wa.me/573203188602?text=Hola,%20quiero%20contactarlos"
+            target="_blank"
+            class="btn btn--whatsapp btn--sm"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+              />
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.528 5.855L0 24l6.335-1.521A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.677-.487-5.22-1.341l-.374-.218-3.752.901.928-3.651-.241-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"
+              />
+            </svg>
+            Contáctenos
+          </a>
+        </div>
+      </div>
+      <div class="footer__copy">
+        <span class="footer__copy-text"
+          >© 2026 EASI Soluciones · Acacías, Colombia</span
+        >
+        <span class="footer__copy-text">Todos los derechos reservados</span>
+      </div>
+    </footer>
+
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script src="js/shared.js"></script>
+    <script>
+      // ── Add to cart (event delegation on grid) ─────────────────
+      document
+        .getElementById("products-grid")
+        .addEventListener("click", (e) => {
+          const btn = e.target.closest(".product-card__add");
+          if (!btn) return;
+
+          // Catalog items (materias primas list) — no select, no variants
+          if (btn.closest(".products__catalog-item")) {
+            Cart.add({
+              id: btn.dataset.id,
+              name: btn.dataset.name,
+              size: "Kg",
+              price: 0,
+            });
+            return;
+          }
+
+          const card = btn.closest(".product-card");
+          const activeFrag = card.querySelector(".product-card__frag--active");
+          const select = card.querySelector(".product-card__select");
+          const option = select.options[select.selectedIndex];
+          const fragrance = activeFrag ? activeFrag.dataset.frag : null;
+          Cart.add({
+            id: btn.dataset.id,
+            name: fragrance
+              ? `${btn.dataset.name} – ${fragrance}`
+              : btn.dataset.name,
+            size: option.value,
+            price: parseInt(option.dataset.price) || 0,
+          });
+        });
+
+      // ── Fragrance pill selector ────────────────────────────────
+      document
+        .getElementById("products-grid")
+        .addEventListener("click", (e) => {
+          const pill = e.target.closest(".product-card__frag");
+          if (!pill) return;
+          pill
+            .closest(".product-card__fragrances")
+            .querySelectorAll(".product-card__frag")
+            .forEach((p) => p.classList.remove("product-card__frag--active"));
+          pill.classList.add("product-card__frag--active");
+        });
+
+      // ── Product filter ─────────────────────────────────────────
+      document.querySelectorAll(".filter-bar__btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-bar__btn")
+            .forEach((b) => b.classList.remove("filter-bar__btn--active"));
+          btn.classList.add("filter-bar__btn--active");
+          const filter = btn.dataset.filter;
+          document.querySelectorAll("[data-cat]").forEach((el) => {
+            if (filter === "all" || el.dataset.cat === filter) {
+              el.style.display = "";
+            } else {
+              el.style.display = "none";
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

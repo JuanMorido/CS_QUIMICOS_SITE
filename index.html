@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS Químicos</title>
+    <link rel="icon" href="csqicongold.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <!-- ══════════════════════════════════════════════════════════
+     NAV — Fixed top bar, shared across all pages.
+     Active link: nav__link--active on "Inicio"
+     ══════════════════════════════════════════════════════════ -->
+    <nav class="nav">
+      <a href="index.html" class="nav__logo">
+        CS&nbsp;<span class="nav__logo-accent">Químicos</span>
+      </a>
+
+      <ul class="nav__links">
+        <li><a href="productos.html" class="nav__link">Productos</a></li>
+        <li><a href="nosotros.html" class="nav__link">Nosotros</a></li>
+        <li><a href="recursos.html" class="nav__link">Recursos</a></li>
+        <li><a href="contacto.html" class="nav__link">Contáctenos</a></li>
+        <li>
+          <button class="nav__cart" id="cart-open" data-cart-open title="Ver carrito">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="8" width="18" height="14" rx="2" />
+              <path d="M8 8V6a4 4 0 018 0v2" />
+            </svg>
+            <span class="nav__cart-badge" id="cart-badge"></span>
+          </button>
+        </li>
+      </ul>
+
+      <!-- Hamburger — visible on mobile only -->
+      <button class="nav__burger" id="nav-burger" aria-label="Abrir menú">
+        <span class="nav__burger-line"></span>
+        <span class="nav__burger-line"></span>
+        <span class="nav__burger-line"></span>
+      </button>
+    </nav>
+
+    <!-- ══════════════════════════════════════════════════════════
+     MOBILE MENU — toggled by JS on burger click
+     ══════════════════════════════════════════════════════════ -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="productos.html" class="mobile-menu__link">Productos</a>
+      <a href="nosotros.html" class="mobile-menu__link">Nosotros</a>
+      <a href="recursos.html" class="mobile-menu__link">Recursos</a>
+      <a href="contacto.html" class="mobile-menu__link">Contáctenos</a>
+      <button class="mobile-menu__link" data-cart-open>Ver carrito</button>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+     PAGE WRAPPER — offsets content below fixed nav
+     ══════════════════════════════════════════════════════════ -->
+    <div class="page">
+      <!-- ── HERO ──────────────────────────────────────────────
+       Full-screen split: dark left (copy) / cream right (logo)
+       Entrance animations handled via CSS keyframes
+       ──────────────────────────────────────────────────── -->
+      <section class="hero">
+        <!-- Left column: headline + CTAs -->
+        <div class="hero__left">
+          <h1 class="hero__title">La química<br /><em>perfecta.</em></h1>
+
+          <p class="hero__desc">
+            Ingeniería química de alto desempeño para limpieza, desinfección y
+            producción. Potenciamos tu negocio con soluciones confiables,
+            eficientes y elegantes. Contamos con un stock amplio y siempre
+            disponible de materias primas nacionales e importadas de la mejor
+            calidad esperando a ser distribuidas.
+          </p>
+
+          <div class="hero__actions">
+            <a
+              href="https://wa.me/573203188602?text=Hola,%20me%20interesan%20sus%20productos"
+              target="_blank"
+              class="btn btn--whatsapp"
+            >
+              <!-- WhatsApp icon -->
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+                />
+                <path
+                  d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.528 5.855L0 24l6.335-1.521A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.677-.487-5.22-1.341l-.374-.218-3.752.901.928-3.651-.241-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"
+                />
+              </svg>
+              Cotizar Ahora
+            </a>
+            <a href="productos.html" class="btn btn--outline-light"
+              >Ver Productos</a
+            >
+          </div>
+        </div>
+
+        <!-- Right column: logo display -->
+        <div class="hero__right">
+          <div class="hex-bg"></div>
+          <div class="hero__logo-wrap">
+            <img
+              src="images/CS_Quimicos_Logo_transparent.png"
+              alt="CS Químicos"
+            />
+            <p class="hero__logo-subtitle">
+              Productos químicos y materias primas para la industria,
+            </p>
+            <p class="hero__logo-tagline--gold">Importadas y nacionales.</p>
+          </div>
+        </div>
+      </section>
+      <!-- /.hero -->
+
+
+      <!-- ── WHY US ────────────────────────────────────────────
+       Two columns: differentiators left / team card right
+       ──────────────────────────────────────────────────── -->
+      <section class="why-us">
+        <!-- Left: copy + features + CTAs -->
+        <div class="reveal">
+          <div class="section-header">
+            <span class="section-header__eyebrow">¿Por qué CS Químicos?</span>
+            <h2 class="section-header__title">
+              No somos un<br />distribuidor.<br /><em
+                >Somos los fabricantes.</em
+              >
+            </h2>
+            <p class="section-header__desc">
+              Cada producto nace de fórmulas desarrolladas por ingenieros
+              químicos certificados. Mayor concentración, mejor rendimiento —
+              calidad garantizada.
+            </p>
+          </div>
+
+          <!--
+            <div class="why-us__features">
+            <div class="why-us__feature">
+              <span class="why-us__feature-line"></span>Formulación propia
+            </div>
+            <div class="why-us__feature">
+              <span class="why-us__feature-line"></span>Control de calidad
+            </div>
+            <div class="why-us__feature">
+              <span class="why-us__feature-line"></span>Múltiples presentaciones
+            </div>
+            <div class="why-us__feature">
+              <span class="why-us__feature-line"></span>Materia prima pura
+            </div>
+            <div class="why-us__feature">
+              <span class="why-us__feature-line"></span>Asesoría técnica
+              gratuita
+            </div>
+            <div class="why-us__feature">
+              <span class="why-us__feature-line"></span>Envíos en el Meta
+            </div>
+          </div>
+        -->
+          <div class="why-us__actions">
+            <a href="nosotros.html" class="btn btn--outline">Conocernos</a>
+          </div>
+        </div>
+
+        <!-- Right: team card -->
+        <div class="reveal reveal--delay-1">
+          <div class="team-card">
+            <p class="team-card__intro">Detrás de cada producto,</p>
+            <!--
+            <div class="team-card__member">
+              <div class="team-card__icon">⚗️</div>
+              <div>
+                <span class="team-card__name">Ing. Ammie</span>
+                <span class="team-card__role"
+                  >Ingeniera Química · +8 años en la industria<br />Dirección
+                  técnica y formulación</span
+                >
+              </div>
+            </div>
+
+            <div class="team-card__member">
+              <div class="team-card__icon">🔬</div>
+              <div>
+                <span class="team-card__name">CS Químicos</span>
+                <span class="team-card__role"
+                  >Fundado en Acacías, Meta<br />Producción, comercialización y
+                  servicio</span
+                >
+              </div>
+            -->
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- /.why-us -->
+    </div>
+    <!-- /.page -->
+
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside class="cart" id="cart" role="dialog" aria-label="Carrito de compras">
+      <div class="cart__header">
+        <span class="cart__title">Su Pedido</span>
+        <button class="cart__close" id="cart-close">✕</button>
+      </div>
+      <div class="cart__items" id="cart-items"></div>
+      <div class="cart__footer">
+        <div class="cart__total">
+          <span class="cart__total-label">Total estimado</span>
+          <span class="cart__total-value" id="cart-total">$0</span>
+        </div>
+        <p class="cart__note">
+          Precios orientativos. Confirmamos disponibilidad y precio final por
+          WhatsApp.
+        </p>
+        <div class="cart__actions">
+          <button class="btn btn--whatsapp btn--full" id="cart-send">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+              />
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.528 5.855L0 24l6.335-1.521A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.677-.487-5.22-1.341l-.374-.218-3.752.901.928-3.651-.241-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"
+              />
+            </svg>
+            Enviar Pedido por WhatsApp
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ══════════════════════════════════════════════════════════
+     FOOTER — shared across all pages
+     Three columns: nav | brand | contact
+     ══════════════════════════════════════════════════════════ -->
+    <footer class="footer">
+      <div class="footer__main">
+        <!-- Column 1: navigation links -->
+        <div>
+          <span class="footer__nav-title">Páginas</span>
+          <ul class="footer__nav-list">
+            <li><a href="index.html" class="footer__nav-link">Inicio</a></li>
+            <li>
+              <a href="nosotros.html" class="footer__nav-link">Nosotros</a>
+            </li>
+            <li>
+              <a href="productos.html" class="footer__nav-link">Productos</a>
+            </li>
+            <li>
+              <a href="recursos.html" class="footer__nav-link">Recursos</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 2: brand logo + tagline -->
+        <div class="footer__brand">
+          <img
+            src="images/CS_Quimicos_Logo_transparent.png"
+            alt="CS Químicos"
+            style="width: 64px; height: auto"
+          />
+          <span class="footer__brand-name">CS <span>Químicos</span></span>
+          <span class="footer__brand-tagline">La química perfecta.</span>
+        </div>
+
+        <!-- Column 3: address + WhatsApp -->
+        <div class="footer__contact">
+          <address class="footer__address" style="font-style: normal">
+            <span class="footer__address-label">Dirección</span>
+            Calle 14 #27a-12, Acacías, Meta
+          </address>
+          <a
+            href="https://wa.me/573203188602?text=Hola,%20quiero%20contactarlos"
+            target="_blank"
+            class="btn btn--whatsapp btn--sm"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+              />
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.528 5.855L0 24l6.335-1.521A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.677-.487-5.22-1.341l-.374-.218-3.752.901.928-3.651-.241-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"
+              />
+            </svg>
+            Contáctenos
+          </a>
+        </div>
+      </div>
+      <!-- /.footer__main -->
+
+      <div class="footer__copy">
+        <span class="footer__copy-text"
+          >© 2026 EASI Soluciones · Acacías, Colombia</span
+        >
+        <span class="footer__copy-text">Todohass los derechos reservados</span>
+      </div>
+    </footer>
+
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script src="js/shared.js"></script>
+  </body>
+</html>

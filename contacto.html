@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contáctenos — CS Químicos</title>
+    <link rel="icon" href="csqicongold.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <!-- ══════════════════════════════════════════════════════════
+     NAV — Active: Contáctenos
+     ══════════════════════════════════════════════════════════ -->
+    <nav class="nav">
+      <a href="index.html" class="nav__logo"
+        >CS&nbsp;<span class="nav__logo-accent">Químicos</span></a
+      >
+      <ul class="nav__links">
+        <li><a href="productos.html" class="nav__link">Productos</a></li>
+        <li><a href="nosotros.html" class="nav__link">Nosotros</a></li>
+        <li><a href="recursos.html" class="nav__link">Recursos</a></li>
+        <li>
+          <a href="contacto.html" class="nav__link nav__link--active"
+            >Contáctenos</a
+          >
+        </li>
+        <li>
+          <button class="nav__cart" id="cart-open" data-cart-open title="Ver carrito">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="8" width="18" height="14" rx="2" />
+              <path d="M8 8V6a4 4 0 018 0v2" />
+            </svg>
+            <span class="nav__cart-badge" id="cart-badge"></span>
+          </button>
+        </li>
+      </ul>
+      <button class="nav__burger" id="nav-burger" aria-label="Abrir menú">
+        <span class="nav__burger-line"></span
+        ><span class="nav__burger-line"></span
+        ><span class="nav__burger-line"></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="productos.html" class="mobile-menu__link">Productos</a>
+      <a href="nosotros.html" class="mobile-menu__link">Nosotros</a>
+      <a href="recursos.html" class="mobile-menu__link">Recursos</a>
+      <a href="contacto.html" class="mobile-menu__link">Contáctenos</a>
+      <button class="mobile-menu__link" data-cart-open>Ver carrito</button>
+    </div>
+
+    <div class="page">
+      <!-- ── PAGE HERO ──────────────────────────────────────────
+       Dark banner with page title. Hex pattern in background.
+       ──────────────────────────────────────────────────── -->
+      <div class="page-hero">
+        <div class="hex-bg"></div>
+        <span class="page-hero__eyebrow reveal">Estamos para servirle</span>
+        <h1 class="page-hero__title reveal">
+          Hablemos,<br /><em>contáctenos.</em>
+        </h1>
+      </div>
+
+      <!-- ── CONTACT: MAP + FORM ────────────────────────────────
+       Left column: Google Maps embed
+       Right column: contact form (submits via WhatsApp)
+       ──────────────────────────────────────────────────── -->
+      <section class="contact">
+        <div class="contact__layout">
+
+          <!-- Map -->
+          <div class="contact__map reveal">
+            <iframe
+              src="https://maps.google.com/maps?q=Calle+14+%2327a-12,+Acacías,+Meta,+Colombia&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              allowfullscreen
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Ubicación CS Químicos — Acacías, Meta"
+            ></iframe>
+          </div>
+
+          <!-- Form -->
+          <form class="contact__form reveal reveal--delay-1" id="contact-form" novalidate>
+            <div class="contact__row">
+              <div class="contact__field">
+                <input
+                  type="text"
+                  id="cf-nombre"
+                  name="nombre"
+                  placeholder="Nombre"
+                  required
+                />
+              </div>
+              <div class="contact__field">
+                <input
+                  type="email"
+                  id="cf-email"
+                  name="email"
+                  placeholder="Email"
+                />
+              </div>
+            </div>
+
+            <div class="contact__row">
+              <div class="contact__field">
+                <input
+                  type="tel"
+                  id="cf-telefono"
+                  name="telefono"
+                  placeholder="Teléfono"
+                />
+              </div>
+              <div class="contact__field">
+                <input
+                  type="text"
+                  id="cf-empresa"
+                  name="empresa"
+                  placeholder="Empresa"
+                />
+              </div>
+            </div>
+
+            <div class="contact__row">
+              <div class="contact__field">
+                <input
+                  type="text"
+                  id="cf-ciudad"
+                  name="ciudad"
+                  placeholder="Ciudad"
+                />
+              </div>
+              <div class="contact__field">
+                <input
+                  type="text"
+                  id="cf-asunto"
+                  name="asunto"
+                  placeholder="Asunto"
+                />
+              </div>
+            </div>
+
+            <div class="contact__field">
+              <textarea
+                id="cf-mensaje"
+                name="mensaje"
+                placeholder="Mensaje"
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary contact__submit">
+              Enviar mensaje
+            </button>
+          </form>
+
+        </div>
+      </section>
+
+      <!-- ── INFO CARDS ─────────────────────────────────────────
+       Three cards: address / phone / email
+       ──────────────────────────────────────────────────── -->
+      <section class="contact-info">
+        <div class="contact-info__grid">
+
+          <!-- Address -->
+          <div class="contact-info__card reveal">
+            <svg class="contact-info__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+              <circle cx="12" cy="9" r="2.5"/>
+            </svg>
+            <div class="contact-info__body">
+              <span class="contact-info__label">Visítenos</span>
+              <span class="contact-info__value">
+                Calle 14 #27a-12<br />Acacías, Meta, Colombia
+              </span>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="contact-info__card reveal reveal--delay-1">
+            <svg class="contact-info__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/>
+            </svg>
+            <div class="contact-info__body">
+              <span class="contact-info__label">Llámenos</span>
+              <span class="contact-info__value">
+                <a href="https://wa.me/573203188602" target="_blank">
+                  +57 320 318 8602
+                </a>
+              </span>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="contact-info__card reveal reveal--delay-2">
+            <svg class="contact-info__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <div class="contact-info__body">
+              <span class="contact-info__label">Escríbanos</span>
+              <span class="contact-info__value">
+                <a href="/cdn-cgi/l/email-protection">csquimicos@email.com</a>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════════
+       FOOTER
+       ══════════════════════════════════════════════════════════ -->
+      <footer class="footer">
+        <div class="footer__main">
+          <div>
+            <span class="footer__nav-title">Páginas</span>
+            <ul class="footer__nav-list">
+              <li><a href="index.html" class="footer__nav-link">Inicio</a></li>
+              <li>
+                <a href="nosotros.html" class="footer__nav-link">Nosotros</a>
+              </li>
+              <li>
+                <a href="productos.html" class="footer__nav-link">Productos</a>
+              </li>
+              <li>
+                <a href="recursos.html" class="footer__nav-link">Recursos</a>
+              </li>
+              <li>
+                <a href="contacto.html" class="footer__nav-link">Contáctenos</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer__brand">
+            <img
+              src="images/CS_Quimicos_Logo_transparent.png"
+              alt="CS Químicos"
+              style="width: 64px; height: auto"
+            />
+            <span class="footer__brand-name">CS <span>Químicos</span></span>
+            <span class="footer__brand-tagline">La química perfecta.</span>
+          </div>
+          <div class="footer__contact">
+            <address class="footer__address" style="font-style: normal">
+              <span class="footer__address-label">Dirección</span>
+              Calle 14 #27a-12, Acacías, Meta
+            </address>
+            <a
+              href="https://wa.me/573203188602?text=Hola,%20quiero%20contactarlos"
+              target="_blank"
+              class="btn btn--whatsapp btn--sm"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+                />
+                <path
+                  d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.528 5.855L0 24l6.335-1.521A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.677-.487-5.22-1.341l-.374-.218-3.752.901.928-3.651-.241-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"
+                />
+              </svg>
+              Contáctenos
+            </a>
+          </div>
+        </div>
+        <div class="footer__copy">
+          <span class="footer__copy-text"
+            >© 2026 EASI Soluciones · Acacías, Colombia</span
+          >
+          <span class="footer__copy-text">Todos los derechos reservados</span>
+        </div>
+      </footer>
+    </div>
+    <!-- /.page -->
+
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside class="cart" id="cart" role="dialog" aria-label="Carrito de compras">
+      <div class="cart__header">
+        <span class="cart__title">Su Pedido</span>
+        <button class="cart__close" id="cart-close">✕</button>
+      </div>
+      <div class="cart__items" id="cart-items"></div>
+      <div class="cart__footer">
+        <div class="cart__total">
+          <span class="cart__total-label">Total estimado</span>
+          <span class="cart__total-value" id="cart-total">$0</span>
+        </div>
+        <p class="cart__note">
+          Precios orientativos. Confirmamos disponibilidad y precio final por
+          WhatsApp.
+        </p>
+        <div class="cart__actions">
+          <button class="btn btn--whatsapp btn--full" id="cart-send">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
+              />
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.528 5.855L0 24l6.335-1.521A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.677-.487-5.22-1.341l-.374-.218-3.752.901.928-3.651-.241-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"
+              />
+            </svg>
+            Enviar Pedido por WhatsApp
+          </button>
+          <button class="btn btn--outline btn--sm btn--full" id="cart-clear">
+            Vaciar carrito
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script src="js/shared.js"></script>
+    <script>
+      document.getElementById('contact-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const nombre   = document.getElementById('cf-nombre').value.trim();
+        const email    = document.getElementById('cf-email').value.trim();
+        const telefono = document.getElementById('cf-telefono').value.trim();
+        const empresa  = document.getElementById('cf-empresa').value.trim();
+        const ciudad   = document.getElementById('cf-ciudad').value.trim();
+        const asunto   = document.getElementById('cf-asunto').value.trim();
+        const mensaje  = document.getElementById('cf-mensaje').value.trim();
+
+        if (!nombre || !mensaje) return;
+
+        let msg = 'Hola CS Químicos, me pongo en contacto:\n\n';
+        msg += `*Nombre:* ${nombre}\n`;
+        if (email)    msg += `*Email:* ${email}\n`;
+        if (telefono) msg += `*Teléfono:* ${telefono}\n`;
+        if (empresa)  msg += `*Empresa:* ${empresa}\n`;
+        if (ciudad)   msg += `*Ciudad:* ${ciudad}\n`;
+        if (asunto)   msg += `*Asunto:* ${asunto}\n`;
+        msg += `\n*Mensaje:*\n${mensaje}`;
+
+        window.open('https://wa.me/573203188602?text=' + encodeURIComponent(msg), '_blank');
+      });
+    </script>
+  </body>
+</html>

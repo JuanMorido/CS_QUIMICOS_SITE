@@ -1,0 +1,311 @@
+/* ============================================================
+   06-nosotros.css
+   Sections used exclusively on nosotros.html:
+     .services-what  →  dark "lo que hacemos" section
+     .env            →  environmental commitment section
+     .timeline       →  company history alternating timeline
+   ============================================================ */
+
+/* ─────────────────────────────────────────────────────────
+   SERVICES-WHAT  ("Lo que hacemos")
+   Dark two-column section.
+   Left  →  numbered list of service types
+   Right →  pull quote + WhatsApp CTA
+   ──────────────────────────────────────────────────────── */
+.services-what {
+  background: var(--color-surface);
+  padding: var(--section-pad);
+}
+
+/* Two-column layout */
+.services-what__layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 5rem;
+  margin-top: 4rem;
+}
+
+.services-what__list { display: flex; flex-direction: column; }
+
+/* Each numbered item — gold vertical bar on left via ::before */
+.services-what__item {
+  padding: 1.8rem 0 1.8rem 1.6rem;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  position: relative;
+}
+.services-what__item:last-child { border-bottom: none; }
+.services-what__item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 2px; height: 55%;
+  background: var(--color-gold);
+}
+
+.services-what__item-number {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  letter-spacing: 0.2em;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.services-what__item-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--color-cream);
+  margin-bottom: 0.4rem;
+}
+
+.services-what__item-desc {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--color-gray);
+  line-height: 1.8;
+}
+
+/* Right column: left border + quote + CTA */
+.services-what__cta {
+  border-left: 1px solid rgba(201,168,76,0.2);
+  padding-left: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.services-what__quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-weight: 400;
+  color: var(--color-cream);
+  line-height: 1.35;
+  margin-bottom: 2rem;
+}
+.services-what__quote strong {
+  color: var(--color-gold);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.services-what__quote-sub {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--color-gray);
+  line-height: 1.9;
+  margin-bottom: 2rem;
+}
+
+/* ─────────────────────────────────────────────────────────
+   ENVIRONMENTAL COMMITMENT
+   Two-column section on cream-dark background.
+   Left  →  title + three environmental practice items
+   Right →  image (or placeholder until you have a real photo)
+
+   TODO: Replace .env__image-placeholder with:
+   <img src="images/lab.jpg" alt="Laboratorio CS Químicos">
+   ──────────────────────────────────────────────────────── */
+.env {
+  background: var(--color-cream-dark);
+  padding: var(--section-pad);
+  position: relative;
+  overflow: hidden;
+}
+
+.env__layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* List of three practices */
+.env__practices {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.env__practice {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.env__practice-icon { font-size: 1.4rem; margin-top: 0.1rem; flex-shrink: 0; }
+
+.env__practice-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-black);
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.env__practice-desc {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--color-gray);
+  line-height: 1.8;
+}
+
+/* Image column */
+.env__image { position: relative; }
+
+/* Placeholder shown until a real image is uploaded */
+.env__image-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.env__image-placeholder-inner      { text-align: center; position: relative; z-index: 2; }
+.env__image-placeholder-icon       { font-size: 3rem; display: block; margin-bottom: 1rem; opacity: 0.4; }
+.env__image-placeholder-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gray);
+}
+
+/* Decorative offset gold border behind the image */
+.env__image-border {
+  position: absolute;
+  bottom: -12px; right: -12px;
+  width: 60%; height: 60%;
+  border: 1px solid rgba(201,168,76,0.3);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────────────────
+   TIMELINE  (Company history)
+   Items alternate left / right along a centred vertical line.
+   The last item uses .timeline__dot--current (larger, glowing).
+
+   TODO: Fill in all [Año] and [Hito] placeholders.
+   ──────────────────────────────────────────────────────── */
+.timeline {
+  background: var(--color-cream);
+  padding: var(--section-pad);
+}
+
+.timeline__track {
+  max-width: 760px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Vertical centre line */
+.timeline__track::before {
+  content: '';
+  position: absolute;
+  left: 50%; top: 0; bottom: 0;
+  width: 1px;
+  background: rgba(201,168,76,0.25);
+  transform: translateX(-50%);
+}
+
+.timeline__item {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  align-items: flex-start;
+}
+.timeline__item:last-child { margin-bottom: 0; }
+
+/* Text panels — flex:1 so they fill available space */
+.timeline__side        { flex: 1; }
+.timeline__side--left  { text-align: right; padding-right: 1.5rem; }
+.timeline__side--right { text-align: left;  padding-left:  1.5rem; }
+.timeline__side--empty { flex: 1; }
+
+/* Gold dot centred on the vertical line */
+.timeline__dot {
+  width: 12px; height: 12px;
+  background: var(--color-gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 0.9rem;
+  position: relative;
+  z-index: 1;
+}
+/* "Today" dot: slightly larger with a soft glow ring */
+.timeline__dot--current {
+  width: 16px; height: 16px;
+  box-shadow: 0 0 0 5px rgba(201,168,76,0.2);
+  margin-top: 0.75rem;
+}
+
+.timeline__year {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--color-gold);
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.timeline__title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--color-black);
+  margin-bottom: 0.5rem;
+}
+
+.timeline__desc {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--color-gray);
+  line-height: 1.8;
+}
+
+/* ── Responsive: Tablet ≤1023px ───────────────────────────
+   services-what: stack columns. env: stack columns.
+   ──────────────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  /* Stack services-what columns */
+  .services-what__layout  { grid-template-columns: 1fr; gap: 3rem; }
+  .services-what__cta     {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding-top: 2.5rem;
+  }
+
+  /* Stack env columns */
+  .env__layout            { grid-template-columns: 1fr; gap: 3rem; }
+  .env__image-border      { display: none; } /* clips on narrow screens */
+}
+
+/* ── Responsive: Mobile ≤767px ────────────────────────────
+   Linearise timeline (single column, no centre line).
+   ──────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .services-what__item-desc { font-size: 0.88rem; }
+  .services-what__quote-sub { font-size: 0.88rem; }
+
+  /* Hide the centre line, convert to simple stacked list */
+  .timeline__track::before  { display: none; }
+  .timeline__item           { flex-direction: column; gap: 0.5rem; }
+  .timeline__dot            { display: none; } /* no dot needed in linear layout */
+  .timeline__side--left,
+  .timeline__side--right    { text-align: left; padding: 0; }
+  .timeline__side--empty    { display: none; }
+  .timeline__item           { padding-left: 1rem; border-left: 2px solid var(--color-gold); }
+  .timeline__year           { font-size: 1.6rem; }
+}

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recursos — CS Químicos</title>
+  <link rel="icon" href="csqicongold.ico" type="image/x-icon"/>
+  <link rel="stylesheet" href="styles/main.css"/>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     NAV — Active: Recursos
+     ══════════════════════════════════════════════════════════ -->
+<nav class="nav">
+  <a href="index.html" class="nav__logo">CS&nbsp;<span class="nav__logo-accent">Químicos</span></a>
+  <ul class="nav__links">
+    <li><a href="productos.html" class="nav__link">Productos</a></li>
+    <li><a href="nosotros.html"  class="nav__link">Nosotros</a></li>
+    <li><a href="recursos.html"  class="nav__link nav__link--active">Recursos</a></li>
+    <li><a href="contacto.html" class="nav__link">Contáctenos</a></li>
+    <li>
+      <button class="nav__cart" id="cart-open" data-cart-open title="Ver carrito">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="14" rx="2"/><path d="M8 8V6a4 4 0 018 0v2"/></svg>
+        <span class="nav__cart-badge" id="cart-badge"></span>
+      </button>
+    </li>
+  </ul>
+  <button class="nav__burger" id="nav-burger" aria-label="Abrir menú">
+    <span class="nav__burger-line"></span><span class="nav__burger-line"></span><span class="nav__burger-line"></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="productos.html" class="mobile-menu__link">Productos</a>
+  <a href="nosotros.html"  class="mobile-menu__link">Nosotros</a>
+  <a href="recursos.html"  class="mobile-menu__link">Recursos</a>
+  <a href="contacto.html" class="mobile-menu__link">Contáctenos</a>
+  <button class="mobile-menu__link" data-cart-open>Ver carrito</button>
+</div>
+
+<div class="page">
+
+  <!-- ── PAGE HERO ────────────────────────────────────────── -->
+  <div class="page-hero">
+    <div class="hex-bg"></div>
+    <span class="page-hero__eyebrow reveal">Biblioteca técnica</span>
+    <h1 class="page-hero__title reveal">Recursos<br><em>para todos.</em></h1>
+    <p class="page-hero__desc reveal">
+      Calculadora de piscinas, fichas de seguridad, artículos técnicos y guías prácticas, todas en un solo lugar.
+    </p>
+  </div>
+
+
+  <!-- ── CALCULADORAS ──────────────────────────────────────
+       Pool calculator widget — js/calculator.js
+       ──────────────────────────────────────────────────── -->
+  <section class="recursos">
+    <div class="section-header reveal">
+      <h2 class="section-header__title">Calculadora para piscina<br><em>en línea.</em></h2>
+      <p class="section-header__desc">
+        Calcule todos los químicos de su piscina en este lugar, sin salir de la página.
+      </p>
+    </div>
+
+    <!-- Pool calculator — full-width featured card -->
+    <div class="calc-wrapper reveal">
+      <div class="calc-card">
+        <div class="calc-card__label">Calculadora de Piscina</div>
+        <div id="pool-calculator"></div>
+      </div>
+    </div>
+
+    <!-- Other calculators — placeholder cards -->
+
+  </section><!-- /.recursos (calculadoras) -->
+
+
+  <!-- ── FICHAS DE SEGURIDAD ────────────────────────────────
+       TODO: Replace each placeholder span with an <a> tag
+       linking to the PDF file, once uploaded.
+       Example:
+         <a href="fichas/soda-caustica.pdf" target="_blank"
+            class="btn btn--outline btn--sm">Descargar PDF</a>
+       ──────────────────────────────────────────────────── -->
+  <section class="recursos" style="background: var(--color-cream-dark); padding-top: 2rem;">
+    <div class="section-header reveal">
+      <span class="section-header__eyebrow">Documentación técnica</span>
+      <h2 class="section-header__title">Fichas de<br><em>Seguridad.</em></h2>
+      <p class="section-header__desc">
+        Hojas de datos de seguridad (HDS / SDS) para los productos que comercializamos. Manejo, almacenamiento y primeros auxilios.
+      </p>
+    </div>
+
+    <div class="recursos__grid">
+
+      <div class="recursos__card reveal">
+        <span class="recursos__card-type">Ficha de Seguridad · PDF</span>
+        <span class="recursos__card-icon">📄</span>
+        <h3 class="recursos__card-title">Ácido Oxálico</h3>
+        <p class="recursos__card-desc">Quitamanchas de óxido y descalcificante. EPP, primeros auxilios y almacenamiento seguro.</p>
+        <a href="FDS/Ácido Oxálico.pdf" target="_blank" class="btn btn--outline btn--sm">Descargar PDF</a>
+      </div>
+
+      <div class="recursos__card reveal reveal--delay-1">
+        <span class="recursos__card-type">Ficha de Seguridad · PDF</span>
+        <span class="recursos__card-icon">📄</span>
+        <h3 class="recursos__card-title">Ácido Tricloroisocialurónico</h3>
+        <p class="recursos__card-desc">Desinfectante de alta concentración. Manejo, incompatibilidades y protocolos de emergencia.</p>
+        <a href="FDS/Ácido Tricloroisocialurónico.pdf" target="_blank" class="btn btn--outline btn--sm">Descargar PDF</a>
+      </div>
+
+      <div class="recursos__card reveal reveal--delay-2">
+        <span class="recursos__card-type">Ficha de Seguridad · PDF</span>
+        <span class="recursos__card-icon">📄</span>
+        <h3 class="recursos__card-title">Hidróxido de Sodio (NaOH)</h3>
+        <p class="recursos__card-desc">EPP recomendado, primeros auxilios, almacenamiento y transporte seguro de la soda cáustica.</p>
+        <a href="FDS/Hidróxido de sodio.pdf" target="_blank" class="btn btn--outline btn--sm">Descargar PDF</a>
+      </div>
+
+      <div class="recursos__card reveal">
+        <span class="recursos__card-type">Ficha de Seguridad · PDF</span>
+        <span class="recursos__card-icon">📄</span>
+        <h3 class="recursos__card-title">Hipoclorito de Calcio</h3>
+        <p class="recursos__card-desc">Condiciones de almacenamiento, dosificación para desinfección y primeros auxilios.</p>
+        <a href="FDS/Hipoclorito de calcio.pdf" target="_blank" class="btn btn--outline btn--sm">Descargar PDF</a>
+      </div>
+
+      <div class="recursos__card reveal reveal--delay-1">
+        <span class="recursos__card-type">Ficha de Seguridad · PDF</span>
+        <span class="recursos__card-icon">📄</span>
+        <h3 class="recursos__card-title">Sulfato de Aluminio</h3>
+        <p class="recursos__card-desc">Coagulante para tratamiento de agua. EPP, primeros auxilios y almacenamiento seguro.</p>
+        <a href="FDS/Sulfato de Aluminio.pdf" target="_blank" class="btn btn--outline btn--sm">Descargar PDF</a>
+      </div>
+
+      <!-- WhatsApp fallback for missing fichas -->
+      <div class="recursos__card reveal reveal--delay-2">
+        <span class="recursos__card-type">Ficha de Seguridad · PDF</span>
+        <span class="recursos__card-icon">📄</span>
+        <h3 class="recursos__card-title">¿Necesita otra ficha?</h3>
+        <p class="recursos__card-desc">Iremos subiendo las fichas de todos nuestros productos. ¿Necesita una urgente? Escríbanos.</p>
+        <a href="https://wa.me/573203188602?text=Hola,%20necesito%20la%20ficha%20de%20seguridad%20de:"
+           target="_blank" class="btn btn--outline btn--sm">Solicitar por WhatsApp</a>
+      </div>
+
+    </div>
+  </section><!-- /.recursos (fichas) -->
+
+
+  <!-- ── BLOG / ARTÍCULOS ───────────────────────────────────
+       TODO: Replace each [Título] and [Descripción] with real
+       article content. Add an <a> linking to the full article
+       page (or external link) when published.
+       ──────────────────────────────────────────────────── -->
+  <section class="recursos">
+    <div class="section-header reveal">
+      <span class="section-header__eyebrow">Blog técnico</span>
+      <h2 class="section-header__title">Artículos y<br><em>guías prácticas.</em></h2>
+      <p class="section-header__desc">
+        Contenido escrito por nuestros ingenieros: consejos de aplicación, comparativas, errores comunes y novedades del sector.
+      </p>
+    </div>
+
+    <div class="recursos__grid">
+
+      <div class="recursos__card reveal">
+        <span class="recursos__card-type">Artículo · [Categoría]</span>
+        <span class="recursos__card-icon">✍️</span>
+        <!-- TODO: Replace with real article title and description -->
+        <h3 class="recursos__card-title">[Título del artículo 1]</h3>
+        <p class="recursos__card-desc">[Descripción breve. Ej: "Cómo mantener el pH de su piscina estable durante el verano sin sobregastar en productos."]</p>
+        <span class="recursos__card-placeholder">— Artículo por publicar —</span>
+      </div>
+
+      <div class="recursos__card reveal reveal--delay-1">
+        <span class="recursos__card-type">Artículo · [Categoría]</span>
+        <span class="recursos__card-icon">✍️</span>
+        <!-- TODO: Replace with real article title and description -->
+        <h3 class="recursos__card-title">[Título del artículo 2]</h3>
+        <p class="recursos__card-desc">[Descripción breve. Ej: "La diferencia entre concentración real y concentración de venta, y por qué le importa a su negocio."]</p>
+        <span class="recursos__card-placeholder">— Artículo por publicar —</span>
+      </div>
+
+      <div class="recursos__card reveal reveal--delay-2">
+        <span class="recursos__card-type">Artículo · [Categoría]</span>
+        <span class="recursos__card-icon">✍️</span>
+        <!-- TODO: Replace with real article title and description -->
+        <h3 class="recursos__card-title">[Título del artículo 3]</h3>
+        <p class="recursos__card-desc">[Descripción breve. Ej: "Cómo leer una ficha técnica de materia prima: los 5 datos que siempre debe verificar antes de comprar."]</p>
+        <span class="recursos__card-placeholder">— Artículo por publicar —</span>
+      </div>
+
+    </div>
+  </section><!-- /.recursos (blog) -->
+
+
+  <!-- ── CTA STRIP ─────────────────────────────────────────── -->
+  <div class="cta-strip">
+    <h2 class="cta-strip__title">¿Tiene una pregunta técnica?</h2>
+    <p class="cta-strip__desc">Nuestros ingenieros responden. Sin rodeos, sin costo.</p>
+    <a href="https://wa.me/573203188602?text=Hola,%20tengo%20una%20consulta%20técnica:"
+       target="_blank" class="btn btn--dark">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.528 5.855L0 24l6.335-1.521A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.677-.487-5.22-1.341l-.374-.218-3.752.901.928-3.651-.241-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      Consultar con un Ingeniero
+    </a>
+  </div>
+
+</div><!-- /.page -->
+
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart" id="cart" role="dialog" aria-label="Carrito de compras">
+  <div class="cart__header">
+    <span class="cart__title">Su Pedido</span>
+    <button class="cart__close" id="cart-close">✕</button>
+  </div>
+  <div class="cart__items" id="cart-items"></div>
+  <div class="cart__footer">
+    <div class="cart__total">
+      <span class="cart__total-label">Total estimado</span>
+      <span class="cart__total-value" id="cart-total">$0</span>
+    </div>
+    <p class="cart__note">Precios orientativos. Confirmamos disponibilidad y precio final por WhatsApp.</p>
+    <div class="cart__actions">
+      <button class="btn btn--whatsapp btn--full" id="cart-send">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.528 5.855L0 24l6.335-1.521A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.677-.487-5.22-1.341l-.374-.218-3.752.901.928-3.651-.241-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Enviar Pedido por WhatsApp
+      </button>
+    </div>
+  </div>
+</aside>
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer__main">
+    <div>
+      <span class="footer__nav-title">Páginas</span>
+      <ul class="footer__nav-list">
+        <li><a href="index.html"     class="footer__nav-link">Inicio</a></li>
+        <li><a href="nosotros.html"  class="footer__nav-link">Nosotros</a></li>
+        <li><a href="productos.html" class="footer__nav-link">Productos</a></li>
+        <li><a href="recursos.html"  class="footer__nav-link">Recursos</a></li>
+      </ul>
+    </div>
+    <div class="footer__brand">
+      <img src="images/CS_Quimicos_Logo_transparent.png" alt="CS Químicos" style="width:64px;height:auto;">
+      <span class="footer__brand-name">CS <span>Químicos</span></span>
+      <span class="footer__brand-tagline">La química perfecta.</span>
+    </div>
+    <div class="footer__contact">
+      <address class="footer__address" style="font-style:normal;">
+        <span class="footer__address-label">Dirección</span>
+        Calle 14 #27a-12, Acacías, Meta
+      </address>
+      <a href="https://wa.me/573203188602?text=Hola,%20quiero%20contactarlos" target="_blank" class="btn btn--whatsapp btn--sm">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.528 5.855L0 24l6.335-1.521A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.677-.487-5.22-1.341l-.374-.218-3.752.901.928-3.651-.241-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Contáctenos
+      </a>
+    </div>
+  </div>
+  <div class="footer__copy">
+    <span class="footer__copy-text">© 2026 EASI Soluciones · Acacías, Colombia</span>
+    <span class="footer__copy-text">Todos los derechos reservados</span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/calculator.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+/* ============================================================
+   02-buttons.css
+   The .btn block and all its modifiers.
+   Used on every page.
+
+   How to use:
+     Always combine the base class with ONE color modifier
+     and optionally a size modifier:
+
+     <a class="btn btn--primary">Cotizar</a>
+     <a class="btn btn--whatsapp btn--full">WhatsApp</a>
+     <button class="btn btn--outline btn--sm">Ver más</button>
+   ============================================================ */
+
+/* ── Base ─────────────────────────────────────────────────
+   Sets shared structure. Never use .btn alone.
+   ──────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 0.9rem 2rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background   var(--transition),
+    color        var(--transition),
+    border-color var(--transition),
+    transform    var(--transition);
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+
+/* ── Color modifiers ──────────────────────────────────────
+
+   --primary       Gold fill. Main CTA, dark backgrounds.
+   --outline       Transparent + subtle gold border. Light bg.
+   --outline-light Transparent + light border. Dark bg.
+   --whatsapp      WhatsApp green. All contact buttons.
+   --dark          Black fill. Use on gold CTA strip.
+   ──────────────────────────────────────────────────────── */
+.btn--primary       { background: var(--color-gold); color: var(--color-black); }
+.btn--primary:hover { background: var(--color-gold-light); }
+
+.btn--outline       { background: transparent; color: var(--color-black); border: 1px solid rgba(201,168,76,0.5); }
+.btn--outline:hover { border-color: var(--color-gold); color: var(--color-gold); }
+
+.btn--outline-light       { background: transparent; color: var(--color-cream); border: 1px solid rgba(201,168,76,0.4); }
+.btn--outline-light:hover { border-color: var(--color-gold); color: var(--color-gold); }
+
+.btn--whatsapp       { background: var(--color-green); color: #fff; }
+.btn--whatsapp:hover { background: #1ebe5d; }
+
+.btn--dark       { background: var(--color-surface); color: var(--color-cream); }
+.btn--dark:hover { background: #2D3B46; }
+
+/* ── Size modifiers ───────────────────────────────────────
+   --full  Fills 100% of its container width.
+   --sm    Compact — used in nav and inside cards.
+   ──────────────────────────────────────────────────────── */
+.btn--full { width: 100%; }
+.btn--sm   { padding: 0.55rem 1.2rem; font-size: 0.68rem; }
+
+/* ── Responsive: Mobile ≤767px ────────────────────────────
+   Full-width buttons on small screens (unless --sm).
+   ──────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .btn { font-size: 0.72rem; }
+  .btn--sm { font-size: 0.65rem; }
+}

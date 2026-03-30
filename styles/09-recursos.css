@@ -1,0 +1,114 @@
+/* ============================================================
+   09-recursos.css
+   Sections used exclusively on recursos.html:
+     .recursos       →  section wrapper (used 3 times)
+     .recursos__grid →  3-column card grid
+     .recursos__card →  individual resource card
+
+   The page has three instances of .recursos:
+     1. Calculadoras   (white background)
+     2. Fichas SDS     (cream-dark background, set inline)
+     3. Blog posts     (white background)
+
+   TODO for each card: replace .recursos__card-placeholder
+   with real content (a link, iframe, or download button).
+   ============================================================ */
+
+/* ─────────────────────────────────────────────────────────
+   RECURSOS SECTION WRAPPER
+   ──────────────────────────────────────────────────────── */
+.recursos {
+  background: var(--color-cream);
+  padding: var(--section-pad);
+}
+
+/* ─────────────────────────────────────────────────────────
+   RESOURCES GRID
+   3 equal columns with a visible gap between cards.
+   ──────────────────────────────────────────────────────── */
+.recursos__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+/* ─────────────────────────────────────────────────────────
+   RESOURCE CARD
+   Hover: border turns gold, background lightens slightly.
+   ──────────────────────────────────────────────────────── */
+.recursos__card {
+  background: var(--color-cream-dark);
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 2.5rem 2rem;
+  transition: border-color var(--transition), background var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+.recursos__card:hover {
+  border-color: var(--color-gold);
+  background: var(--color-cream);
+}
+
+/* "Calculadora" / "Ficha de Seguridad · PDF" / "Artículo" label */
+.recursos__card-type {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+/* Emoji icon */
+.recursos__card-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* Card title */
+.recursos__card-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--color-black);
+  margin-bottom: 0.6rem;
+  line-height: 1.2;
+}
+
+/* Short description */
+.recursos__card-desc {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--color-gray);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  flex: 1; /* pushes placeholder/button to the bottom */
+}
+
+/* Italic placeholder shown until real content is ready */
+.recursos__card-placeholder {
+  font-size: 0.75rem;
+  color: var(--color-gold);
+  letter-spacing: 0.08em;
+  font-style: italic;
+  margin-top: auto;
+}
+
+/* ── Responsive: Tablet ≤1023px ───────────────────────────
+   2-column grid.
+   ──────────────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .recursos__grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+}
+
+/* ── Responsive: Mobile ≤767px ────────────────────────────
+   Single column. Slightly tighter card padding.
+   ──────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .recursos__grid    { grid-template-columns: 1fr; gap: 1.2rem; }
+  .recursos__card    { padding: 2rem 1.5rem; }
+  .recursos__card-desc { font-size: 0.88rem; }
+}

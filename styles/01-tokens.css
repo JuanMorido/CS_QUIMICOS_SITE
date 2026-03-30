@@ -1,0 +1,156 @@
+/* ============================================================
+   01-tokens.css
+   Design tokens: CSS variables, reset, base styles,
+   animations, and utilities used across every page.
+   ============================================================ */
+
+/* ── Google Fonts ─────────────────────────────────────────
+   Cormorant Garamond  →  headings and display text
+   Montserrat          →  body copy, labels, UI
+   ──────────────────────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,600;1,400;1,600&family=Afrah&family=Montserrat:wght@400;500;600;700&display=swap");
+
+/* ── CSS Variables ────────────────────────────────────────
+   Change a value here and it updates the whole site.
+   ──────────────────────────────────────────────────────── */
+:root {
+  /* Colors */
+  --color-gold: #c9a84c; /* main accent: buttons, highlights   */
+  --color-gold-light: #e2c97e; /* hover state for gold               */
+  --color-gold-pale: #f0e0b0; /* gold on dark backgrounds           */
+  --color-cream: #f5f0e8; /* page background                    */
+  --color-cream-dark: #ede6d6; /* alternate section background       */
+  --color-black: #111010; /* primary text                       */
+  --color-surface: #c6b79b; /* charcoal gray — section backgrounds  */
+  --color-charcoal: #2a2a2a; /* secondary text on light bg         */
+  --color-gray: #3d3935; /* muted text — contrast-safe         */
+  --color-green: #25d366; /* WhatsApp green                     */
+  --color-whale: #4e5d6c; /* whale gray — product card bg        */
+
+  /* Typography */
+  --font-display: "Cabin", sans-serif;
+  --font-body: "Montserrat", sans-serif;
+
+  /* Layout */
+  --nav-height: 4.5rem;
+  --section-pad: 6rem 7rem; /* desktop — overridden at breakpoints */
+  --transition: 0.25s ease;
+}
+
+/* ── Reset ────────────────────────────────────────────────
+   Removes default browser margins/padding.
+   ──────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 120%;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-black);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+ul {
+  list-style: none;
+}
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+input,
+select {
+  font-family: var(--font-body);
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ── Page wrapper ─────────────────────────────────────────
+   Pushes page content below the fixed nav bar.
+   Every page wraps all its sections in <div class="page">.
+   ──────────────────────────────────────────────────────── */
+.page {
+  padding-top: var(--nav-height);
+}
+
+/* ── Animations ───────────────────────────────────────────
+   fadeUp  → used by hero entrance (CSS animation)
+   fadeIn  → used by hero logo (CSS animation)
+   ──────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ── Scroll reveal ────────────────────────────────────────
+   Add class="reveal" to any element you want to animate in
+   when the user scrolls it into view.
+   shared.js adds "is-visible" via IntersectionObserver.
+   Use reveal--delay-1/2/3 to stagger sibling elements.
+   ──────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+.reveal--delay-1 {
+  transition-delay: 0.1s;
+}
+.reveal--delay-2 {
+  transition-delay: 0.2s;
+}
+.reveal--delay-3 {
+  transition-delay: 0.3s;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Hex background watermark ─────────────────────────────
+   Tiled hexagon pattern used in dark sections.
+   Always position:absolute — parent must be position:relative.
+   ──────────────────────────────────────────────────────── */
+.hex-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 900'%3E%3Cpolygon points='75,80 62.5,58.4 37.5,58.4 25,80 37.5,101.6 62.5,101.6' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='195,120 172.5,81 127.5,81 105,120 127.5,159 172.5,159' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='300,60 290,42.7 270,42.7 260,60 270,77.3 290,77.3' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='460,100 430,48 370,48 340,100 370,152 430,152' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='580,70 565,44 535,44 520,70 535,96 565,96' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='740,130 720,95.4 680,95.4 660,130 680,164.6 720,164.6' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='150,260 125,216.7 75,216.7 50,260 75,303.3 125,303.3' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='255,200 242.5,178.4 217.5,178.4 205,200 217.5,221.6 242.5,221.6' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='420,280 385,219.4 315,219.4 280,280 315,340.6 385,340.6' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='535,220 517.5,189.7 482.5,189.7 465,220 482.5,250.3 517.5,250.3' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='705,300 677.5,252.3 622.5,252.3 595,300 622.5,347.7 677.5,347.7' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='770,200 760,182.7 740,182.7 730,200 740,217.3 760,217.3' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='75,420 52.5,381 7.5,381 -15,420 7.5,459 52.5,459' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='210,380 195,354 165,354 150,380 165,406 195,406' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='360,460 330,408 270,408 240,460 270,512 330,512' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='475,400 462.5,378.4 437.5,378.4 425,400 437.5,421.6 462.5,421.6' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='630,450 605,406.7 555,406.7 530,450 555,493.3 605,493.3' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='755,380 737.5,349.7 702.5,349.7 685,380 702.5,410.3 737.5,410.3' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='120,580 100,545.4 60,545.4 40,580 60,614.6 100,614.6' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='275,560 247.5,512.3 192.5,512.3 165,560 192.5,607.7 247.5,607.7' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='410,600 395,574 365,574 350,600 365,626 395,626' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='585,580 552.5,523.7 487.5,523.7 455,580 487.5,636.3 552.5,636.3' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='705,540 692.5,518.4 667.5,518.4 655,540 667.5,561.6 692.5,561.6' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='805,620 782.5,581 737.5,581 715,620 737.5,659 782.5,659' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='160,700 150,682.7 130,682.7 120,700 130,717.3 150,717.3' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='370,750 345,706.7 295,706.7 270,750 295,793.3 345,793.3' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='515,720 497.5,689.7 462.5,689.7 445,720 462.5,750.3 497.5,750.3' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='710,760 680,708 620,708 590,760 620,812 680,812' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='55,800 42.5,778.4 17.5,778.4 5,800 17.5,821.6 42.5,821.6' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3Cpolygon points='790,850 770,815.4 730,815.4 710,850 730,884.6 770,884.6' fill='none' stroke='%23C9A84C' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+}

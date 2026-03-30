@@ -1,0 +1,383 @@
+/* ============================================================
+   05-home.css
+   Sections used exclusively on index.html (home page):
+     .hero         →  full-screen split banner
+     .stats-strip  →  three numbers below the hero
+     .why-us       →  two-column differentiator section
+     .team-card    →  dark card inside .why-us right column
+   ============================================================ */
+
+/* ─────────────────────────────────────────────────────────
+   HERO
+   Full-screen two-column section.
+   Left: dark bg with headline, description, CTA buttons.
+   Right: cream bg with the CS logo mark.
+   Slides under the fixed nav bar via negative margin-top.
+   ──────────────────────────────────────────────────────── */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  margin-top: calc(-1 * var(--nav-height));
+}
+
+/* Left column */
+.hero__left {
+  background: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10rem 5rem 5rem 7rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Entrance animations — staggered via animation-delay */
+.hero__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 1.8rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.2s forwards;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(3.8rem, 6.5vw, 6.5rem);
+  font-weight: 400;
+  line-height: 1.08;
+  color: var(--color-cream);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.4s forwards;
+}
+.hero__title em {
+  font-style: italic;
+  color: var(--color-gold);
+}
+
+.hero__desc {
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.9;
+  color: #1f2a44;
+  max-width: 400px;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.6s forwards;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.8s forwards;
+}
+
+/* Right cream column: logo */
+.hero__right {
+  background: #ffffff;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero__logo-wrap {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem;
+  opacity: 0;
+  animation: fadeIn 1.2s ease 1s forwards;
+}
+
+.hero__logo-wrap img {
+  width: clamp(220px, 42vw, 380px);
+  height: auto;
+}
+
+.hero__logo-brand {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-black);
+  margin-top: 0.8rem;
+}
+
+.hero__logo-subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 400;
+  color: var(--color-charcoal);
+  line-height: 1.5;
+  margin-top: 0.8rem;
+  text-align: left;
+}
+
+.hero__logo-tagline--gold {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+  font-weight: 600;
+  color: var(--color-gold);
+  margin-top: 0.3rem;
+  text-align: left;
+}
+
+/* ─────────────────────────────────────────────────────────
+   STATS STRIP
+   Three key numbers in a dark bar directly below the hero.
+   ──────────────────────────────────────────────────────── */
+.stats-strip {
+  background: var(--color-surface);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+.stats-strip__item {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  border-right: 1px solid rgba(201, 168, 76, 0.1);
+}
+.stats-strip__item:last-child {
+  border-right: none;
+}
+
+.stats-strip__number {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: var(--color-gold);
+  line-height: 1;
+  display: block;
+}
+
+.stats-strip__label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gray);
+  margin-top: 0.6rem;
+  display: block;
+}
+
+/* ─────────────────────────────────────────────────────────
+   WHY US
+   Two-column section:
+   Left  →  eyebrow + title + feature list + CTA buttons
+   Right →  .team-card (dark card with founder info)
+   ──────────────────────────────────────────────────────── */
+.why-us {
+  background: #ffffff;
+  padding: var(--section-pad);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+/* 2×3 grid of short feature bullets */
+.why-us__features {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Each feature: a short gold dash + text */
+.why-us__feature {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-charcoal);
+}
+.why-us__feature-line {
+  width: 20px;
+  height: 1px;
+  background: var(--color-gold);
+  flex-shrink: 0;
+  display: block;
+}
+
+.why-us__actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+
+/* ─────────────────────────────────────────────────────────
+   TEAM CARD
+   Dark card showing founder info — sits in the right
+   column of .why-us. The ::before creates an offset gold
+   decorative border behind the card.
+   ──────────────────────────────────────────────────────── */
+.team-card {
+  background: var(--color-surface);
+  padding: 3.5rem;
+  position: relative;
+}
+/* Offset gold border — decorative, clips on narrow screens */
+.team-card::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  right: 12px;
+  bottom: 12px;
+  border: 1px solid var(--color-gold);
+  z-index: -1;
+}
+
+.team-card__intro {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--color-gold-pale);
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.team-card__member {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+}
+.team-card__member:last-child {
+  border-bottom: none;
+}
+
+.team-card__icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(201, 168, 76, 0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.team-card__name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-cream);
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.team-card__role {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--color-gray);
+  line-height: 1.7;
+}
+
+/* ── Responsive: Tablet ≤1023px ───────────────────────────
+   Hero: stack into single column. Stats: stack vertically.
+   Why-us: single column, remove offset border on card.
+   ──────────────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  /* Stack hero columns */
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .hero__left {
+    padding: 7rem 2.5rem 4rem;
+  }
+  .hero__right {
+    min-height: 280px;
+    padding: 3rem;
+  }
+  .hero__desc {
+    max-width: 100%;
+  }
+
+  /* Stack stats vertically */
+  .stats-strip {
+    grid-template-columns: 1fr;
+  }
+  .stats-strip__item {
+    border-right: none;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+  }
+  .stats-strip__item:last-child {
+    border-bottom: none;
+  }
+
+  /* Stack why-us columns */
+  .why-us {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .team-card::before {
+    display: none;
+  } /* offset border clips on narrow screens */
+}
+
+/* ── Responsive: Mobile ≤767px ────────────────────────────
+   Tighter hero padding. Single-column features. Stacked CTAs.
+   ──────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .hero__left {
+    padding: 5.5rem 1.2rem 3rem;
+  }
+  .hero__right {
+    min-height: 220px;
+    padding: 2rem;
+  }
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .stats-strip__number {
+    font-size: 2.2rem;
+  }
+  .stats-strip__item {
+    padding: 1.8rem 1rem;
+  }
+  .stats-strip__label {
+    font-size: 0.72rem;
+  }
+
+  .why-us {
+    gap: 2rem;
+  }
+  .why-us__features {
+    grid-template-columns: 1fr;
+  }
+  .why-us__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .team-card {
+    padding: 2rem 1.5rem;
+  }
+  .team-card__role {
+    font-size: 0.82rem;
+  }
+}

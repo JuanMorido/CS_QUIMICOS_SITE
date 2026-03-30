@@ -1,0 +1,202 @@
+/* ============================================================
+   03-nav.css
+   Top navigation bar and mobile dropdown menu.
+   Used on every page.
+
+   JS behaviour (shared.js):
+     nav--scrolled     → added when window.scrollY > 60
+     mobile-menu--open → toggled by the hamburger button
+   ============================================================ */
+
+/* ── .nav — fixed top bar ─────────────────────────────────
+   Stays at the top of the viewport at all times.
+   --nav-height is also used by .page to push content down.
+   ──────────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4rem;
+  height: var(--nav-height);
+  background: rgba(245, 240, 232, 0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  transition: height var(--transition), box-shadow var(--transition);
+}
+
+/* Compact state after user scrolls down */
+.nav--scrolled {
+  height: 3.625rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+
+/* Brand name / logo text link */
+.nav__logo {
+  font-family: "Afrah", cursive;
+  font-size: 1.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-black);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav__logo-accent { color: var(--color-gold); }
+
+/* ── Desktop link list ────────────────────────────────────
+   Hidden on tablet and mobile — see responsive section below.
+   ──────────────────────────────────────────────────────── */
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Individual page link */
+.nav__link {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-charcoal);
+  position: relative;
+  padding-bottom: 3px;
+  white-space: nowrap;
+  transition: color var(--transition);
+}
+
+/* Animated gold underline — expands on hover/active */
+.nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--color-gold);
+  transition: width 0.3s ease;
+}
+.nav__link:hover,
+.nav__link--active        { color: var(--color-gold); }
+.nav__link:hover::after,
+.nav__link--active::after { width: 100%; }
+
+/* ── Cart icon button ─────────────────────────────────────
+   On productos.html this opens the slide-in cart panel.
+   On all other pages it links directly to productos.html.
+   ──────────────────────────────────────────────────────── */
+.nav__cart {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #c0392b;
+  border: none;
+  border-radius: 7px;
+  color: #ffffff;
+  padding: 0.5rem 0.6rem;
+  transition: opacity var(--transition);
+  cursor: pointer;
+}
+.nav__cart:hover { opacity: 0.85; }
+
+/* Number badge — shown when cart has items (JS toggles --visible) */
+.nav__cart-badge {
+  position: absolute;
+  top: -4px; right: -6px;
+  width: 18px; height: 18px;
+  background: var(--color-gold);
+  color: var(--color-black);
+  font-size: 0.58rem;
+  font-weight: 700;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.nav__cart-badge--visible { display: flex; }
+
+/* ── Hamburger button ─────────────────────────────────────
+   Hidden on desktop. Shown on tablet and mobile.
+   ──────────────────────────────────────────────────────── */
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+}
+.nav__burger-line {
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--color-black);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* ── .mobile-menu ─────────────────────────────────────────
+   Full-width dropdown that appears below the nav bar.
+   Hidden by default — JS adds mobile-menu--open on toggle.
+   ──────────────────────────────────────────────────────── */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: var(--nav-height); left: 0; right: 0;
+  background: var(--color-cream);
+  border-bottom: 1px solid rgba(201,168,76,0.25);
+  padding: 1.5rem 2rem;
+  flex-direction: column;
+  gap: 1.4rem;
+  z-index: 199;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.mobile-menu--open { display: flex; }
+
+.mobile-menu__link {
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-charcoal);
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  transition: color var(--transition);
+}
+.mobile-menu__link:last-child { border-bottom: none; }
+.mobile-menu__link:hover { color: var(--color-gold); }
+
+button.mobile-menu__link {
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: var(--font-body);
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* ── Responsive: Tablet ≤1023px ───────────────────────────
+   Hide desktop links. Show hamburger button.
+   ──────────────────────────────────────────────────────── */
+@media (max-width: 1023px) {
+  .nav          { padding: 0 2rem; }
+  .nav__link    { display: none; }   /* hide text links, keep cart button */
+  .nav__links   { gap: 0; }          /* collapse gap since only cart remains */
+  .nav__burger  { display: flex; }
+}
+
+/* ── Responsive: Mobile ≤767px ────────────────────────────
+   Tighter padding, slightly smaller logo.
+   ──────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .nav            { padding: 0 1.2rem; }
+  .nav__logo      { font-size: 1.2rem; }
+  .mobile-menu    { padding: 1.2rem 1.2rem; }
+}

@@ -1,0 +1,44 @@
+/* ============================================================
+   main.css  —  CS Químicos
+   ============================================================
+   Master stylesheet. Import this single file in every HTML page:
+
+     <link rel="stylesheet" href="styles/main.css">
+
+   This file only contains @import rules — no styles live here.
+   Each partial file handles one logical area of the site.
+   Open the individual file when you need to edit something.
+
+   Load order matters: tokens must come first (variables used by
+   all other files), then shared blocks, then page-specific files.
+   ============================================================ */
+
+/* 1. Design tokens, reset, base, animations, utilities */
+@import url('01-tokens.css');
+
+/* 2. .btn block — used on every page */
+@import url('02-buttons.css');
+
+/* 3. .nav and .mobile-menu — used on every page */
+@import url('03-nav.css');
+
+/* 4. Shared layout: section-header, page-hero, cta-strip, footer */
+@import url('04-layout.css');
+
+/* 5. Home page: hero, stats-strip, why-us, team-card */
+@import url('05-home.css');
+
+/* 6. Nosotros page: services-what, env, timeline */
+@import url('06-nosotros.css');
+
+/* 8. Productos page: filter-bar, product-card, cart */
+@import url('08-productos.css');
+
+/* 9. Recursos page: resource card grid */
+@import url('09-recursos.css');
+
+/* 10. Pool calculator widget */
+@import url('10-calculator.css');
+
+/* 11. Contacto page: map + form, info cards */
+@import url('11-contacto.css');
