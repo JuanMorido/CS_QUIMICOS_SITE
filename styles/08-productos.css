@@ -126,7 +126,23 @@
   .products__catalog-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 767px) {
-  .products__catalog-grid { grid-template-columns: 1fr 1fr; }
+  .products__catalog { padding: 1rem 1rem 1.5rem; }
+  .products__catalog-grid { grid-template-columns: 1fr; }
+  .products__catalog-item {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: 0.8rem 0.9rem;
+  }
+  .products__catalog-name {
+    min-width: 0;
+    font-size: 0.8rem;
+    overflow-wrap: anywhere;
+  }
+  .products__catalog-item .product-card__add {
+    width: 100%;
+    white-space: normal;
+  }
 }
 
 /* "Can't find it? Ask us" area below the grid */
