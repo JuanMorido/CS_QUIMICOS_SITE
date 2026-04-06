@@ -1,788 +1,670 @@
 /**
- * CS Químicos — Calculadora de Piscina v3
+ * CS Químicos — Calculadora de Piscina
+ * =====================================
+ * Drop-in: <div id="pool-calculator"></div>
+ * Requires: styles/10-calculator.css
  *
- * Mount point: <div id="pool-calculator"></div>
- *
- * FORMULAS (all quantities in SI-compatible units):
- *
- * VOLUME
- *   Rectangular : L × A × ((Pmax + Pmin) / 2)
- *   Ovalada     : L × A × 0.89 × ((Pmax + Pmin) / 2)
- *   Circular    : π × (D/2)² × ((Pmax + Pmin) / 2)
- *   Irregular   : L × A × coef × ((Pmax + Pmin) / 2)
- *
- * CLORO
- *   g   = (Δppm × vol_L) / (conc_decimal × 1000)
- *   mL  = (Δppm × vol_L) / (conc_decimal × 1000)   [same formula, liquid unit]
- *
- * pH BAJAR (ácido muriático 33%)
- *   mL  = (Δpph × vol_m3 × 1000) / 330
- *
- * pH SUBIR (carbonato de sodio)
- *   g   = Δpph × vol_m3 × 180
- *
- * ALCALINIDAD SUBIR (bicarbonato de sodio)
- *   g   = (Δppm × vol_L × 1.4) / 1000
- *
- * ALCALINIDAD BAJAR (ácido muriático)
- *   mL  = (Δppm × vol_L × 1.2) / 1000
- *
- * FLOCULANTE (sulfato de aluminio)
- *   g   = dosis_g_m3 × vol_m3
- *   where dosis: ligera=30, turbia=60, muy_turbia=100, verde=150
- *
- * CLORAMINAS shock (super-cloración 10×)
- *   ppm_shock = cloraminas × 10
- *   g = ((ppm_shock - cloro_libre) × vol_L) / (conc_decimal × 1000)
- *
- * REDUCIR CLORO (tiosulfato de sodio)
- *   g   = (Δppm × vol_L × 0.7) / 1000
+ * FÓRMULAS VALIDADAS:
+ *   Rectangular: V = Largo × Ancho × ((Pmax + Pmin) / 2)   [m³]
+ *   Circular:    V = π × (D/2)² × Prof                     [m³]
+ *   Cloro (g)  = (ΔCl_ppm × V_L) / (Conc × 1,000)
+ *   Cloro (mL) = g / densidad_kg_L
+ *   pH↑ NaOH 99%: Henderson-Hasselbalch, pKa1 = 6.35
+ *   Floculante: factor[g/m³] × V_m³
  */
 
 (function () {
-  'use strict';
-
-  const root = document.getElementById('pool-calculator');
+  const root = document.getElementById("pool-calculator");
   if (!root) return;
 
-  // ── CHEMICAL CONSTANTS ───────────────────────────────────────────────────
+  // ── PRODUCTOS ─────────────────────────────────────────────
+  const CLORO_PRODS = [
+    {
+      id: "cl91",
+      label: "Cloro Granulado 91%",
+      conc: 0.91,
+      liquid: false,
+    },
+    {
+      id: "cl70",
+      label: "Cloro Granulado 70%",
+      conc: 0.7,
+      liquid: false,
+    },
 
-  const CLORO_PRODUCTOS = [
-    { id: 'tri91',   label: 'Cloro Granulado 91% (tricloro)',  conc: 0.91, unit: 'g'  },
-    { id: 'cal65',   label: 'Hipoclorito Cálcico 65%',         conc: 0.65, unit: 'g'  },
-    { id: 'past90',  label: 'Pastillas Tricloro 90%',           conc: 0.90, unit: 'g'  },
-    { id: 'sodio12', label: 'Hipoclorito Sódico 12%',           conc: 0.12, unit: 'mL' },
+    {
+      id: "liq15",
+      label: "Cloro líquido 15%",
+      conc: 0.15,
+      liquid: true,
+      density: 1.2,
+    },
+    {
+      id: "liq5",
+      label: "Cloro líquido 5%",
+      conc: 0.05,
+      liquid: true,
+      density: 1.05,
+    },
   ];
-
-  const SHOCK_PRODUCTOS = [
-    { id: 'shock_tri91', label: 'Cloro Granulado Shock (tricloro 91%)', conc: 0.91 },
-    { id: 'shock_diclo', label: 'Dicloroisocianurato 56%',              conc: 0.56 },
-  ];
-
-  // Flocculant dose by turbidity level
-  const FLOC_DOSIS_G   = { ligera: 30,  turbia: 60, muy_turbia: 100, verde: 150 }; // g/m³ sulfato
-  const FLOC_DOSIS_ML  = { ligera: 15,  turbia: 30, muy_turbia:  50, verde:  75 }; // mL/m³ líquido
-
-  const TURB_LABELS = {
-    ligera:     'Ligeramente turbia',
-    turbia:     'Turbia',
-    muy_turbia: 'Muy turbia',
-    verde:      'Verde (algas)',
+  const FLOC_FACTORS = { leve: 15, turbia: 40, muy: 70, verde: 90 };
+  const FLOC_LABELS = {
+    leve: "Ligeramente turbia",
+    turbia: "Turbia",
+    muy: "Muy turbia",
+    verde: "Verde con algas",
   };
 
-  // Pool shape coefficient
-  const OVAL_COEF = 0.89;
+  // ── RESUMEN ───────────────────────────────────────────────
+  const summary = {}; // { cloro: {param,rango,producto,cantidad}, ph: {...}, floc: {...} }
 
-  // pH formula constants
-  const PH_ACID_ML_NUM  = 1000;  // numerator for acid formula: mL = Δph×vol_m3×1000 / 330
-  const PH_ACID_ML_DEN  = 330;   // 33% muriatic acid denominator
-  const PH_SODA_G_COEF  = 180;   // g = Δph × vol_m3 × 180
+  // ── HELPERS ───────────────────────────────────────────────
+  const $ = (id) => document.getElementById(id);
 
-  // Alkalinity formula constants
-  const ALK_RAISE_COEF  = 1.4;   // g = (Δppm × vol_L × 1.4) / 1000
-  const ALK_LOWER_COEF  = 1.2;   // mL = (Δppm × vol_L × 1.2) / 1000
-
-  // Chlorine reducer constant
-  const REDCL_COEF      = 0.7;   // g = (Δppm × vol_L × 0.7) / 1000
-
-  // ── STATE ────────────────────────────────────────────────────────────────
-  const summary = {}; // keyed by parameter id
-
-  // ── HELPERS ──────────────────────────────────────────────────────────────
-
-  /** Colombian locale number: 1.234,56 */
-  function fmtCO(n, dec) {
-    if (!isFinite(n)) return '—';
-    dec = dec === undefined ? 2 : dec;
-    const str  = Math.abs(n).toFixed(dec);
-    const parts = str.split('.');
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    const result = parts.length > 1 ? parts[0] + ',' + parts[1] : parts[0];
-    return n < 0 ? '-' + result : result;
+  function fmtG(v) {
+    if (v >= 1000) return (v / 1000).toFixed(2) + " kg";
+    if (v >= 100) return Math.round(v) + " g";
+    return v.toFixed(1) + " g";
+  }
+  function fmtL(v) {
+    if (v >= 1) return v.toFixed(2) + " L";
+    return (v * 1000).toFixed(0) + " mL";
+  }
+  function fmtML(ml) {
+    if (ml >= 1000) return (ml / 1000).toFixed(2) + " L";
+    return Math.round(ml) + " mL";
   }
 
-  function fmtDose(g) {
-    if (g >= 1000) return fmtCO(g / 1000, 2) + ' kg';
-    if (g >= 100)  return fmtCO(Math.round(g), 0) + ' g';
-    return fmtCO(g, 1) + ' g';
-  }
-
-  function fmtLiq(ml) {
-    if (ml >= 1000) return fmtCO(ml / 1000, 2) + ' L';
-    return fmtCO(Math.round(ml), 0) + ' mL';
-  }
-
-  const $   = id  => document.getElementById(id);
-  const num = id  => parseFloat($(id)?.value) || 0;
-
-  // ── INLINE VALIDATION ────────────────────────────────────────────────────
-
-  function setError(inputId, msg) {
-    const el = $(inputId);
-    if (!el) return;
-    const wrap = el.closest('.f');
-    if (!wrap) return;
-    let err = wrap.querySelector('.f__error');
-    if (msg) {
-      el.classList.add('f--invalid');
-      if (!err) {
-        err = document.createElement('span');
-        err.className = 'f__error';
-        wrap.appendChild(err);
-      }
-      err.textContent = msg;
-    } else {
-      el.classList.remove('f--invalid');
-      if (err) err.remove();
-    }
-  }
-
-  function clearErrors() {
-    Array.from(arguments).forEach(id => setError(id, ''));
-  }
-
-  // ── VOLUME ───────────────────────────────────────────────────────────────
-
+  // ── VOLUMEN ───────────────────────────────────────────────
   function calcVol() {
-    const tipo     = $('vol-tipo').value;
-    const largo    = num('vol-largo');
-    const ancho    = num('vol-ancho');
-    const pmax     = num('vol-pmax');
-    const pmin     = num('vol-pmin');
-    const avgDepth = (pmax + pmin) / 2;
-
-    if (tipo === 'rect') return largo * ancho * avgDepth;
-    if (tipo === 'oval') return largo * ancho * OVAL_COEF * avgDepth;
-    if (tipo === 'circ') return Math.PI * Math.pow(largo / 2, 2) * avgDepth;
-    if (tipo === 'irreg') return largo * ancho * num('vol-coef') * avgDepth;
-    return 0;
+    const tipo = $("vol-tipo").value;
+    if (tipo === "rect") {
+      const l = +$("vol-largo").value || 0;
+      const a = +$("vol-ancho").value || 0;
+      const pmax = +$("vol-pmax").value || 0;
+      const pmin = +$("vol-pmin").value || pmax;
+      return l * a * ((pmax + pmin) / 2);
+    } else {
+      const d = +$("vol-diam").value || 0;
+      const p = +$("vol-pcirc").value || 0;
+      return Math.PI * Math.pow(d / 2, 2) * p;
+    }
   }
 
-  function updateVolumeDisplay() {
-    const v   = calcVol();
-    const box = $('vol-display');
-    if (!box) return;
+  function updateVolBanner() {
+    const v = calcVol();
+    $("vol-display").textContent = v > 0 ? v.toFixed(1) + " m³" : "—";
+  }
 
-    if (v > 0) {
-      box.innerHTML =
-        '<span class="vol-m3">' + fmtCO(v, 1) + ' m³</span>' +
-        '<span class="vol-sep">·</span>' +
-        '<span class="vol-l">' + fmtCO(v * 1000, 0) + ' L</span>';
-      box.classList.remove('vol-display--empty');
+  // ── α1 (Henderson-Hasselbalch, pKa1 = 6.35) ──────────────
+  function alpha1(pH) {
+    const ratio = Math.pow(10, pH - 6.35);
+    return ratio / (1 + ratio);
+  }
+
+  // ── HTML TEMPLATE ─────────────────────────────────────────
+  root.innerHTML = `
+
+<!-- VOLUMEN -->
+<div class="cq-vol">
+  <div class="cq-vol-top">
+    <div class="cq-vol-inputs">
+      <span class="cq-vol-label">Volumen de la piscina</span>
+      <div class="cq-vol-fields">
+    <div class="cq-f">
+      <label>Tipo</label>
+      <select id="vol-tipo" onchange="pqVolToggle()">
+        <option value="rect">Rectangular</option>
+        <option value="circ">Circular</option>
+      </select>
+    </div>
+    <div id="vf-rect" style="display:contents">
+      <div class="cq-f"><label>Largo (m)</label><input type="number" id="vol-largo" min="0" step="0.1" oninput="pqVolUpdate()"></div>
+      <div class="cq-f"><label>Ancho (m)</label><input type="number" id="vol-ancho" min="0" step="0.1" oninput="pqVolUpdate()"></div>
+      <div class="cq-f"><label>Prof. máxima (m)</label><input type="number" id="vol-pmax" min="0" step="0.1" oninput="pqVolUpdate()"></div>
+      <div class="cq-f"><label>Prof. mínima (m)</label><input type="number" id="vol-pmin" min="0" step="0.1" oninput="pqVolUpdate()"></div>
+    </div>
+    <div class="cq-f" id="vf-circ-diam" style="display:none"><label>Diámetro (m)</label><input type="number" id="vol-diam" min="0" step="0.1" oninput="pqVolUpdate()"></div>
+    <div class="cq-f" id="vf-circ-prof" style="display:none"><label>Profundidad (m)</label><input type="number" id="vol-pcirc" min="0" step="0.1" oninput="pqVolUpdate()"></div>
+      </div>
+    </div>
+    <div class="cq-vol-display">
+      <span class="cq-vol-m3" id="vol-display">75.0 m³</span>
+    </div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="cq-tabs">
+  <button class="cq-tab" onclick="pqTab(0)">Cloro</button>
+  <button class="cq-tab" onclick="pqTab(1)">pH</button>
+  <button class="cq-tab" onclick="pqTab(2)">Floculante</button>
+</div>
+
+<!-- TAB 0: CLORO -->
+<div class="cq-panel" id="tab0">
+  <div class="cq-form">
+    <p style="font-size:1.05rem;font-weight:700;margin-bottom:0.25rem;color:#222;">Dosificación de Cloro</p>
+    <p style="font-size:0.78rem;color:#888;margin-bottom:1rem;line-height:1.55;">Calcula la cantidad de cloro a añadir para alcanzar la concentración deseada.</p>
+
+    <div class="cq-fg">
+      <div class="cq-f"><label>Concentración actual (ppm)</label><input type="number" id="cl-ini" min="0" max="30" step="0.1" oninput="pqClRestrict()"></div>
+      <div class="cq-f"><label>Concentración deseada (ppm)</label><input type="number" id="cl-des" min="0" max="30" step="0.1" oninput="pqClRestrict()"></div>
+    </div>
+    <div class="cq-fg col1">
+      <div class="cq-f">
+        <label>Producto</label>
+        <select id="cl-prod" onchange="pqClProdChange()">
+          ${CLORO_PRODS.map((p) => `<option value="${p.id}">${p.label}</option>`).join("\n          ")}
+        </select>
+      </div>
+    </div>
+    <div id="cl-liq-wrap" style="display:none">
+      <div class="cq-fg">
+        <div class="cq-f"><label>Concentración (%)</label><input type="number" id="cl-liq-conc" value="10" min="1" max="20" step="0.1"></div>
+        <div class="cq-f"><label>Densidad (kg/L)</label><input type="number" id="cl-liq-dens" value="1.10" min="0.9" max="1.4" step="0.01"></div>
+      </div>
+    </div>
+
+    <button class="cq-btn" onclick="pqCalcCloro()">Calcular</button>
+    <div class="cq-result" id="cl-res">
+      <div class="cq-result-head">Resumen de dosificación</div>
+      <div id="cl-res-body"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- TAB 1: pH -->
+<div class="cq-panel" id="tab1">
+  <div class="cq-form">
+    <p style="font-size:1.05rem;font-weight:700;margin-bottom:0.25rem;color:#222;">Ajuste de pH</p>
+    <p style="font-size:0.78rem;color:#888;margin-bottom:1rem;line-height:1.55;">Rango ideal 7,2–7,6. pH alto reduce la eficacia del cloro. pH bajo irrita ojos y piel.</p>
+
+    <div class="cq-fg">
+      <div class="cq-f"><label>pH actual</label><input type="number" id="ph-ini" min="6" max="9" step="0.1"></div>
+      <div class="cq-f"><label>pH objetivo</label><input type="number" id="ph-obj" min="6.5" max="8.5" step="0.1"></div>
+    </div>
+    <div class="cq-ph-alk-toggle">
+      <label class="cq-radio-label">
+        <input type="radio" name="ph-alk-mode" value="std" checked onchange="pqPhAlkToggle()">
+        Alcalinidad estándar (80 ppm)
+      </label>
+      <label class="cq-radio-label">
+        <input type="radio" name="ph-alk-mode" value="custom" onchange="pqPhAlkToggle()">
+        Especificar alcalinidad (ppm)
+      </label>
+    </div>
+    <div class="cq-fg col1" id="ph-alk-wrap" style="display:none">
+      <div class="cq-f"><label>Alcalinidad (ppm)</label><input type="number" id="ph-alk" min="10" max="300" step="5"></div>
+    </div>
+
+    <button class="cq-btn" onclick="pqCalcPH()">Calcular</button>
+    <div class="cq-result" id="ph-res">
+      <div class="cq-result-head">Resumen de dosificación</div>
+      <div id="ph-res-body"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- TAB 2: FLOCULANTE -->
+<div class="cq-panel" id="tab2">
+  <div class="cq-form">
+    <p style="font-size:1.05rem;font-weight:700;margin-bottom:0.25rem;color:#222;">Floculante / Clarificante</p>
+    <p style="font-size:0.78rem;color:#888;margin-bottom:1rem;line-height:1.55;">Aglomera partículas en suspensión para que decanten al fondo y se aspiren fácilmente.</p>
+
+    <div class="cq-fg">
+      <div class="cq-f">
+        <label>Nivel de turbidez</label>
+        <select id="floc-nivel">
+          <option value="leve">Ligeramente turbia — fondo visible pero opaco</option>
+          <option value="turbia" selected>Turbia — fondo no visible</option>
+          <option value="muy">Muy turbia — agua lechosa o verde claro</option>
+          <option value="verde">Verde con algas — verde intenso</option>
+        </select>
+      </div>
+      <div class="cq-f">
+        <label>Producto</label>
+        <select id="floc-prod" onchange="pqFlocProdChange()">
+          <option value="sulf">Sulfato de Aluminio Tipo A</option>
+          <option value="clarin-csq">Clarín — CSQ</option>
+          <option value="clarin-otro">Clarín — Otro</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="cq-btn" onclick="pqCalcFloc()">Calcular</button>
+    <div class="cq-result" id="floc-res">
+      <div class="cq-result-head">Resumen de dosificación</div>
+      <div id="floc-res-body"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- RESUMEN -->
+<div class="cq-summary">
+  <div class="cq-summary-head">
+    <span class="cq-summary-label">Resumen de dosificación</span>
+    <div class="cq-summary-actions">
+      <button class="cq-summary-copy" onclick="pqCopySummary()">Copiar resumen</button>
+      <button class="cq-summary-reset" onclick="pqResetAll()">Reiniciar todo</button>
+    </div>
+  </div>
+  <div class="cq-summary-scroll">
+    <table class="cq-summary-table">
+      <thead>
+        <tr><th>Parámetro</th><th>Rango</th><th>Producto</th><th>Cantidad</th></tr>
+      </thead>
+      <tbody id="summary-body">
+        <tr><td colspan="4" class="cq-summary-empty">Ningún cálculo realizado todavía.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="cq-toast" id="cq-toast" aria-live="polite"></div>
+`;
+
+  // ── VOLUME TOGGLE ──────────────────────────────────────────
+  window.pqVolToggle = function () {
+    const isRect = $("vol-tipo").value === "rect";
+    $("vf-rect").style.display = isRect ? "contents" : "none";
+    $("vf-circ-diam").style.display = isRect ? "none" : "";
+    $("vf-circ-prof").style.display = isRect ? "none" : "";
+    updateVolBanner();
+  };
+  window.pqVolUpdate = updateVolBanner;
+
+  // ── TABS (toggle: click activo lo cierra) ──────────────────
+  window.pqTab = function (i) {
+    const tabs = document.querySelectorAll("#pool-calculator .cq-tab");
+    const panels = document.querySelectorAll("#pool-calculator .cq-panel");
+    const isOpen = tabs[i].classList.contains("active");
+    tabs.forEach((t) => t.classList.remove("active"));
+    panels.forEach((p) => p.classList.remove("active"));
+    if (!isOpen) {
+      tabs[i].classList.add("active");
+      panels[i].classList.add("active");
+    }
+  };
+
+  // ── FLOC UI ────────────────────────────────────────────────
+  window.pqFlocProdChange = function () {};
+
+  // ── CLORO UI ───────────────────────────────────────────────
+  window.pqClRestrict = function () {
+    const ini = +$("cl-ini").value || 0;
+    const des = +$("cl-des").value || 0;
+    const opt = $("cl-prod").querySelector('option[value="cl91"]');
+    if (!opt) return;
+    const restrict = ini < 1 || des > 3;
+    opt.disabled = restrict;
+    if (restrict && $("cl-prod").value === "cl91") {
+      $("cl-prod").value = "cl70";
+      pqClProdChange();
+    }
+  };
+
+  window.pqClProdChange = function () {
+    const prod = CLORO_PRODS.find((p) => p.id === $("cl-prod").value);
+    $("cl-liq-wrap").style.display = prod && prod.id === "liqcus" ? "" : "none";
+  };
+
+  // ── CALC: CLORO ────────────────────────────────────────────
+  window.pqCalcCloro = function () {
+    const vol = calcVol();
+    if (!vol) {
+      alert("Ingrese dimensiones válidas.");
+      return;
+    }
+    const litros = vol * 1000;
+
+    const ppmIni = +$("cl-ini").value || 0;
+    const ppmDes = +$("cl-des").value || 0;
+    const prodId = $("cl-prod").value;
+    const prod = CLORO_PRODS.find((p) => p.id === prodId);
+
+    let conc, density, isLiquid;
+    if (prodId === "liqcus") {
+      conc = (+$("cl-liq-conc").value || 10) / 100;
+      density = +$("cl-liq-dens").value || 1.1;
+      isLiquid = true;
     } else {
-      box.innerHTML = '<span class="vol-placeholder">Ingrese las dimensiones</span>';
-      box.classList.add('vol-display--empty');
+      conc = prod.conc;
+      density = prod.density || null;
+      isLiquid = prod.liquid;
     }
 
-    // Enable/disable all calculate buttons
-    document.querySelectorAll('#pool-calculator .calc-btn').forEach(btn => {
-      btn.disabled = v <= 0;
-    });
+    const delta = ppmDes - ppmIni;
 
-    // Keep cloraminas display in sync
-    updateCloraminas();
-  }
+    if (delta <= 0) {
+      showResult("cl-res", [
+        {
+          n: "El cloro ya está en el nivel deseado o superior",
+          o: "Actual: " + ppmIni + " ppm — Objetivo: " + ppmDes + " ppm",
+          v: "✓",
+          c: "g",
+        },
+      ]);
+      updateSummary(
+        "cloro",
+        "Cloro",
+        ppmIni + " → " + ppmDes + " ppm",
+        "—",
+        "Ya en rango",
+      );
+      return;
+    }
 
-  function togglePoolType() {
-    const tipo = $('vol-tipo').value;
-    $('vol-ancho-row').style.display = tipo === 'circ' ? 'none' : '';
-    $('vol-coef-row').style.display  = tipo === 'irreg' ? '' : 'none';
-    $('vol-largo-label').textContent = tipo === 'circ' ? 'Diámetro (m)' : 'Largo (m)';
-    updateVolumeDisplay();
-  }
+    const gProducto = (delta * litros) / (conc * 1000);
+    let doseStr =
+      isLiquid && density ? fmtML(gProducto / density) : fmtG(gProducto);
 
-  // ── TABS ─────────────────────────────────────────────────────────────────
+    const rows = [
+      {
+        n: prod.label,
+        o: ppmIni + " ppm → " + ppmDes + " ppm  ·  " + vol.toFixed(1) + " m³",
+        v: doseStr,
+        c: "g",
+      },
+    ];
+    if (ppmDes >= 10)
+      rows.push({
+        n: "⚠  Super-cloración activa",
+        o: "No bañarse hasta que el nivel de cloro baje de 5 ppm",
+        v: "",
+        c: "w",
+      });
+    if (ppmDes >= 20)
+      rows.push({
+        n: "⚠  Agua verde",
+        o: "Combine con floculante. Aspire algas muertas a las 24 h",
+        v: "",
+        c: "w",
+      });
 
-  function activateTab(i) {
-    document.querySelectorAll('#pool-calculator .pq-tab').forEach(
-      (t, j) => t.classList.toggle('pq-tab--active', i === j)
+    showResult("cl-res", rows);
+    updateSummary(
+      "cloro",
+      "Cloro",
+      ppmIni + " → " + ppmDes + " ppm",
+      prod.label,
+      doseStr,
     );
-    document.querySelectorAll('#pool-calculator .pq-panel').forEach(
-      (p, j) => { p.hidden = i !== j; }
-    );
+  };
+
+  window.pqPhAlkToggle = function () {
+    const isCustom =
+      document.querySelector('input[name="ph-alk-mode"]:checked').value ===
+      "custom";
+    $("ph-alk-wrap").style.display = isCustom ? "" : "none";
+  };
+
+  // ── CALC: pH ───────────────────────────────────────────────
+  window.pqCalcPH = function () {
+    const vol = calcVol();
+    if (!vol) {
+      alert("Ingrese dimensiones válidas.");
+      return;
+    }
+
+    const phIni = +$("ph-ini").value || 7.0;
+    const phObj = +$("ph-obj").value || 7.4;
+    const alkMode = document.querySelector(
+      'input[name="ph-alk-mode"]:checked',
+    ).value;
+    const alk = alkMode === "custom" ? +$("ph-alk").value || 80 : 80;
+    const delta = phObj - phIni;
+
+    if (Math.abs(delta) < 0.05) {
+      showResult("ph-res", [
+        {
+          n: "El pH ya está en el rango objetivo",
+          o: "pH actual: " + phIni.toFixed(1),
+          v: "✓",
+          c: "g",
+        },
+      ]);
+      updateSummary(
+        "ph",
+        "pH",
+        phIni.toFixed(1) + " → " + phObj.toFixed(1),
+        "—",
+        "Ya en rango",
+      );
+      return;
+    }
+
+    if (delta > 0) {
+      const a1ini = alpha1(phIni);
+      const a1fin = alpha1(phObj);
+      const CT = alk / 50000 / a1ini;
+      const gPerM3 = (CT * (a1fin - a1ini) * 1000 * 40) / 0.99;
+      const gTotal = gPerM3 * vol;
+      const dose = fmtG(gTotal);
+      showResult("ph-res", [
+        {
+          n: "Soda Cáustica en escamas",
+          o:
+            "pH " +
+            phIni.toFixed(1) +
+            " → " +
+            phObj.toFixed(1) +
+            "  ·  alcalinidad " +
+            alk +
+            " ppm  ·  " +
+            vol.toFixed(1) +
+            " m³",
+          v: dose,
+          c: "g",
+        },
+      ]);
+      updateSummary(
+        "ph",
+        "pH",
+        phIni.toFixed(1) + " → " + phObj.toFixed(1),
+        "NaOH 99%",
+        dose,
+      );
+    } else {
+      const ml = (Math.abs(delta) / 0.1) * (alk / 80) * vol * 12;
+      const dose = fmtL(ml / 1000);
+      showResult("ph-res", [
+        {
+          n: "Ácido muriático / bisulfato de sodio (referencia)",
+          o:
+            "pH " +
+            phIni.toFixed(1) +
+            " → " +
+            phObj.toFixed(1) +
+            "  ·  alcalinidad " +
+            alk +
+            " ppm",
+          v: dose,
+          c: "w",
+        },
+        {
+          n: "⚠  Nota",
+          o: "Reductor de pH no está en el catálogo CS Químicos actualmente",
+          v: "",
+          c: "w",
+        },
+      ]);
+      updateSummary(
+        "ph",
+        "pH",
+        phIni.toFixed(1) + " → " + phObj.toFixed(1),
+        "Reductor (ref.)",
+        dose,
+      );
+    }
+  };
+
+  // ── CALC: FLOCULANTE ───────────────────────────────────────
+  const CLARIN_CSQ_CONC = 18;
+  const CLARIN_OTRO_CONC = 12;
+
+  window.pqCalcFloc = function () {
+    const vol = calcVol();
+    if (!vol) {
+      alert("Ingrese dimensiones válidas.");
+      return;
+    }
+
+    const nivel = $("floc-nivel").value;
+    const prod = $("floc-prod").value;
+    const factor = FLOC_FACTORS[nivel];
+
+    let rows = [];
+    let prodLabel, doseStr;
+
+    if (prod === "sulf") {
+      const gSulf = factor * vol;
+      doseStr = fmtG(gSulf);
+      prodLabel = "Sulfato de Aluminio Tipo A";
+      rows.push({
+        n: "Sulfato de Aluminio Tipo A (99% p/p)",
+        o:
+          FLOC_LABELS[nivel] +
+          "  ·  factor " +
+          factor +
+          " g/m³  ·  " +
+          vol.toFixed(1) +
+          " m³",
+        v: doseStr,
+        c: "g",
+      });
+    } else {
+      const clarinConc =
+        prod === "clarin-csq" ? CLARIN_CSQ_CONC : CLARIN_OTRO_CONC;
+      const mlClarin = factor * vol * 0.3125 * (18 / clarinConc);
+      doseStr = fmtML(mlClarin);
+      prodLabel =
+        prod === "clarin-csq" ? "Clarín — CSQ" : "Clarín " + clarinConc + "%";
+      rows.push({
+        n: prodLabel + " (" + clarinConc + "%)",
+        o:
+          FLOC_LABELS[nivel] +
+          "  ·  factor " +
+          factor +
+          " g/m³  ·  " +
+          vol.toFixed(1) +
+          " m³",
+        v: doseStr,
+        c: "g",
+      });
+    }
+
+    if (nivel === "verde")
+      rows.push({
+        n: "⚠  Agua verde con algas",
+        o: "Aplique choque de cloro a 20–25 ppm ANTES del floculante",
+        v: "",
+        c: "w",
+      });
+
+    showResult("floc-res", rows);
+    updateSummary("floc", "Floculante", FLOC_LABELS[nivel], prodLabel, doseStr);
+  };
+
+  // ── SHOW RESULT ────────────────────────────────────────────
+  function showResult(boxId, rows) {
+    const box = $(boxId);
+    const body = $(boxId + "-body");
+    body.innerHTML = rows
+      .map(
+        (r) => `
+      <div class="cq-rrow">
+        <div>
+          <div class="cq-rn">${r.n}</div>
+          ${r.o ? `<div class="cq-ro">${r.o}</div>` : ""}
+        </div>
+        ${r.v ? `<span class="cq-rv ${r.c || ""}">${r.v}</span>` : ""}
+      </div>`,
+      )
+      .join("");
+    box.classList.add("show");
+    box.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
-  // ── CLORAMINAS LIVE DISPLAY ──────────────────────────────────────────────
-
-  function updateCloraminas() {
-    const disp = $('clam-display');
-    if (!disp) return;
-    const clam = Math.max(0, num('clam-tot') - num('clam-lib'));
-    disp.textContent = fmtCO(clam, 2) + ' ppm';
-    disp.className = 'clam-value' + (
-      clam > 0.5 ? ' clam-value--danger' :
-      clam > 0.2 ? ' clam-value--warn'   : ' clam-value--ok'
-    );
-  }
-
-  // ── RESULT RENDERER ──────────────────────────────────────────────────────
-  /**
-   * rows: [{ label, sub?, qty?, type: 'ok'|'warn'|'danger'|'tip' }]
-   * The qty field is shown right-aligned in a large display font.
-   */
-  function showResult(panelKey, rows) {
-    const box = $(panelKey + '-result');
-    if (!box) return;
-    box.innerHTML = rows.map(function (r) {
-      return '<div class="res-row res-row--' + (r.type || 'ok') + '">' +
-        '<div class="res-row__text">' +
-          '<span class="res-row__label">' + r.label + '</span>' +
-          (r.sub ? '<span class="res-row__sub">' + r.sub + '</span>' : '') +
-        '</div>' +
-        (r.qty ? '<span class="res-row__qty">' + r.qty + '</span>' : '') +
-      '</div>';
-    }).join('');
-    box.classList.add('result-box--show');
-  }
-
-  // ── SUMMARY ──────────────────────────────────────────────────────────────
-
-  function setSummaryRow(key, data) {
-    summary[key] = data;
+  // ── SUMMARY ────────────────────────────────────────────────
+  function updateSummary(key, param, rango, producto, cantidad) {
+    summary[key] = { param, rango, producto, cantidad };
     renderSummary();
   }
 
   function renderSummary() {
-    const tbody = $('summary-body');
-    const card  = $('summary-card');
-    if (!tbody || !card) return;
+    const tbody = $("summary-body");
     const keys = Object.keys(summary);
-    if (keys.length === 0) {
-      card.classList.add('summary-card--empty');
-      tbody.innerHTML = '<tr><td colspan="4" class="summary-empty">Ningún cálculo realizado todavía.</td></tr>';
+    if (!keys.length) {
+      tbody.innerHTML =
+        '<tr><td colspan="4" class="cq-summary-empty">Ningún cálculo realizado todavía.</td></tr>';
       return;
     }
-    card.classList.remove('summary-card--empty');
-    tbody.innerHTML = keys.map(function (k) {
-      var r = summary[k];
-      return '<tr>' +
-        '<td class="sum-param">' + r.param   + '</td>' +
-        '<td class="sum-range">' + r.range   + '</td>' +
-        '<td class="sum-prod">'  + r.product + '</td>' +
-        '<td class="sum-qty">'   + r.qty     + '</td>' +
-      '</tr>';
-    }).join('');
+    tbody.innerHTML = keys
+      .map((k) => {
+        const r = summary[k];
+        return `<tr>
+        <td>${r.param}</td>
+        <td>${r.rango}</td>
+        <td>${r.producto}</td>
+        <td><strong>${r.cantidad}</strong></td>
+      </tr>`;
+      })
+      .join("");
   }
 
-  function clearSummary() {
-    Object.keys(summary).forEach(function (k) { delete summary[k]; });
-    document.querySelectorAll('#pool-calculator .result-box').forEach(function (b) {
-      b.classList.remove('result-box--show');
-      b.innerHTML = '';
+  function showToast(message, isError = false) {
+    const toast = $("cq-toast");
+    if (!toast) return;
+
+    toast.textContent = message;
+    toast.classList.toggle("error", isError);
+    toast.classList.add("show");
+
+    clearTimeout(showToast.timer);
+    showToast.timer = setTimeout(() => {
+      toast.classList.remove("show");
+      toast.classList.remove("error");
+    }, 2200);
+  }
+
+  window.pqCopySummary = function () {
+    const keys = Object.keys(summary);
+    if (!keys.length) {
+      showToast("No hay calculos para copiar.", true);
+      return;
+    }
+    const vol = calcVol();
+    const lines = [
+      "Resumen de dosificación para la piscina:",
+      "Volumen de agua: " + (vol > 0 ? vol.toFixed(1) + " m³" : "—"),
+    ];
+    keys.forEach((k) => {
+      const r = summary[k];
+      lines.push(
+        r.param + ": " + r.cantidad + " (" + r.producto + " | " + r.rango + ")",
+      );
     });
-    renderSummary();
-  }
-
-  function copySummary() {
-    const keys = Object.keys(summary);
-    if (!keys.length) return;
-    const lines = ['RESUMEN DE DOSIFICACIÓN — CS Químicos', '─'.repeat(42)].concat(
-      keys.map(function (k) {
-        var r = summary[k];
-        return r.param + ': ' + r.range + ' → ' + r.product + ': ' + r.qty;
-      }),
-      ['─'.repeat(42), 'csquimicos.com']
-    );
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(lines.join('\n')).then(function () {
-        var btn = $('summary-copy-btn');
-        if (btn) { btn.textContent = '¡Copiado!'; setTimeout(function () { btn.textContent = 'Copiar resumen'; }, 2000); }
-      });
-    }
-  }
-
-  // ── CALC: CLORO ──────────────────────────────────────────────────────────
-
-  function calcCloro() {
-    const vol    = calcVol();
-    const litros = vol * 1000;
-    const actual = num('cl-actual');
-    const desSel = $('cl-deseado').value;
-    const deseado = desSel === 'custom'
-      ? (parseFloat($('cl-deseado-num')?.value) || 0)
-      : parseFloat(desSel) || 0;
-    const prod = CLORO_PRODUCTOS.find(function (p) { return p.id === $('cl-prod').value; });
-
-    clearErrors('cl-actual');
-    if (actual < 0 || actual > 10) { setError('cl-actual', 'Ingrese un valor entre 0 y 10 ppm'); return; }
-
-    const delta = deseado - actual;
-
-    if (delta <= 0) {
-      showResult('cl', [
-        { label: 'El cloro actual ya está en el nivel deseado o por encima', sub: 'Actual: ' + fmtCO(actual, 1) + ' ppm · Objetivo: ' + fmtCO(deseado, 1) + ' ppm', type: 'warn' },
-        { label: 'Si necesita bajar el nivel, use la pestaña Reducir Cl', type: 'tip' },
-      ]);
-      return;
-    }
-
-    // g (or mL) = (Δppm × vol_L) / (conc_decimal × 1000)
-    const dose = (delta * litros) / (prod.conc * 1000);
-    const qtyStr = prod.unit === 'mL' ? fmtLiq(dose) : fmtDose(dose);
-
-    const rows = [
-      { label: prod.label, sub: 'Elevar de ' + fmtCO(actual, 1) + ' a ' + fmtCO(deseado, 1) + ' ppm · ' + fmtCO(vol, 1) + ' m³', type: 'ok', qty: qtyStr },
-    ];
-    if (deseado >= 10) rows.push({ label: 'Choque activo — no bañarse hasta que el cloro baje de 5 ppm', type: 'danger' });
-    rows.push({ label: 'Añadir con la bomba encendida. Distribuir por el perímetro.', type: 'tip' });
-
-    showResult('cl', rows);
-    setSummaryRow('cloro', { param: 'Cloro', range: fmtCO(actual, 1) + ' → ' + fmtCO(deseado, 1) + ' ppm', product: prod.label, qty: qtyStr });
-  }
-
-  // ── CALC: pH ─────────────────────────────────────────────────────────────
-
-  function calcPH() {
-    const vol     = calcVol();
-    const actual  = num('ph-actual');
-    const deseado = num('ph-deseado');
-
-    clearErrors('ph-actual', 'ph-deseado');
-    if (actual < 4 || actual > 9)       { setError('ph-actual',  'pH entre 4,0 y 9,0'); return; }
-    if (deseado < 6.5 || deseado > 8.5) { setError('ph-deseado', 'pH entre 6,5 y 8,5'); return; }
-
-    const delta = deseado - actual;
-    if (Math.abs(delta) < 0.05) {
-      showResult('ph', [{ label: 'El pH ya está en el rango deseado', type: 'ok' }]);
-      return;
-    }
-
-    const rows = [];
-    let qtyStr, prodLabel;
-
-    if (delta < 0) {
-      // Lower pH — ácido muriático 33%
-      // mL = (Δph × vol_m3 × 1000) / 330
-      const ml = (Math.abs(delta) * vol * PH_ACID_ML_NUM) / PH_ACID_ML_DEN;
-      qtyStr    = fmtLiq(ml);
-      prodLabel = 'Ácido Muriático 33%';
-      rows.push({ label: prodLabel, sub: 'pH ' + fmtCO(actual, 1) + ' → ' + fmtCO(deseado, 1) + ' · ' + fmtCO(vol, 1) + ' m³', type: 'ok', qty: qtyStr });
-      rows.push({ label: 'Alternativa equivalente: Bisulfato de Sodio (misma dosis en gramos)', type: 'tip' });
-    } else {
-      // Raise pH — carbonato de sodio
-      // g = Δph × vol_m3 × 180
-      const g   = delta * vol * PH_SODA_G_COEF;
-      qtyStr    = fmtDose(g);
-      prodLabel = 'Carbonato de Sodio';
-      rows.push({ label: prodLabel, sub: 'pH ' + fmtCO(actual, 1) + ' → ' + fmtCO(deseado, 1) + ' · ' + fmtCO(vol, 1) + ' m³', type: 'ok', qty: qtyStr });
-    }
-
-    if (actual < 7.0 || deseado < 7.0)   rows.push({ label: 'pH inferior a 7,0 — agua corrosiva, daña equipos e irrita la piel', type: 'danger' });
-    else if (actual > 8.0 || deseado > 8.0) rows.push({ label: 'pH superior a 8,0 — el cloro pierde más del 80% de efectividad', type: 'danger' });
-    else if (deseado < 7.2 || deseado > 7.6) rows.push({ label: 'Rango ideal: 7,2 – 7,6', type: 'warn' });
-    rows.push({ label: 'Re-medir el pH después de 4 horas de circulación.', type: 'tip' });
-
-    showResult('ph', rows);
-    setSummaryRow('ph', { param: 'pH', range: fmtCO(actual, 1) + ' → ' + fmtCO(deseado, 1), product: prodLabel, qty: qtyStr });
-  }
-
-  // ── CALC: ALCALINIDAD ────────────────────────────────────────────────────
-
-  function calcAlcalinidad() {
-    const vol    = calcVol();
-    const litros = vol * 1000;
-    const actual  = num('alk-actual');
-    const deseado = num('alk-deseado');
-
-    clearErrors('alk-actual', 'alk-deseado');
-    if (actual < 0 || actual > 300)   { setError('alk-actual',  '0 – 300 ppm'); return; }
-    if (deseado < 20 || deseado > 300){ setError('alk-deseado', '20 – 300 ppm'); return; }
-
-    const delta = deseado - actual;
-    if (Math.abs(delta) < 1) {
-      showResult('alk', [{ label: 'La alcalinidad ya está en el nivel deseado', type: 'ok' }]);
-      return;
-    }
-
-    const rows = [];
-    let qtyStr, prodLabel;
-
-    if (delta > 0) {
-      // Raise — bicarbonato de sodio
-      // g = (Δppm × vol_L × 1.4) / 1000
-      const g   = (delta * litros * ALK_RAISE_COEF) / 1000;
-      qtyStr    = fmtDose(g);
-      prodLabel = 'Bicarbonato de Sodio';
-      rows.push({ label: prodLabel, sub: actual + ' → ' + deseado + ' ppm · ' + fmtCO(vol, 1) + ' m³', type: 'ok', qty: qtyStr });
-    } else {
-      // Lower — ácido muriático
-      // mL = (Δppm × vol_L × 1.2) / 1000
-      const ml  = (Math.abs(delta) * litros * ALK_LOWER_COEF) / 1000;
-      qtyStr    = fmtLiq(ml);
-      prodLabel = 'Ácido Muriático 33%';
-      rows.push({ label: prodLabel, sub: actual + ' → ' + deseado + ' ppm · ' + fmtCO(vol, 1) + ' m³', type: 'ok', qty: qtyStr });
-      rows.push({ label: 'Añadir en partes: cada adición también baja el pH', type: 'warn' });
-    }
-
-    if (deseado < 80 || deseado > 120) rows.push({ label: 'Rango ideal: 80 – 120 ppm', type: 'warn' });
-    rows.push({ label: 'Distribuir por el perímetro con la bomba encendida. Esperar 4 horas.', type: 'tip' });
-
-    showResult('alk', rows);
-    setSummaryRow('alcalinidad', { param: 'Alcalinidad', range: actual + ' → ' + deseado + ' ppm', product: prodLabel, qty: qtyStr });
-  }
-
-  // ── CALC: FLOCULANTE ─────────────────────────────────────────────────────
-
-  function calcFloculante() {
-    const vol    = calcVol();
-    const turbId = $('floc-turb').value;
-    const prodId = $('floc-prod').value;
-    const rows   = [];
-    let qtyStr, prodLabel;
-
-    if (prodId === 'liquido') {
-      // mL total = dosis_mL_m3 × vol_m3
-      const ml  = FLOC_DOSIS_ML[turbId] * vol;
-      qtyStr    = fmtLiq(ml);
-      prodLabel = 'Floculante Líquido';
-    } else {
-      // g total = dosis_g_m3 × vol_m3  (×1.5 for super)
-      const factor = prodId === 'super' ? 1.5 : 1.0;
-      const g   = FLOC_DOSIS_G[turbId] * vol * factor;
-      qtyStr    = fmtDose(g);
-      prodLabel = prodId === 'super' ? 'Super Floculante' : 'Sulfato de Aluminio';
-    }
-
-    rows.push({ label: prodLabel, sub: TURB_LABELS[turbId] + ' · ' + fmtCO(vol, 1) + ' m³', type: 'ok', qty: qtyStr });
-    rows.push({ label: 'Disolver en un balde con agua antes de verter a la piscina', type: 'tip' });
-    rows.push({ label: 'Apagar el filtro 24 h para que las partículas decanten. Aspirar el fondo al día siguiente.', type: 'tip' });
-
-    showResult('floc', rows);
-    setSummaryRow('floculante', { param: 'Floculante', range: TURB_LABELS[turbId], product: prodLabel, qty: qtyStr });
-  }
-
-  // ── CALC: CLORAMINAS ─────────────────────────────────────────────────────
-
-  function calcCloraminas() {
-    const vol      = calcVol();
-    const litros   = vol * 1000;
-    const cloTotal = num('clam-tot');
-    const cloLibre = num('clam-lib');
-
-    clearErrors('clam-tot', 'clam-lib');
-    if (cloTotal < cloLibre) { setError('clam-tot', 'El cloro total no puede ser menor que el libre'); return; }
-
-    const cloraminas = Math.max(0, cloTotal - cloLibre);
-    const prod = SHOCK_PRODUCTOS.find(function (p) { return p.id === $('clam-prod').value; });
-    const rows = [
-      { label: 'Cloraminas presentes', sub: 'Cloro total − cloro libre', qty: fmtCO(cloraminas, 2) + ' ppm',
-        type: cloraminas > 0.5 ? 'danger' : cloraminas > 0.2 ? 'warn' : 'ok' },
-    ];
-
-    if (cloraminas <= 0.2) {
-      rows.push({ label: 'Nivel aceptable — no se requiere acción', type: 'ok' });
-    } else if (cloraminas <= 0.5) {
-      rows.push({ label: 'Nivel bajo-moderado — vigilar y re-medir mañana', type: 'warn' });
-    } else {
-      // Super-cloración: cloro necesario = 10 × cloraminas
-      const ppmShock = cloraminas * 10;
-      const deltaPpm = Math.max(0, ppmShock - cloLibre);
-      // g = (Δppm × vol_L) / (conc × 1000)
-      const g      = (deltaPpm * litros) / (prod.conc * 1000);
-      const qtyStr = fmtDose(g);
-      rows.push({ label: 'Choque necesario: ' + fmtCO(ppmShock, 1) + ' ppm de cloro libre', sub: '10 × cloraminas (' + fmtCO(cloraminas, 2) + ' ppm)', type: 'danger' });
-      rows.push({ label: prod.label, sub: 'Elevar de ' + fmtCO(cloLibre, 1) + ' a ' + fmtCO(ppmShock, 1) + ' ppm', type: 'ok', qty: qtyStr });
-      rows.push({ label: 'No bañarse hasta que el cloro libre baje de 5 ppm', type: 'danger' });
-      setSummaryRow('cloraminas', { param: 'Cloraminas', range: fmtCO(cloraminas, 2) + ' ppm', product: prod.label, qty: qtyStr });
-    }
-
-    showResult('clam', rows);
-  }
-
-  // ── CALC: REDUCIR CLORO ──────────────────────────────────────────────────
-
-  function calcReducirCL() {
-    const vol    = calcVol();
-    const litros = vol * 1000;
-    const actual  = num('red-actual');
-    const deseado = num('red-deseado');
-
-    clearErrors('red-actual', 'red-deseado');
-    if (actual <= 0)             { setError('red-actual',  'Ingrese el nivel actual'); return; }
-    if (deseado < 0)             { setError('red-deseado', 'Ingrese un valor positivo'); return; }
-    if (deseado >= actual) {
-      showResult('red', [{ label: 'El cloro ya está en el nivel deseado o inferior', type: 'ok' }]);
-      return;
-    }
-
-    const delta  = actual - deseado;
-    const rows   = [];
-
-    if (actual <= 5) {
-      rows.push({ label: 'Cloro ≤ 5 ppm — se recomienda dilución con agua limpia en lugar de químicos', sub: 'Drene parte del agua y rellene con agua limpia', type: 'warn' });
-    }
-
-    // Tiosulfato de sodio: g = (Δppm × vol_L × 0.7) / 1000
-    const g      = (delta * litros * REDCL_COEF) / 1000;
-    const qtyStr = fmtDose(g);
-    rows.push({ label: 'Tiosulfato de Sodio', sub: 'Reducir de ' + fmtCO(actual, 1) + ' a ' + fmtCO(deseado, 1) + ' ppm · ' + fmtCO(vol, 1) + ' m³', type: 'ok', qty: qtyStr });
-    rows.push({ label: 'Medir el cloro 2 horas después. Añadir más si es necesario.', type: 'tip' });
-
-    showResult('red', rows);
-    setSummaryRow('reducir_cl', { param: 'Reducir Cl', range: fmtCO(actual, 1) + ' → ' + fmtCO(deseado, 1) + ' ppm', product: 'Tiosulfato de Sodio', qty: qtyStr });
-  }
-
-  // ── HTML TEMPLATE ────────────────────────────────────────────────────────
-
-  root.innerHTML = [
-    // ─ VOLUME SECTION ────────────────────────────────────────────────────
-    '<div class="pq-wrap">',
-
-    '<div class="pq-vol">',
-      '<div class="pq-vol__controls">',
-        '<div class="pq-section-label">Volumen de la piscina</div>',
-        '<div class="pq-vol__row">',
-          '<div class="f f--inline">',
-            '<label for="vol-tipo">Tipo</label>',
-            '<select id="vol-tipo" onchange="pqVolToggle()">',
-              '<option value="rect">Rectangular</option>',
-              '<option value="oval">Ovalada</option>',
-              '<option value="circ">Circular</option>',
-              '<option value="irreg">Irregular</option>',
-            '</select>',
-          '</div>',
-          '<div class="f" id="vol-largo-wrap">',
-            '<label id="vol-largo-label" for="vol-largo">Largo (m)</label>',
-            '<input type="number" id="vol-largo" value="10" min="0" step="0.1" oninput="pqVolUpdate()">',
-          '</div>',
-          '<div class="f" id="vol-ancho-row">',
-            '<label for="vol-ancho">Ancho (m)</label>',
-            '<input type="number" id="vol-ancho" value="5" min="0" step="0.1" oninput="pqVolUpdate()">',
-          '</div>',
-          '<div class="f">',
-            '<label for="vol-pmax">Prof. máxima (m)</label>',
-            '<input type="number" id="vol-pmax" value="1.8" min="0" step="0.1" oninput="pqVolUpdate()">',
-          '</div>',
-          '<div class="f">',
-            '<label for="vol-pmin">Prof. mínima (m)</label>',
-            '<input type="number" id="vol-pmin" value="1.2" min="0" step="0.1" oninput="pqVolUpdate()">',
-          '</div>',
-          '<div class="f" id="vol-coef-row" style="display:none">',
-            '<label for="vol-coef">Coeficiente</label>',
-            '<input type="number" id="vol-coef" value="0.85" min="0.5" max="1" step="0.01" oninput="pqVolUpdate()">',
-          '</div>',
-        '</div>',
-      '</div>',
-      '<div class="pq-vol__display" id="vol-display">',
-        '<span class="vol-placeholder">Ingrese las dimensiones</span>',
-      '</div>',
-    '</div>',
-
-    // ─ TABS ──────────────────────────────────────────────────────────────
-    '<div class="pq-tabs" role="tablist">',
-      '<button class="pq-tab pq-tab--active" role="tab" onclick="pqTab(0)">Cloro</button>',
-      '<button class="pq-tab" role="tab" onclick="pqTab(1)">pH</button>',
-      '<button class="pq-tab" role="tab" onclick="pqTab(2)">Floculante</button>',
-    '</div>',
-
-    // ─ PANEL 0: CLORO ────────────────────────────────────────────────────
-    '<div class="pq-panel" id="pq-panel-0" role="tabpanel">',
-      '<div class="pq-panel__form">',
-        '<h3 class="pq-panel__title">Dosificación de Cloro</h3>',
-        '<p class="pq-panel__desc">Calcula la cantidad de cloro a añadir para alcanzar la concentración deseada.</p>',
-        '<div class="fg fg--2">',
-          '<div class="f"><label for="cl-actual">Concentración actual (ppm)</label>',
-            '<input type="number" id="cl-actual" value="0.5" min="0" max="10" step="0.1"></div>',
-          '<div class="f"><label for="cl-deseado">Concentración deseada</label>',
-            '<select id="cl-deseado" onchange="pqClDeseadoChange()">',
-              '<option value="1">1 ppm — mínimo residencial</option>',
-              '<option value="2">2 ppm — mantenimiento</option>',
-              '<option value="3" selected>3 ppm — mantenimiento óptimo</option>',
-              '<option value="5">5 ppm — piscina pública</option>',
-              '<option value="10">10 ppm — choque suave</option>',
-              '<option value="15">15 ppm — agua turbia</option>',
-              '<option value="22">22 ppm — agua verde</option>',
-              '<option value="custom">Otro valor…</option>',
-            '</select></div>',
-        '</div>',
-        '<div class="fg fg--2" id="cl-custom-row" style="display:none">',
-          '<div class="f"><label for="cl-deseado-num">Valor personalizado (ppm)</label>',
-            '<input type="number" id="cl-deseado-num" value="5" min="0" max="25" step="0.1"></div>',
-        '</div>',
-        '<div class="fg fg--1">',
-          '<div class="f"><label for="cl-prod">Producto</label>',
-            '<select id="cl-prod">',
-              CLORO_PRODUCTOS.map(function (p) { return '<option value="' + p.id + '">' + p.label + '</option>'; }).join(''),
-            '</select></div>',
-        '</div>',
-        '<button class="calc-btn" onclick="pqCalcCloro()">Calcular</button>',
-        '<div class="result-box" id="cl-result"></div>',
-      '</div>',
-      '<div class="pq-panel__info">',
-        '<div class="info-card">',
-          '<div class="info-card__title">Cloro libre en piscinas</div>',
-          '<p class="info-card__desc">El cloro libre es el desinfectante activo. El nivel correcto depende del pH del agua.</p>',
-          '<div class="range-badges">',
-            '<span class="range-badge rb--danger">Bajo · &lt;1 ppm — riesgo sanitario</span>',
-            '<span class="range-badge rb--ok">Ideal · 1–3 ppm (residencial)</span>',
-            '<span class="range-badge rb--ok">Ideal · 3–5 ppm (pública)</span>',
-            '<span class="range-badge rb--warn">Alto · 5–10 ppm — no bañarse</span>',
-            '<span class="range-badge rb--danger">Choque · &gt;10 ppm — no bañarse</span>',
-          '</div>',
-          '<ul class="info-tips">',
-            '<li>A mayor pH, se necesita más cloro para el mismo efecto.</li>',
-            '<li>La luz solar destruye hasta el 50% del cloro en 2 horas.</li>',
-            '<li>Mida siempre antes del mediodía para una lectura precisa.</li>',
-            '<li>Con más de 6 bañistas, sume 0,5 ppm adicional.</li>',
-          '</ul>',
-          '<div class="ref-table"><div class="ref-table__title">pH vs cloro recomendado</div>',
-            '<table><tr><th>pH</th><th>Cloro libre</th></tr>',
-              '<tr><td>7,2 – 7,4</td><td>1 – 2 ppm</td></tr>',
-              '<tr><td>7,4 – 7,6</td><td>2 – 3 ppm</td></tr>',
-              '<tr><td>7,6 – 7,8</td><td>3 – 4 ppm</td></tr>',
-              '<tr><td>7,8 – 8,0</td><td>4 – 5 ppm</td></tr>',
-            '</table></div>',
-          '<div class="tip-box">Añada siempre los químicos con la bomba en marcha. Nunca mezcle dos productos entre sí.</div>',
-        '</div>',
-      '</div>',
-    '</div>',
-
-    // ─ PANEL 1: pH ───────────────────────────────────────────────────────
-    '<div class="pq-panel" id="pq-panel-1" role="tabpanel" hidden>',
-      '<div class="pq-panel__form">',
-        '<h3 class="pq-panel__title">Ajuste de pH</h3>',
-        '<p class="pq-panel__desc">El pH ideal es 7,2–7,6. Un pH alto reduce la efectividad del cloro; uno bajo irrita piel y daña equipos.</p>',
-        '<div class="fg fg--2">',
-          '<div class="f"><label for="ph-actual">pH actual</label>',
-            '<input type="number" id="ph-actual" value="7.0" min="4" max="9" step="0.1"></div>',
-          '<div class="f"><label for="ph-deseado">pH objetivo</label>',
-            '<input type="number" id="ph-deseado" value="7.4" min="6.5" max="8.5" step="0.1"></div>',
-        '</div>',
-        '<button class="calc-btn" onclick="pqCalcPH()">Calcular</button>',
-        '<div class="result-box" id="ph-result"></div>',
-      '</div>',
-      '<div class="pq-panel__info">',
-        '<div class="info-card">',
-          '<div class="info-card__title">pH del agua</div>',
-          '<p class="info-card__desc">El pH mide la acidez o alcalinidad en escala 0–14. Es el parámetro más crítico de la piscina.</p>',
-          '<div class="range-badges">',
-            '<span class="range-badge rb--danger">Ácido · &lt;7,0 — corrosivo</span>',
-            '<span class="range-badge rb--warn">Bajo · 7,0–7,2</span>',
-            '<span class="range-badge rb--ok">Ideal · 7,2–7,6</span>',
-            '<span class="range-badge rb--warn">Alto · 7,6–8,0</span>',
-            '<span class="range-badge rb--danger">Alcalino · &gt;8,0 — cloro ineficaz</span>',
-          '</div>',
-          '<ul class="info-tips">',
-            '<li>A pH 8,0, el cloro pierde el 80% de su capacidad desinfectante.</li>',
-            '<li>El pH sube naturalmente con el tiempo por aireación.</li>',
-            '<li>La lluvia puede bajar el pH bruscamente.</li>',
-            '<li>Ajuste siempre el pH antes de añadir cloro.</li>',
-          '</ul>',
-          '<div class="ref-table"><div class="ref-table__title">Cloro activo (HOCl) según pH</div>',
-            '<table><tr><th>pH</th><th>Cloro activo</th></tr>',
-              '<tr><td>7,0</td><td>73%</td></tr>',
-              '<tr><td>7,2</td><td>63%</td></tr>',
-              '<tr><td>7,5</td><td>49%</td></tr>',
-              '<tr><td>8,0</td><td>21%</td></tr>',
-            '</table></div>',
-          '<div class="tip-box">Ajuste el pH antes de añadir cloro. Añada el ácido lentamente y nunca de golpe.</div>',
-        '</div>',
-      '</div>',
-    '</div>',
-
-    // ─ PANEL 2: FLOCULANTE ───────────────────────────────────────────────
-    '<div class="pq-panel" id="pq-panel-2" role="tabpanel" hidden>',
-      '<div class="pq-panel__form">',
-        '<h3 class="pq-panel__title">Floculante / Clarificante</h3>',
-        '<p class="pq-panel__desc">Elimina la turbidez aglomerando partículas en suspensión para que decanten al fondo.</p>',
-        '<div class="fg fg--1">',
-          '<div class="f"><label for="floc-turb">Nivel de turbidez</label>',
-            '<select id="floc-turb">',
-              '<option value="ligera">Ligeramente turbia — agua opaca pero se ve el fondo</option>',
-              '<option value="turbia" selected>Turbia — no se ve el fondo con claridad</option>',
-              '<option value="muy_turbia">Muy turbia — no se ve el fondo</option>',
-              '<option value="verde">Verde — agua con algas</option>',
-            '</select></div>',
-        '</div>',
-        '<div class="fg fg--1">',
-          '<div class="f"><label for="floc-prod">Producto</label>',
-            '<select id="floc-prod">',
-              '<option value="sulfato">Sulfato de Aluminio</option>',
-              '<option value="liquido">Floculante Líquido</option>',
-              '<option value="super">Super Floculante</option>',
-            '</select></div>',
-        '</div>',
-        '<button class="calc-btn" onclick="pqCalcFloculante()">Calcular</button>',
-        '<div class="result-box" id="floc-result"></div>',
-      '</div>',
-      '<div class="pq-panel__info">',
-        '<div class="info-card">',
-          '<div class="info-card__title">Floculantes y clarificantes</div>',
-          '<p class="info-card__desc">Los floculantes unen partículas microscópicas en grumos que se hunden al fondo para aspirarse.</p>',
-          '<div class="range-badges">',
-            '<span class="range-badge rb--ok">Clara — no se necesita</span>',
-            '<span class="range-badge rb--warn">Ligeramente turbia — dosis baja</span>',
-            '<span class="range-badge rb--warn">Turbia — dosis media</span>',
-            '<span class="range-badge rb--danger">Verde / muy turbia — dosis máxima + choque</span>',
-          '</div>',
-          '<ul class="info-tips">',
-            '<li>Disuelva el floculante en un balde antes de verterlo.</li>',
-            '<li>Apague el filtro 24 h para permitir la decantación.</li>',
-            '<li>Aspire el fondo al día siguiente sin remover el agua.</li>',
-            '<li>Para agua verde, realice choque de cloro primero.</li>',
-          '</ul>',
-          '<div class="ref-table"><div class="ref-table__title">Dosis de referencia (Sulfato Al.)</div>',
-            '<table><tr><th>Turbidez</th><th>Dosis</th></tr>',
-              '<tr><td>Ligera</td><td>30 g/m³</td></tr>',
-              '<tr><td>Media</td><td>60 g/m³</td></tr>',
-              '<tr><td>Alta</td><td>100 g/m³</td></tr>',
-              '<tr><td>Verde</td><td>150 g/m³</td></tr>',
-            '</table></div>',
-          '<div class="tip-box">Para agua verde: choque de cloro el día 1, floculante el día 2, aspirar el día 3.</div>',
-        '</div>',
-      '</div>',
-    '</div>',
-
-    // ─ SUMMARY CARD ──────────────────────────────────────────────────────
-    '<div class="summary-card summary-card--empty" id="summary-card">',
-      '<div class="summary-card__header">',
-        '<span class="summary-card__title">Resumen de dosificación</span>',
-        '<div class="summary-card__actions">',
-          '<button class="summary-btn" id="summary-copy-btn" onclick="pqCopySummary()">Copiar resumen</button>',
-          '<button class="summary-btn summary-btn--reset" onclick="pqClearSummary()">Reiniciar todo</button>',
-        '</div>',
-      '</div>',
-      '<div class="summary-card__body">',
-        '<table class="summary-table">',
-          '<thead><tr>',
-            '<th>Parámetro</th>',
-            '<th>Rango</th>',
-            '<th>Producto</th>',
-            '<th>Cantidad</th>',
-          '</tr></thead>',
-          '<tbody id="summary-body">',
-            '<tr><td colspan="4" class="summary-empty">Ningún cálculo realizado todavía.</td></tr>',
-          '</tbody>',
-        '</table>',
-      '</div>',
-    '</div>',
-
-    '</div>',// /.pq-wrap
-  ].join('');
-
-  // ── GLOBAL HANDLERS ──────────────────────────────────────────────────────
-
-  window.pqVolToggle        = togglePoolType;
-  window.pqVolUpdate        = updateVolumeDisplay;
-  window.pqTab              = activateTab;
-  window.pqClamUpdate       = updateCloraminas;
-  window.pqCalcCloro        = calcCloro;
-  window.pqCalcPH           = calcPH;
-  window.pqCalcAlcalinidad  = calcAlcalinidad;
-  window.pqCalcFloculante   = calcFloculante;
-  window.pqCalcCloraminas   = calcCloraminas;
-  window.pqCalcReducirCL    = calcReducirCL;
-  window.pqClearSummary     = clearSummary;
-  window.pqCopySummary      = copySummary;
-
-  window.pqClDeseadoChange = function () {
-    const row = $('cl-custom-row');
-    if (row) row.style.display = $('cl-deseado').value === 'custom' ? 'grid' : 'none';
+    navigator.clipboard
+      .writeText(lines.join("\n"))
+      .then(() => showToast("Resumen copiado al portapapeles."))
+      .catch(() =>
+        showToast("No se pudo copiar. Copie manualmente desde la tabla.", true),
+      );
   };
 
-  // ── INIT ─────────────────────────────────────────────────────────────────
-  updateVolumeDisplay();
-  updateCloraminas();
-  renderSummary();
+  window.pqResetAll = function () {
+    Object.keys(summary).forEach((k) => delete summary[k]);
+    renderSummary();
+    ["cl-res", "ph-res", "floc-res"].forEach((id) => {
+      const el = $(id);
+      if (el) el.classList.remove("show");
+    });
+  };
 
+  // Init
+  updateVolBanner();
 })();

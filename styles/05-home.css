@@ -93,14 +93,14 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   padding: 2rem;
   opacity: 0;
   animation: fadeIn 1.2s ease 1s forwards;
 }
 
 .hero__logo-wrap img {
-  width: clamp(220px, 42vw, 380px);
+  width: clamp(300px, 55vw, 520px);
   height: auto;
 }
 
@@ -123,7 +123,7 @@
   color: var(--color-charcoal);
   line-height: 1.5;
   margin-top: 0.8rem;
-  text-align: left;
+  text-align: center;
 }
 
 .hero__logo-tagline--gold {
@@ -133,7 +133,7 @@
   font-weight: 600;
   color: var(--color-gold);
   margin-top: 0.3rem;
-  text-align: left;
+  text-align: center;
 }
 
 /* ─────────────────────────────────────────────────────────
@@ -305,11 +305,11 @@
     min-height: auto;
   }
   .hero__left {
-    padding: 7rem 2.5rem 4rem;
+    padding: 2.5rem 2.5rem 4rem;
   }
   .hero__right {
     min-height: 280px;
-    padding: 3rem;
+    padding: calc(var(--nav-height) + 2.5rem) 3rem 3rem;
   }
   .hero__desc {
     max-width: 100%;
@@ -342,11 +342,11 @@
    ──────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
   .hero__left {
-    padding: 5.5rem 1.2rem 3rem;
+    padding: 2rem 1.2rem 3rem;
   }
   .hero__right {
     min-height: 220px;
-    padding: 2rem;
+    padding: calc(var(--nav-height) + 1.5rem) 1.2rem 2rem;
   }
   .hero__actions {
     flex-direction: column;

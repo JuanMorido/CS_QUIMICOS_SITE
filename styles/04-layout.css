@@ -95,12 +95,25 @@
   color: var(--color-gold);
 }
 
+.page-hero__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.page-hero__right {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
 .page-hero__desc {
   font-size: 0.85rem;
   font-weight: 400;
   color: var(--color-cream);
   line-height: 1.9;
-  max-width: 480px;
   margin-top: 1.5rem;
 }
 
@@ -308,6 +321,10 @@
 
   .page-hero {
     padding: 3rem 1.2rem 2.5rem;
+  }
+  .page-hero__body {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
   .page-hero__desc {
     font-size: 0.9rem;

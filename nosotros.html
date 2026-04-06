@@ -25,7 +25,12 @@
         <li><a href="recursos.html" class="nav__link">Recursos</a></li>
         <li><a href="contacto.html" class="nav__link">Contáctenos</a></li>
         <li>
-          <button class="nav__cart" id="cart-open" data-cart-open title="Ver carrito">
+          <button
+            class="nav__cart"
+            id="cart-open"
+            data-cart-open
+            title="Ver carrito"
+          >
             <svg
               width="20"
               height="20"
@@ -64,10 +69,35 @@
        ──────────────────────────────────────────────────── -->
       <div class="page-hero">
         <div class="hex-bg"></div>
-        <span class="page-hero__eyebrow reveal">Quiénes somos</span>
-        <h1 class="page-hero__title reveal">
-          Ciencia,<br /><em>compromiso</em><br />y territorio.
-        </h1>
+        <div class="page-hero__body">
+          <div class="page-hero__left">
+            <span class="page-hero__eyebrow reveal">Quiénes somos</span>
+            <h1 class="page-hero__title reveal">
+              Ciencia,<br /><em>compromiso</em><br />y territorio.
+            </h1>
+          </div>
+          <div class="page-hero__right">
+            <p class="page-hero__desc reveal">
+              CS Químicos es una empresa especializada en la producción y
+              comercialización de la línea de productos para el aseo, a nivel
+              nacional, en la línea institucional, industrial y línea doméstica
+              de consumo masivo.
+            </p>
+            <p class="page-hero__desc reveal">
+              Para lograrlo, seguimos puntualmente todos los requisitos y
+              exigencias de los organismos reguladores de la actividad como el
+              INVIMA, SANIDAD, etc., con lo que garantizamos altos estándares de
+              calidad.
+            </p>
+            <p class="page-hero__desc reveal">
+              Satisfacemos a nuestros clientes actuales y futuros, con
+              excelentes productos y óptimo cumplimiento en la calidad de los
+              productos y entregas oportunas. Además, brindamos a los socios,
+              empleados, clientes y proveedores estabilidad, generación de
+              utilidades y crecimiento mutuo en cada uno de sus patrimonios.
+            </p>
+          </div>
+        </div>
       </div>
 
       <!-- ── COMPROMISO AMBIENTAL ───────────────────────────────
@@ -75,7 +105,7 @@
        TODO: Replace image placeholder with a real photo.
        ──────────────────────────────────────────────────── -->
       <section class="env">
-        <div class="hex-bg" style="opacity: 0.025"></div>
+        <div class="hex-bg"></div>
         <div class="env__layout">
           <!-- Text column -->
           <div class="reveal">
@@ -84,60 +114,43 @@
               <h2 class="section-header__title">
                 Nuestro compromiso<br />con <em>el planeta.</em>
               </h2>
-              <p class="section-header__desc">
-                <!-- TODO: Escriba aquí su declaración de compromiso ambiental.
-                 Ejemplo: fórmulas biodegradables, manejo responsable de residuos,
-                 preservación de fuentes hídricas, etc. -->
-                [Contenido por completar]
-              </p>
             </div>
 
-            <div class="env__practices">
-              <!-- TODO: Replace all three practices with real content -->
-              <div class="env__practice">
-                <span class="env__practice-icon">🌿</span>
-                <div>
-                  <span class="env__practice-title"
-                    >[Práctica ambiental 1]</span
-                  >
-                  <p class="env__practice-desc">[Descripción]</p>
-                </div>
-              </div>
-              <div class="env__practice">
-                <span class="env__practice-icon">💧</span>
-                <div>
-                  <span class="env__practice-title"
-                    >[Práctica ambiental 2]</span
-                  >
-                  <p class="env__practice-desc">[Descripción]</p>
-                </div>
-              </div>
-              <div class="env__practice">
-                <span class="env__practice-icon">♻️</span>
-                <div>
-                  <span class="env__practice-title"
-                    >[Práctica ambiental 3]</span
-                  >
-                  <p class="env__practice-desc">[Descripción]</p>
-                </div>
-              </div>
-            </div>
+            <p class="section-header__desc">
+              CS Quimicos comprende que nuestro hogar es la tierra, y de esta
+              manera busca ser sustentable en todos sus procesos con el fin de
+              generar el menor impacto ambiental posible. Gracias a nuestras
+              materias primas y formulaciones tenemos en el mercado productos
+              biodegradables, cada uno con su certificado correspondiente a
+              disposición de nuestros clientes; adicionalmente manejamos en
+              todos nuestros procesos materiales recuperados, desde el envase,
+              la caja y el producto en si.
+            </p>
           </div>
 
           <!-- Image column -->
-          <!-- TODO: Replace this placeholder div with:
-           <img src="images/laboratorio.jpg" alt="Laboratorio CS Químicos" style="width:100%;"> -->
           <div class="env__image reveal reveal--delay-1">
-            <div class="env__image-placeholder">
-              <div class="hex-bg" style="opacity: 0.06"></div>
-              <div class="env__image-placeholder-inner">
-                <span class="env__image-placeholder-icon">🌱</span>
-                <span class="env__image-placeholder-label"
-                  >Insertar foto aquí</span
-                >
-              </div>
-            </div>
+            <img
+              src="images/chemistry-lab-plant-stock.jpg"
+              alt="Compromiso ambiental CS Químicos"
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+              "
+            />
             <div class="env__image-border"></div>
+            <p
+              style="
+                text-align: center;
+                font-size: 0.75rem;
+                letter-spacing: 0.15em;
+                text-transform: uppercase;
+                color: var(--color-gold);
+                margin-top: 0.75rem;
+              "
+            ></p>
           </div>
         </div>
       </section>
@@ -181,6 +194,16 @@
                 [Fundación formal, primer cliente, apertura del laboratorio,
                 etc.]
               </p>
+              <img
+                src="images/Local_segundoyear.jpeg"
+                alt="CS Químicos — segundo año"
+                style="
+                  width: 100%;
+                  margin-top: 1rem;
+                  border-radius: 4px;
+                  display: block;
+                "
+              />
             </div>
           </div>
 

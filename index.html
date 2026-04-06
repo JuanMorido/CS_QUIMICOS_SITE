@@ -23,7 +23,12 @@
         <li><a href="recursos.html" class="nav__link">Recursos</a></li>
         <li><a href="contacto.html" class="nav__link">Contáctenos</a></li>
         <li>
-          <button class="nav__cart" id="cart-open" data-cart-open title="Ver carrito">
+          <button
+            class="nav__cart"
+            id="cart-open"
+            data-cart-open
+            title="Ver carrito"
+          >
             <svg
               width="20"
               height="20"
@@ -70,7 +75,22 @@
        Entrance animations handled via CSS keyframes
        ──────────────────────────────────────────────────── -->
       <section class="hero">
-        <!-- Left column: headline + CTAs -->
+        <!-- Left column: logo display -->
+        <div class="hero__right">
+          <div class="hex-bg"></div>
+          <div class="hero__logo-wrap">
+            <img
+              src="images/CS_Quimicos_Logo_transparent.png"
+              alt="CS Químicos"
+            />
+            <p class="hero__logo-subtitle">
+              Productos químicos y materias primas para la industria,
+            </p>
+            <p class="hero__logo-tagline--gold">Importadas y nacionales.</p>
+          </div>
+        </div>
+
+        <!-- Right column: headline + CTAs -->
         <div class="hero__left">
           <h1 class="hero__title">La química<br /><em>perfecta.</em></h1>
 
@@ -109,24 +129,8 @@
             >
           </div>
         </div>
-
-        <!-- Right column: logo display -->
-        <div class="hero__right">
-          <div class="hex-bg"></div>
-          <div class="hero__logo-wrap">
-            <img
-              src="images/CS_Quimicos_Logo_transparent.png"
-              alt="CS Químicos"
-            />
-            <p class="hero__logo-subtitle">
-              Productos químicos y materias primas para la industria,
-            </p>
-            <p class="hero__logo-tagline--gold">Importadas y nacionales.</p>
-          </div>
-        </div>
       </section>
       <!-- /.hero -->
-
 
       <!-- ── WHY US ────────────────────────────────────────────
        Two columns: differentiators left / team card right
@@ -148,29 +152,6 @@
             </p>
           </div>
 
-          <!--
-            <div class="why-us__features">
-            <div class="why-us__feature">
-              <span class="why-us__feature-line"></span>Formulación propia
-            </div>
-            <div class="why-us__feature">
-              <span class="why-us__feature-line"></span>Control de calidad
-            </div>
-            <div class="why-us__feature">
-              <span class="why-us__feature-line"></span>Múltiples presentaciones
-            </div>
-            <div class="why-us__feature">
-              <span class="why-us__feature-line"></span>Materia prima pura
-            </div>
-            <div class="why-us__feature">
-              <span class="why-us__feature-line"></span>Asesoría técnica
-              gratuita
-            </div>
-            <div class="why-us__feature">
-              <span class="why-us__feature-line"></span>Envíos en el Meta
-            </div>
-          </div>
-        -->
           <div class="why-us__actions">
             <a href="nosotros.html" class="btn btn--outline">Conocernos</a>
           </div>
@@ -180,29 +161,6 @@
         <div class="reveal reveal--delay-1">
           <div class="team-card">
             <p class="team-card__intro">Detrás de cada producto,</p>
-            <!--
-            <div class="team-card__member">
-              <div class="team-card__icon">⚗️</div>
-              <div>
-                <span class="team-card__name">Ing. Ammie</span>
-                <span class="team-card__role"
-                  >Ingeniera Química · +8 años en la industria<br />Dirección
-                  técnica y formulación</span
-                >
-              </div>
-            </div>
-
-            <div class="team-card__member">
-              <div class="team-card__icon">🔬</div>
-              <div>
-                <span class="team-card__name">CS Químicos</span>
-                <span class="team-card__role"
-                  >Fundado en Acacías, Meta<br />Producción, comercialización y
-                  servicio</span
-                >
-              </div>
-            -->
-            </div>
           </div>
         </div>
       </section>
