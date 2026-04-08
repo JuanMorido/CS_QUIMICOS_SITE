@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página no encontrada — CS Químicos</title>
+    <link rel="icon" href="csqicongold.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+  <body>
+    <nav class="nav">
+      <a href="index.html" class="nav__logo">
+        CS&nbsp;<span class="nav__logo-accent">Químicos</span>
+      </a>
+
+      <ul class="nav__links">
+        <li><a href="productos.html" class="nav__link">Productos</a></li>
+        <li><a href="nosotros.html" class="nav__link">Nosotros</a></li>
+        <li><a href="recursos.html" class="nav__link">Recursos</a></li>
+        <li><a href="contacto.html" class="nav__link">Contáctenos</a></li>
+        <li>
+          <button
+            class="nav__cart"
+            id="cart-open"
+            data-cart-open
+            title="Ver carrito"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#C9A84C"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="8" width="18" height="14" rx="2" />
+              <path d="M8 8V6a4 4 0 018 0v2" />
+            </svg>
+            <span class="nav__cart-badge" id="cart-badge"></span>
+          </button>
+        </li>
+      </ul>
+
+      <button class="nav__burger" id="nav-burger" aria-label="Abrir menú">
+        <span class="nav__burger-line"></span>
+        <span class="nav__burger-line"></span>
+        <span class="nav__burger-line"></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="productos.html" class="mobile-menu__link">Productos</a>
+      <a href="nosotros.html" class="mobile-menu__link">Nosotros</a>
+      <a href="recursos.html" class="mobile-menu__link">Recursos</a>
+      <a href="contacto.html" class="mobile-menu__link">Contáctenos</a>
+      <button class="mobile-menu__link" data-cart-open>Ver carrito</button>
+    </div>
+
+    <div class="page">
+      <section style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: calc(100vh - var(--nav-height));
+        padding: 4rem 2rem;
+        text-align: center;
+      ">
+        <span style="
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.3em;
+          text-transform: uppercase;
+          color: var(--color-gold);
+          margin-bottom: 1.5rem;
+          display: block;
+        ">Error 404</span>
+
+        <h1 style="
+          font-family: var(--font-display);
+          font-size: clamp(3.5rem, 8vw, 7rem);
+          font-weight: 400;
+          line-height: 1.08;
+          color: var(--color-black);
+          margin-bottom: 1.5rem;
+        ">Página no<br><em style="font-style: italic; color: var(--color-gold);">encontrada.</em></h1>
+
+        <p style="
+          font-size: 0.95rem;
+          color: #888;
+          line-height: 1.8;
+          max-width: 420px;
+          margin-bottom: 2.5rem;
+        ">La página que buscas no existe o fue movida. Vuelve al inicio o navega a otra sección.</p>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+          <a href="index.html" class="btn btn--gold">Volver al inicio</a>
+          <a href="productos.html" class="btn btn--outline">Ver productos</a>
+        </div>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <div class="footer__main">
+        <div>
+          <ul class="footer__nav-list">
+            <li><a href="index.html" class="footer__nav-link">Inicio</a></li>
+            <li><a href="nosotros.html" class="footer__nav-link">Nosotros</a></li>
+            <li><a href="productos.html" class="footer__nav-link">Productos</a></li>
+            <li><a href="recursos.html" class="footer__nav-link">Recursos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__brand">
+          <img
+            src="images/CS_Quimicos_Logo_transparent.png"
+            alt="CS Químicos"
+            style="width: 100px; height: auto"
+          />
+          <div class="footer__social">
+            <a href="https://wa.me/573203188602" target="_blank" class="footer__social-link" aria-label="WhatsApp">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.122 1.528 5.855L0 24l6.335-1.521A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.677-.487-5.22-1.341l-.374-.218-3.752.901.928-3.651-.241-.386A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            </a>
+            <a href="https://web.facebook.com/CSQUIMICOS" target="_blank" class="footer__social-link" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/cs.quimicos/" target="_blank" class="footer__social-link" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__contact">
+          <address class="footer__address" style="font-style: normal">
+            <span class="footer__address-label">Contacto</span>
+            Calle 14 #27a-12, Acacías, Meta<br>
+            <a href="tel:+573203188602">+57 320 318 8602</a><br>
+            <a href="mailto:gerencia@csquimicos.com">gerencia@csquimicos.com</a>
+          </address>
+        </div>
+      </div>
+
+      <div class="footer__copy">
+        <span class="footer__copy-text">© 2026 EASI Soluciones · Acacías, Colombia</span>
+        <span class="footer__copy-text">Todos los derechos reservados</span>
+      </div>
+    </footer>
+
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script src="js/shared.js"></script>
+  </body>
+</html>

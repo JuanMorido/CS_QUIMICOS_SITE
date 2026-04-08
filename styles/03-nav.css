@@ -94,10 +94,10 @@
   position: relative;
   display: flex;
   align-items: center;
-  background: #c0392b;
+  background: #1C1C1A;
   border: none;
   border-radius: 7px;
-  color: #ffffff;
+  color: #C9A84C;
   padding: 0.5rem 0.6rem;
   transition: opacity var(--transition);
   cursor: pointer;

@@ -10,8 +10,8 @@
 /* ─────────────────────────────────────────────────────────
    HERO
    Full-screen two-column section.
-   Left: dark bg with headline, description, CTA buttons.
-   Right: cream bg with the CS logo mark.
+   Left: cream bg with the CS logo mark (.hero__left).
+   Right: dark bg with headline, description, CTA buttons (.hero__right).
    Slides under the fixed nav bar via negative margin-top.
    ──────────────────────────────────────────────────────── */
 .hero {
@@ -21,8 +21,8 @@
   margin-top: calc(-1 * var(--nav-height));
 }
 
-/* Left column */
-.hero__left {
+/* Right column: dark bg, headline + CTAs */
+.hero__right {
   background: var(--color-surface);
   display: flex;
   flex-direction: column;
@@ -78,8 +78,8 @@
   animation: fadeUp 0.8s ease 0.8s forwards;
 }
 
-/* Right cream column: logo */
-.hero__right {
+/* Left column: cream bg, logo */
+.hero__left {
   background: #ffffff;
   position: relative;
   display: flex;
@@ -304,10 +304,10 @@
     grid-template-columns: 1fr;
     min-height: auto;
   }
-  .hero__left {
+  .hero__right {
     padding: 2.5rem 2.5rem 4rem;
   }
-  .hero__right {
+  .hero__left {
     min-height: 280px;
     padding: calc(var(--nav-height) + 2.5rem) 3rem 3rem;
   }
@@ -341,10 +341,10 @@
    Tighter hero padding. Single-column features. Stacked CTAs.
    ──────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
-  .hero__left {
+  .hero__right {
     padding: 2rem 1.2rem 3rem;
   }
-  .hero__right {
+  .hero__left {
     min-height: 220px;
     padding: calc(var(--nav-height) + 1.5rem) 1.2rem 2rem;
   }
