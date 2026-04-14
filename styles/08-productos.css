@@ -119,9 +119,11 @@
 }
 .products__catalog-item .product-card__add {
   flex-shrink: 0;
-  font-size: 0.65rem;
-  padding: 0.25rem 0.7rem;
+  font-size: 0.52rem;
+  padding: 0.28rem 0.55rem;
   white-space: nowrap;
+  margin-top: 0;
+  width: auto;
 }
 
 @media (max-width: 1100px) {
@@ -154,42 +156,36 @@
 
 /* ─────────────────────────────────────────────────────────
    PRODUCT CARD
-   Hover: background turns black, gold underline sweeps in.
-   The <select> and add button are interactive.
+   White body, cream image zone, wine-red add button.
+   Hover: subtle lift (translateY) + deeper shadow, no recolor.
 
    data-cat attribute on each card matches filter-bar buttons:
-     data-cat="aseo" | "aromas" | "piscinas" | "materias"
+     data-cat="aseo" | "aromas" | "piscinas" | "utensilios" | "materias"
    ──────────────────────────────────────────────────────── */
 .product-card {
-  background: var(--color-whale);
-  padding: 1.4rem 1.4rem;
+  background: #fff;
+  border: 1px solid rgba(201,168,76,0.14);
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
   position: relative;
   overflow: hidden;
-  transition: background var(--transition), box-shadow var(--transition);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  min-height: 180px;
   min-width: 0;
   width: 100%;
-  border-radius: 4px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  padding: 0 1.2rem 1.2rem;
 }
 .product-card:hover {
-  background: #425060;
-  box-shadow: 0 6px 24px rgba(0,0,0,0.28);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
 
-/* Gold sweep underline on hover */
-.product-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0;
-  height: 2px; width: 0;
-  background: var(--color-gold);
-  transition: width 0.4s ease;
-}
-.product-card:hover::after { width: 100%; }
+/* No gold sweep on white cards */
+.product-card::after { display: none; }
+
+/* Category badge — disabled */
+.product-card::before { display: none; }
 
 /* "Más Vendido" / "Exclusivo" badge — top right corner */
 .product-card__badge {
@@ -202,33 +198,56 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  z-index: 2;
 }
 
-/* Product image — absolutely positioned, centered on the right */
+/* Product image zone — full-width cream band at the top of the card */
 .product-card__image {
-  position: absolute;
-  right: 0.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 270px;
-  height: 270px;
+  position: static;
+  margin: 0 -1.2rem 1rem;
+  width: calc(100% + 2.4rem);
+  height: 160px;
+  background: var(--color-cream);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   border: none;
-  background: none;
+  transform: none;
+  top: auto; right: auto;
 }
 .product-card__image img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  padding: 0.6rem;
   display: block;
-  filter: drop-shadow(0 4px 18px rgba(0,0,0,0.25));
-  transition: transform var(--transition), filter var(--transition);
+  transition: transform 0.2s ease;
 }
 .product-card:hover .product-card__image img {
-  filter: drop-shadow(0 6px 22px rgba(201,168,76,0.4));
   transform: scale(1.04);
+}
+
+/* "Sin imagen" placeholder shown when the image div is empty */
+.product-card__image:empty::before {
+  content: '';
+  display: block;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 0.4rem;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23aaa' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z'/%3E%3Cpolyline points='3.27 6.96 12 12.01 20.73 6.96'/%3E%3Cline x1='12' y1='22.08' x2='12' y2='12'/%3E%3C/svg%3E") center / contain no-repeat;
+  opacity: 0.35;
+}
+.product-card__image:empty::after {
+  content: 'Sin imagen';
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.22);
 }
 
 /* Product name */
@@ -236,23 +255,21 @@
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 400;
-  color: var(--color-cream);
+  color: var(--color-black);
   margin-bottom: 0.25rem;
-  transition: color var(--transition);
   line-height: 1.2;
 }
-.product-card:hover .product-card__name { color: var(--color-gold); }
+.product-card:hover .product-card__name { color: var(--color-black); }
 
 /* Short description */
 .product-card__desc {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 400;
   line-height: 1.5;
-  color: rgba(245,240,232,0.65);
-  margin-bottom: 0.5rem;
-  transition: color var(--transition);
+  color: var(--color-gray);
+  margin-bottom: 0.6rem;
 }
-.product-card:hover .product-card__desc { color: rgba(245,240,232,0.8); }
+.product-card:hover .product-card__desc { color: var(--color-gray); }
 
 /* Fragrance pill selector */
 .product-card__fragrances {
@@ -263,8 +280,8 @@
 }
 .product-card__frag {
   background: transparent;
-  border: 1px solid rgba(201,168,76,0.4);
-  color: rgba(245,240,232,0.8);
+  border: 1px solid rgba(0,0,0,0.15);
+  color: var(--color-charcoal);
   font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 500;
@@ -280,8 +297,8 @@
   color: var(--color-black);
 }
 .product-card:hover .product-card__frag {
-  border-color: rgba(201,168,76,0.5);
-  color: var(--color-cream);
+  border-color: rgba(0,0,0,0.15);
+  color: var(--color-charcoal);
 }
 .product-card:hover .product-card__frag--active,
 .product-card:hover .product-card__frag:hover {
@@ -292,50 +309,70 @@
 
 /* Size / price <select> dropdown */
 .product-card__select option {
-  background-color: #36454F;
-  color: var(--color-cream);
+  background-color: #fff;
+  color: var(--color-charcoal);
 }
 .product-card__select {
   width: 100%;
-  background: rgba(0,0,0,0.2);
-  border: 1px solid rgba(201,168,76,0.4);
-  color: var(--color-cream);
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--color-cream);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C9A84C' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.65rem center;
+  border: 1px solid rgba(201,168,76,0.35);
+  border-radius: 6px;
+  color: var(--color-charcoal);
   font-family: var(--font-body);
   font-size: 0.72rem;
   font-weight: 500;
-  padding: 0.35rem 0.5rem;
-  margin-bottom: 0.5rem;
+  padding: 0.38rem 1.8rem 0.38rem 0.6rem;
+  margin-bottom: 0.6rem;
   cursor: pointer;
-  transition: all var(--transition);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.product-card__select:focus {
+  outline: none;
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.2);
 }
 .product-card:hover .product-card__select {
-  border-color: var(--color-gold);
-  color: var(--color-gold-light);
-  background: rgba(0,0,0,0.25);
+  border-color: rgba(201,168,76,0.5);
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
 }
 
-/* "Agregar al carrito" button — solid rectangle */
+/* "Agregar al carrito" button — wine/burgundy with cart icon */
 .product-card__add {
   width: 100%;
-  background: rgba(0,0,0,0.2);
+  background: #7B2D42;
   border: none;
-  color: var(--color-gold);
+  color: var(--color-cream);
   font-family: var(--font-body);
-  font-size: 0.52rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 0.32rem 0.4rem;
+  padding: 0.55rem 0.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.4rem;
   border-radius: 7px;
   cursor: pointer;
-  transition: all var(--transition);
+  transition: background var(--transition);
+  margin-top: auto;
+}
+.product-card__add::before {
+  content: '';
+  display: block;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F5F0E8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='8' width='18' height='14' rx='2'/%3E%3Cpath d='M8 8V6a4 4 0 018 0v2'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 .product-card:hover .product-card__add {
-  background: var(--color-gold);
-  color: var(--color-black);
+  background: #6b2438;
 }
 .product-card__add:active { transform: scale(0.97); }
 
@@ -540,26 +577,12 @@
 
 .cart__actions { display: flex; flex-direction: column; gap: 0.8rem; }
 
-/* ── Desktop only: image-offset padding ──────────────────
-   The 285px right padding makes room for the absolutely-
-   positioned product image. Only needed at ≥1024px where
-   images are visible.
-   ──────────────────────────────────────────────────────── */
-@media (min-width: 1024px) {
-  .product-card {
-    padding: 0.4rem 285px 0.4rem 0.8rem;
-    min-height: 270px;
-  }
-}
-
 /* ── Responsive: Tablet ≤1023px ───────────────────────────
-   2-column product grid. Hide images so text doesn't collapse.
+   2-column product grid.
    ──────────────────────────────────────────────────────── */
 @media (max-width: 1023px) {
   .products__grid  { grid-template-columns: repeat(2, 1fr); }
   .filter-bar      { padding: 1rem 2.5rem; }
-
-  .product-card__image { display: none; }
   .product-card    { min-width: 0; }
 }
 
@@ -572,7 +595,6 @@
   .filter-bar      { position: static; padding: 1rem 1.2rem; gap: 0.5rem; }
   .filter-bar__btn { font-size: 0.7rem; padding: 0.5rem 0.9rem; }
 
-  .product-card__image { display: none; }
   .product-card    { min-width: 0; }
   .product-card__desc { font-size: 0.88rem; }
 
