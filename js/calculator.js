@@ -84,10 +84,12 @@
       const pmax = +$("vol-pmax").value || 0;
       const pmin = +$("vol-pmin").value || pmax;
       return l * a * ((pmax + pmin) / 2);
-    } else {
+    } else if (tipo === "circ") {
       const d = +$("vol-diam").value || 0;
       const p = +$("vol-pcirc").value || 0;
       return Math.PI * Math.pow(d / 2, 2) * p;
+    } else {
+      return +$("vol-manual").value || 0;
     }
   }
 
@@ -116,6 +118,7 @@
       <select id="vol-tipo" onchange="pqVolToggle()">
         <option value="rect">Rectangular</option>
         <option value="circ">Circular</option>
+        <option value="manual">Sin medidas</option>
       </select>
     </div>
     <div id="vf-rect" style="display:contents">
@@ -126,6 +129,7 @@
     </div>
     <div class="cq-f" id="vf-circ-diam" style="display:none"><label>Diámetro (m)</label><input type="number" id="vol-diam" min="0" step="0.1" oninput="pqVolUpdate()"></div>
     <div class="cq-f" id="vf-circ-prof" style="display:none"><label>Profundidad (m)</label><input type="number" id="vol-pcirc" min="0" step="0.1" oninput="pqVolUpdate()"></div>
+    <div class="cq-f" id="vf-manual" style="display:none"><label>Volumen (m³)</label><input type="number" id="vol-manual" min="0" step="0.1" oninput="pqVolUpdate()"></div>
       </div>
     </div>
     <div class="cq-vol-display">
@@ -269,10 +273,11 @@
 
   // ── VOLUME TOGGLE ──────────────────────────────────────────
   window.pqVolToggle = function () {
-    const isRect = $("vol-tipo").value === "rect";
-    $("vf-rect").style.display = isRect ? "contents" : "none";
-    $("vf-circ-diam").style.display = isRect ? "none" : "";
-    $("vf-circ-prof").style.display = isRect ? "none" : "";
+    const tipo = $("vol-tipo").value;
+    $("vf-rect").style.display      = tipo === "rect"   ? "contents" : "none";
+    $("vf-circ-diam").style.display = tipo === "circ"   ? ""         : "none";
+    $("vf-circ-prof").style.display = tipo === "circ"   ? ""         : "none";
+    $("vf-manual").style.display    = tipo === "manual" ? ""         : "none";
     updateVolBanner();
   };
   window.pqVolUpdate = updateVolBanner;

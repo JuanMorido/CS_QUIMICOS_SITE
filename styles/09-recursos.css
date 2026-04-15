@@ -97,11 +97,61 @@
   margin-top: auto;
 }
 
+/* Clickable card — resets <a> defaults */
+a.recursos__card--link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+a.recursos__card--link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.09);
+}
+
+/* Gold CTA link inside active card */
+.recursos__card-cta {
+  font-size: 0.8rem;
+  color: var(--color-gold);
+  letter-spacing: 0.04em;
+  margin-top: auto;
+}
+
+/* ─────────────────────────────────────────────────────────
+   BLOG GRID — compact variant
+   Smaller cards for the article section (5+ cards).
+   ──────────────────────────────────────────────────────── */
+.recursos__grid--blog {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+.recursos__grid--blog .recursos__card {
+  padding: 1.4rem 1.2rem;
+}
+.recursos__grid--blog .recursos__card-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.55rem;
+}
+.recursos__grid--blog .recursos__card-type {
+  margin-bottom: 0.5rem;
+}
+.recursos__grid--blog .recursos__card-title {
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+}
+.recursos__grid--blog .recursos__card-desc {
+  font-size: 0.78rem;
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+
 /* ── Responsive: Tablet ≤1023px ───────────────────────────
    2-column grid.
    ──────────────────────────────────────────────────────── */
 @media (max-width: 1023px) {
   .recursos__grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .recursos__grid--blog { gap: 1rem; }
 }
 
 /* ── Responsive: Mobile ≤767px ────────────────────────────
@@ -111,4 +161,6 @@
   .recursos__grid    { grid-template-columns: 1fr; gap: 1.2rem; }
   .recursos__card    { padding: 2rem 1.5rem; }
   .recursos__card-desc { font-size: 0.88rem; }
+  .recursos__grid--blog { gap: 0.9rem; }
+  .recursos__grid--blog .recursos__card { padding: 1.2rem 1rem; }
 }
