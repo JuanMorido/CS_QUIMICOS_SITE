@@ -7,6 +7,25 @@
    ============================================================ */
 
 /* ─────────────────────────────────────────────────────────
+   PAGE HERO — nosotros override
+   Changes the shared .page-hero sand background (#c6b79b)
+   to carbon (#1C1C1A). Text colours updated for contrast.
+   The hex-bg SVG overlay is preserved (position:absolute).
+   ──────────────────────────────────────────────────────── */
+.page-hero--dark {
+  background: #1C1C1A;
+}
+.page-hero--dark .page-hero__title {
+  color: #FFFFFF;
+}
+.page-hero--dark .page-hero__title em {
+  color: #C9A84C;
+}
+.page-hero--dark .page-hero__desc {
+  color: #EDE8DC;
+}
+
+/* ─────────────────────────────────────────────────────────
    SERVICES-WHAT  ("Lo que hacemos")
    Dark two-column section.
    Left  →  numbered list of service types

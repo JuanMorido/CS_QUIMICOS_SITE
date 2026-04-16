@@ -74,6 +74,7 @@
   font-size: 1.35rem;
   font-weight: 400;
   color: var(--color-black);
+  margin-top: 0.5rem;
   margin-bottom: 0.6rem;
   line-height: 1.2;
 }
@@ -118,40 +119,132 @@ a.recursos__card--link:hover {
 }
 
 /* ─────────────────────────────────────────────────────────
-   BLOG GRID — compact variant
-   Smaller cards for the article section (5+ cards).
+   FICHAS DE SEGURIDAD — cards estilo B
+   White bg + gold left accent, clearly separated from the
+   cream-dark section background.
+   ──────────────────────────────────────────────────────── */
+.recursos__grid--fichas .recursos__card {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-left: 3px solid #C9A84C;
+  border-radius: 8px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.recursos__grid--fichas .recursos__card:hover {
+  background: #ffffff;
+  border-color: rgba(0,0,0,0.08);
+  border-left-color: #C9A84C;
+  box-shadow: 0 4px 16px rgba(28,28,26,0.10);
+  transform: translateY(-2px);
+}
+
+/* CTA card — wine accent instead of gold */
+.recursos__card--cta {
+  border-left-color: #7B2D42 !important;
+}
+.recursos__card--cta:hover {
+  border-left-color: #7B2D42 !important;
+}
+
+/* "Descargar PDF" button — carbon hover */
+.recursos__grid--fichas .btn--outline {
+  border-color: #1C1C1A;
+  color: #1C1C1A;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.recursos__grid--fichas .btn--outline:hover {
+  background: #1C1C1A;
+  color: #F0E6CB;
+}
+
+/* CTA card button — wine */
+.recursos__card--cta .btn--outline {
+  border-color: #7B2D42;
+  color: #7B2D42;
+}
+.recursos__card--cta .btn--outline:hover {
+  background: #7B2D42;
+  color: #F0E6CB;
+}
+
+/* ─────────────────────────────────────────────────────────
+   BLOG SECTION — lets slider bleed past section padding
+   ──────────────────────────────────────────────────────── */
+.recursos--blog {
+  overflow: hidden;
+}
+.recursos--blog .recursos__grid--blog {
+  margin-left: -7rem;
+  margin-right: -7rem;
+  padding-left: 7rem;
+  padding-right: 7rem;
+}
+
+/* ─────────────────────────────────────────────────────────
+   BLOG SLIDER — horizontal scrolling bar
+   Cards sit in a single row; overflow scrolls horizontally.
    ──────────────────────────────────────────────────────── */
 .recursos__grid--blog {
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: row;
   gap: 1.2rem;
   margin-top: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.75rem; /* room for scrollbar on desktop */
+  /* hide scrollbar visually while keeping functionality */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201,168,76,0.4) transparent;
 }
+.recursos__grid--blog::-webkit-scrollbar {
+  height: 4px;
+}
+.recursos__grid--blog::-webkit-scrollbar-track {
+  background: transparent;
+}
+.recursos__grid--blog::-webkit-scrollbar-thumb {
+  background: rgba(201,168,76,0.4);
+  border-radius: 2px;
+}
+
 .recursos__grid--blog .recursos__card {
-  padding: 1.4rem 1.2rem;
-}
-.recursos__grid--blog .recursos__card-icon {
-  font-size: 1.4rem;
-  margin-bottom: 0.55rem;
+  flex: 0 0 280px;       /* fixed width, no shrink/grow */
+  scroll-snap-align: start;
+  padding: 0 0 1.2rem;   /* image bleeds to edges, text padded below */
+  overflow: hidden;
 }
 .recursos__grid--blog .recursos__card-type {
   margin-bottom: 0.5rem;
+  padding: 0 1.2rem;
 }
 .recursos__grid--blog .recursos__card-title {
-  font-size: 1.05rem;
+  font-size: 1rem;
   margin-bottom: 0.4rem;
+  padding: 0 1.2rem;
 }
 .recursos__grid--blog .recursos__card-desc {
   font-size: 0.78rem;
   line-height: 1.65;
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
+  padding: 0 1.2rem;
+}
+.recursos__grid--blog .recursos__card-cta {
+  padding: 0 1.2rem;
 }
 
 /* ── Responsive: Tablet ≤1023px ───────────────────────────
-   2-column grid.
+   Slider stays horizontal; slightly narrower cards.
    ──────────────────────────────────────────────────────── */
 @media (max-width: 1023px) {
   .recursos__grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .recursos__grid--blog { gap: 1rem; }
+  .recursos__grid--blog .recursos__card { flex-basis: 260px; }
+  .recursos--blog .recursos__grid--blog {
+    margin-left: -2.5rem;
+    margin-right: -2.5rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
 }
 
 /* ── Responsive: Mobile ≤767px ────────────────────────────
@@ -161,6 +254,12 @@ a.recursos__card--link:hover {
   .recursos__grid    { grid-template-columns: 1fr; gap: 1.2rem; }
   .recursos__card    { padding: 2rem 1.5rem; }
   .recursos__card-desc { font-size: 0.88rem; }
-  .recursos__grid--blog { gap: 0.9rem; }
-  .recursos__grid--blog .recursos__card { padding: 1.2rem 1rem; }
+  .recursos__grid--blog { gap: 0.8rem; }
+  .recursos__grid--blog .recursos__card { flex-basis: 230px; }
+  .recursos--blog .recursos__grid--blog {
+    margin-left: -1.2rem;
+    margin-right: -1.2rem;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
 }

@@ -177,12 +177,23 @@
     }
     .article-note strong { color: #1C1C1A; }
 
+    /* ── Hero image ──────────────────────────────────────── */
+    .article-hero-img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+      margin-bottom: 2.5rem;
+    }
+
     /* ── Conclusion actions ───────────────────────────────── */
     .article-cta {
       margin-top: 3rem;
       padding-top: 2rem;
       border-top: 1px solid rgba(201,168,76,0.2);
       display: flex;
+      justify-content: center;
       gap: 1rem;
       flex-wrap: wrap;
       align-items: center;
@@ -255,6 +266,8 @@
           realmente, y cómo usarlos de forma correcta y segura.
         </p>
       </header>
+
+      <img src="../images/Stock/Piscina-Equilibrio_blog.jpg" alt="Equilibrio químico en piscina" class="article-hero-img" loading="eager"/>
 
       <section class="article-section">
         <h2>Por qué el agua de piscina necesita tratamiento químico</h2>
@@ -454,9 +467,8 @@
       </section>
 
       <div class="article-cta">
-        <a href="../productos.html" class="btn btn--outline">Ver productos para piscina</a>
-        <a href="https://wa.me/573203188602?text=Hola,%20leí%20el%20artículo%20sobre%20equilibrio%20químico%20de%20piscinas%20y%20tengo%20una%20consulta:"
-           target="_blank" class="btn btn--whatsapp">Consultar con un Ingeniero</a>
+        <a href="../productos.html" class="btn btn--outline">Nuestros productos</a>
+        <a href="../index.html" class="btn btn--outline">Inicio</a>
       </div>
 
     </article>

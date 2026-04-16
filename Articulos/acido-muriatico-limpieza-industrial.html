@@ -251,12 +251,23 @@
       color: #1C1C1A;
     }
 
+    /* ── Hero image ──────────────────────────────────────── */
+    .article-hero-img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+      margin-bottom: 2.5rem;
+    }
+
     /* ── Conclusion actions ───────────────────────────────── */
     .article-cta {
       margin-top: 3rem;
       padding-top: 2rem;
       border-top: 1px solid rgba(201,168,76,0.2);
       display: flex;
+      justify-content: center;
       gap: 1rem;
       flex-wrap: wrap;
       align-items: center;
@@ -331,6 +342,8 @@
           producto, dónde funciona, cómo prepararlo y qué hacer cuando algo sale mal.
         </p>
       </header>
+
+      <img src="../images/Stock/AcidoMuriatico_blog.jpg" alt="Ácido muriático limpieza industrial" class="article-hero-img" loading="eager"/>
 
       <section class="article-section">
         <h2>Qué es el ácido muriático y por qué es tan reactivo</h2>
@@ -689,9 +702,8 @@
       </section>
 
       <div class="article-cta">
-        <a href="../productos.html" class="btn btn--outline">Ver materias primas</a>
-        <a href="https://wa.me/573203188602?text=Hola,%20leí%20el%20artículo%20sobre%20ácido%20muriático%20y%20tengo%20una%20consulta:"
-           target="_blank" class="btn btn--whatsapp">Consultar con un Ingeniero</a>
+        <a href="../productos.html" class="btn btn--outline">Nuestros productos</a>
+        <a href="../index.html" class="btn btn--outline">Inicio</a>
       </div>
 
     </article>
