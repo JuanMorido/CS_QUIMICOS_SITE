@@ -25,6 +25,19 @@
   color: #EDE8DC;
 }
 
+/* Semi-transparent backdrop on text columns so hex pattern
+   doesn't reduce legibility. Scoped to nosotros hero only. */
+.page-hero--dark .page-hero__left,
+.page-hero--dark .page-hero__right {
+  background: rgba(18, 18, 16, 0.50);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 8px;
+  padding: 24px;
+  position: relative;
+  z-index: 2;
+}
+
 /* ─────────────────────────────────────────────────────────
    SERVICES-WHAT  ("Lo que hacemos")
    Dark two-column section.
@@ -174,6 +187,17 @@
   font-weight: 400;
   color: var(--color-gray);
   line-height: 1.8;
+}
+
+/* Semi-transparent backdrop on the text column */
+.env__text {
+  background: rgba(245, 240, 232, 0.65);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 8px;
+  padding: 24px;
+  position: relative;
+  z-index: 2;
 }
 
 /* Image column */

@@ -23,13 +23,14 @@
 
 /* Right column: dark bg, headline + CTAs */
 .hero__right {
-  background: var(--color-surface);
+  background: #1C1C1A;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 10rem 5rem 5rem 7rem;
   position: relative;
   z-index: 2;
+  overflow: hidden;
 }
 
 /* Entrance animations — staggered via animation-delay */
@@ -63,11 +64,18 @@
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.9;
-  color: #1f2a44;
+  color: #EDE8DC;
   max-width: 400px;
   margin-bottom: 3rem;
   opacity: 0;
   animation: fadeUp 0.8s ease 0.6s forwards;
+  background: rgba(18, 18, 16, 0.50);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 8px;
+  padding: 24px;
+  position: relative;
+  z-index: 2;
 }
 
 .hero__actions {
@@ -76,6 +84,26 @@
   flex-wrap: wrap;
   opacity: 0;
   animation: fadeUp 0.8s ease 0.8s forwards;
+}
+
+/* Hero button overrides — scoped to hero__actions only */
+.hero__actions .btn--whatsapp {
+  background-color: #F0E6CB;
+  color: #1C1C1A;
+  border: none;
+}
+.hero__actions .btn--whatsapp:hover {
+  background-color: #E8D9B5;
+  color: #1C1C1A;
+}
+.hero__actions .btn--outline-light {
+  background: transparent;
+  color: #F0E6CB;
+  border: 1.5px solid #F0E6CB;
+}
+.hero__actions .btn--outline-light:hover {
+  background-color: #F0E6CB;
+  color: #1C1C1A;
 }
 
 /* Left column: cream bg, logo */

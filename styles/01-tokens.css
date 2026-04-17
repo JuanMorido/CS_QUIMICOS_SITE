@@ -154,3 +154,7 @@ img {
   background-size: cover;
   background-position: center;
 }
+
+.hex-bg--mirror {
+  transform: scaleX(-1);
+}

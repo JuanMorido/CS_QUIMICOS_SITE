@@ -263,3 +263,37 @@ a.recursos__card--link:hover {
     padding-right: 1.2rem;
   }
 }
+
+/* ─────────────────────────────────────────────────────────
+   CTA STRIP — dark variant (recursos.html only)
+   ──────────────────────────────────────────────────────── */
+.cta-strip--dark {
+  background-color: #1C1C1A;
+  position: relative;
+  overflow: hidden;
+}
+.cta-strip--dark::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: #C9A84C;
+}
+.cta-strip--dark .cta-strip__title {
+  color: #F5F0E8;
+}
+.cta-strip--dark .cta-strip__desc {
+  color: #9A9690;
+}
+.cta-strip--dark .btn--dark {
+  background-color: #F0E6CB;
+  color: #1C1C1A;
+  border: none;
+}
+.cta-strip--dark .btn--dark:hover {
+  background-color: #E8D9B5;
+  color: #1C1C1A;
+}

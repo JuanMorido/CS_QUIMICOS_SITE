@@ -73,6 +73,18 @@
   overflow: hidden;
 }
 
+/* Backdrop wrapper for single-column dark heroes */
+.page-hero--dark .page-hero__content {
+  background: rgba(18, 18, 16, 0.50);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 8px;
+  padding: 24px;
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+}
+
 .page-hero__eyebrow {
   font-size: 0.68rem;
   font-weight: 600;
