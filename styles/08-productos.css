@@ -48,6 +48,38 @@
   border-color: var(--color-gold);
 }
 
+.filter-bar__search {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 7px;
+  padding: 0.35rem 0.75rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.filter-bar__search:focus-within {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.15);
+}
+.filter-bar__search-icon {
+  color: var(--color-charcoal);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+.filter-bar__search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--color-charcoal);
+  width: 160px;
+}
+.filter-bar__search-input::placeholder { color: var(--color-charcoal); opacity: 0.45; }
+.filter-bar__search-input::-webkit-search-cancel-button { cursor: pointer; }
+
 /* ─────────────────────────────────────────────────────────
    PRODUCTS GRID
    3-column grid of product cards.
@@ -605,9 +637,20 @@
   .products__grid  { grid-template-columns: 1fr; }
   .filter-bar      { position: static; padding: 0.8rem 1rem; gap: 0.4rem; flex-wrap: wrap; overflow-x: visible; }
   .filter-bar__btn { font-size: 0.68rem; padding: 0.45rem 0.8rem; }
+  .filter-bar__search { margin-left: 0; width: 100%; }
+  .filter-bar__search-input { width: 100%; }
 
   .product-card    { min-width: 0; width: 100%; box-sizing: border-box; }
   .product-card__desc { font-size: 0.88rem; }
+
+  .products__footer { padding: 2rem 1rem 1.5rem; }
+  .products__footer .btn--whatsapp {
+    font-size: 0.65rem;
+    padding: 0.6rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+  }
 
   /* Cart takes full width on small screens */
   .cart            { width: 100vw; }
@@ -621,7 +664,6 @@
   .products        { padding: 1rem 0.75rem; }
   .filter-bar      { padding: 0.7rem 0.75rem; gap: 0.35rem; }
   .filter-bar__btn { font-size: 0.65rem; padding: 0.4rem 0.7rem; }
-  .mp-grid         { grid-template-columns: 1fr 1fr; gap: 8px; }
   .mp-name         { font-size: 11px; min-height: unset; }
 }
 
@@ -740,10 +782,7 @@
   color: #A32D2D;
 }
 
-@media (max-width: 600px) {
-  .mp-grid { grid-template-columns: 1fr 1fr; }
-  .mp-name { font-size: 12px; }
-}
-@media (max-width: 380px) {
+@media (max-width: 767px) {
   .mp-grid { grid-template-columns: 1fr; }
+  .mp-name { font-size: 12px; }
 }

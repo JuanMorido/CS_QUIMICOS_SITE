@@ -132,6 +132,20 @@
         <button class="filter-bar__btn" data-filter="materias">
           Materias Primas
         </button>
+        <div class="filter-bar__search">
+          <svg class="filter-bar__search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input
+            type="search"
+            id="product-search"
+            class="filter-bar__search-input"
+            placeholder="Buscar producto…"
+            autocomplete="off"
+            list="product-suggestions"
+          />
+          <datalist id="product-suggestions"></datalist>
+        </div>
       </div>
 
       <!-- ── PRODUCTS GRID ─────────────────────────────────────
@@ -538,7 +552,7 @@
 
           <div class="product-card reveal" data-cat="aseo">
             <div class="product-card__image"></div>
-            <h3 class="product-card__name">Cloro 5%</h3>
+            <h3 class="product-card__name">Hipoclorito al 5%</h3>
             <p class="product-card__desc">
               Blanqueador y desinfectante de uso general para hogar e industria.
             </p>
@@ -955,7 +969,7 @@
           <div class="product-card reveal" data-cat="aromas">
             <div class="product-card__image">
               <img
-                src="images/Productos/Ambientadores.png"
+                src="images/Productos/Ambientadores 2.png"
                 alt="Ambientador Textil"
               />
             </div>
@@ -2312,23 +2326,58 @@
           pill.classList.add("product-card__frag--active");
         });
 
-      // ── Product filter ─────────────────────────────────────────
+      // ── Populate search suggestions ───────────────────────────
+      (function () {
+        const dl = document.getElementById("product-suggestions");
+        const names = new Set();
+        document.querySelectorAll(".product-card").forEach(c => {
+          const n = c.dataset.name || c.querySelector(".product-card__name")?.textContent;
+          if (n) names.add(n.trim());
+        });
+        document.querySelectorAll(".mp-card .mp-name").forEach(el => {
+          if (el.textContent) names.add(el.textContent.trim());
+        });
+        names.forEach(name => {
+          const opt = document.createElement("option");
+          opt.value = name;
+          dl.appendChild(opt);
+        });
+      })();
+
+      // ── Product filter + search ────────────────────────────────
+      let activeFilter = "all";
+
+      function applyFilters() {
+        const query = document.getElementById("product-search").value.trim().toLowerCase();
+        document.querySelectorAll("[data-cat]").forEach((el) => {
+          const catMatch = activeFilter === "all" || el.dataset.cat === activeFilter;
+          if (!query) {
+            el.style.display = catMatch ? "" : "none";
+            return;
+          }
+          // For product cards, search by data-name or visible text
+          const card = el.classList.contains("product-card") ? el : null;
+          const mpCard = el.classList.contains("mp-card") ? el : null;
+          let name = "";
+          if (card) name = (card.dataset.name || card.querySelector(".product-card__name")?.textContent || "").toLowerCase();
+          else if (mpCard) name = (mpCard.querySelector(".mp-name")?.textContent || "").toLowerCase();
+          else name = (el.textContent || "").toLowerCase();
+          const nameMatch = name.includes(query);
+          el.style.display = (catMatch && nameMatch) ? "" : "none";
+        });
+      }
+
       document.querySelectorAll(".filter-bar__btn").forEach((btn) => {
         btn.addEventListener("click", () => {
-          document
-            .querySelectorAll(".filter-bar__btn")
+          document.querySelectorAll(".filter-bar__btn")
             .forEach((b) => b.classList.remove("filter-bar__btn--active"));
           btn.classList.add("filter-bar__btn--active");
-          const filter = btn.dataset.filter;
-          document.querySelectorAll("[data-cat]").forEach((el) => {
-            if (filter === "all" || el.dataset.cat === filter) {
-              el.style.display = "";
-            } else {
-              el.style.display = "none";
-            }
-          });
+          activeFilter = btn.dataset.filter;
+          applyFilters();
         });
       });
+
+      document.getElementById("product-search").addEventListener("input", applyFilters);
     </script>
     <script>
     (function () {
