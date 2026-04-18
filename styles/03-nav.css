@@ -48,7 +48,12 @@
   white-space: nowrap;
   flex-shrink: 0;
 }
-.nav__logo-accent { color: var(--color-gold); }
+.nav__logo-accent {
+  color: var(--color-gold);
+  font-family: 'Libre Baskerville', serif;
+  font-style: italic;
+  font-weight: 400;
+}
 
 /* ── Desktop link list ────────────────────────────────────
    Hidden on tablet and mobile — see responsive section below.
