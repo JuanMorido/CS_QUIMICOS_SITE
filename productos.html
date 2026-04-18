@@ -701,26 +701,6 @@
             </button>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
-            <div class="product-card__image"></div>
-            <h3 class="product-card__name">Ácido Nítrico</h3>
-            <p class="product-card__desc">
-              Reactivo industrial de alta pureza para limpieza y procesos
-              químicos.
-            </p>
-            <select class="product-card__select">
-              <option value="500ml" data-price="0">500ml</option>
-              <option value="4L" data-price="0">4L</option>
-              <option value="20L" data-price="0">20L</option>
-            </select>
-            <button
-              class="product-card__add"
-              data-id="acido-nitrico"
-              data-name="Ácido Nítrico"
-            >
-              Agregar al carrito
-            </button>
-          </div>
 
           <div class="product-card reveal" data-cat="aseo">
             <div class="product-card__image"></div>
@@ -1550,510 +1530,554 @@
           </div>
 
           <div class="products__catalog" data-cat="materias">
-            <div class="products__catalog-grid">
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Aceite Mineral Blanco</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-aceite-mineral-blanco"
-                  data-name="Aceite Mineral Blanco"
-                >
-                  Agregar
-                </button>
+            <div class="mp-grid">
+
+              <div class="mp-card" data-id="mp-aceite-mineral-blanco">
+                <div class="mp-name">Aceite Mineral Blanco</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Ácido Acético Glacial</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-acido-acetico-glacial"
-                  data-name="Ácido Acético Glacial"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-acido-acetico-glacial">
+                <div class="mp-name">Ácido Acético Glacial</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Ácido Cítrico</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-acido-citrico"
-                  data-name="Ácido Cítrico"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-acido-citrico">
+                <div class="mp-name">Ácido Cítrico</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Ácido Nítrico</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-acido-nitrico"
-                  data-name="Ácido Nítrico (MP)"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-acido-sulfonico">
+                <div class="mp-name">Ácido Sulfónico</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Ácido Oxálico</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-acido-oxalico"
-                  data-name="Ácido Oxálico (MP)"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-alcohol-desodorizado">
+                <div class="mp-name">Alcohol Desodorizado</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Ácido Sulfónico</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-acido-sulfonico"
-                  data-name="Ácido Sulfónico"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-amonio-cuaternario">
+                <div class="mp-name">Amonio Cuaternario</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Alcohol 96%</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-alcohol-96"
-                  data-name="Alcohol 96% (MP)"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-bicarbonato-sodio">
+                <div class="mp-name">Bicarbonato de Sodio</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Alcohol Desodorizado</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-alcohol-desodorizado"
-                  data-name="Alcohol Desodorizado"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-butil">
+                <div class="mp-name">Butil</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Amonio Cuaternario</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-amonio-cuaternario"
-                  data-name="Amonio Cuaternario"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-carbonato-calcio">
+                <div class="mp-name">Carbonato de Calcio</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Bicarbonato de Sodio</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-bicarbonato-sodio"
-                  data-name="Bicarbonato de Sodio (MP)"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-ciacoblend-dtl42">
+                <div class="mp-name">Ciacoblend DTL 42</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Butil</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-butil"
-                  data-name="Butil"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-ciacoproblend-st70">
+                <div class="mp-name">Ciacoproblend ST70</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Carbonato de Calcio</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-carbonato-calcio"
-                  data-name="Carbonato de Calcio"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-cloruro-benzalconio">
+                <div class="mp-name">Cloruro de Benzalconio</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Ciacoblend DTL 42</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-ciacoblend-dtl42"
-                  data-name="Ciacoblend DTL 42"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-cloruro-sodio">
+                <div class="mp-name">Cloruro de Sodio</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Ciacoproblend ST70</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-ciacoproblend-st70"
-                  data-name="Ciacoproblend ST70"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-cocoamida-liquida">
+                <div class="mp-name">Cocoamida Líquida</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Cloro Granulado 70%</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-cloro-70"
-                  data-name="Cloro Granulado 70% (MP)"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-cocoamida-probetaina">
+                <div class="mp-name">Cocoamida Probetaina</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Cloro Granulado 91%</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-cloro-91"
-                  data-name="Cloro Granulado 91% (MP)"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-colorante">
+                <div class="mp-name">Colorante</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name"
-                  >Cloruro de Benzalconio</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-cloruro-benzalconio"
-                  data-name="Cloruro de Benzalconio"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-colorante-azul">
+                <div class="mp-name">Colorante Azul</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Cloruro de Sodio</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-cloruro-sodio"
-                  data-name="Cloruro de Sodio"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-creolina">
+                <div class="mp-name">Creolina</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Cocoamida Líquida</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-cocoamida-liquida"
-                  data-name="Cocoamida Líquida"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-d-limoneno">
+                <div class="mp-name">D-Limoneno</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Cocoamida Probetaina</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-cocoamida-probetaina"
-                  data-name="Cocoamida Probetaina"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-dehyquart">
+                <div class="mp-name">Dehyquart</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Colorante</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-colorante"
-                  data-name="Colorante"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-dioxido-titanio">
+                <div class="mp-name">Dióxido de Titanio</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Colorante Azul</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-colorante-azul"
-                  data-name="Colorante Azul"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-edta-tetrasodico">
+                <div class="mp-name">EDTA Tetrasódico</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Creolina</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-creolina"
-                  data-name="Creolina (MP)"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-ecorich-en-ld6">
+                <div class="mp-name">Ecorich EN LD 6</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">D-Limoneno</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-d-limoneno"
-                  data-name="D-Limoneno"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-emulsion-silicona-60">
+                <div class="mp-name">Emulsión de Silicona 60%</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Dehyquart</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-dehyquart"
-                  data-name="Dehyquart"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-fosfato-trisodico">
+                <div class="mp-name">Fosfato Trisódico</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Dióxido de Titanio</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-dioxido-titanio"
-                  data-name="Dióxido de Titanio"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-glicerina">
+                <div class="mp-name">Glicerina</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">EDTA Tetrasódico</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-edta-tetrasodico"
-                  data-name="EDTA Tetrasódico"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-glydant">
+                <div class="mp-name">Glydant</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Ecorich EN LD 6</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-ecorich-en-ld6"
-                  data-name="Ecorich EN LD 6"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-hidroxicloruro-aluminio">
+                <div class="mp-name">Hidroxicloruro de Aluminio</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name"
-                  >Emulsión de Silicona 60%</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-emulsion-silicona-60"
-                  data-name="Emulsión de Silicona 60%"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-hidroxietilcelulosa">
+                <div class="mp-name">Hidroxietilcelulosa</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Fosfato Trisódico</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-fosfato-trisodico"
-                  data-name="Fosfato Trisódico"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-hipoclorito-15">
+                <div class="mp-name">Hipoclorito al 15%</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Glicerina</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-glicerina"
-                  data-name="Glicerina"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-metasilicato">
+                <div class="mp-name">Metasilicato</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Glydant</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-glydant"
-                  data-name="Glydant"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-nacarante">
+                <div class="mp-name">Nacarante</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name"
-                  >Hidroxicloruro de Aluminio</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-hidroxicloruro-aluminio"
-                  data-name="Hidroxicloruro de Aluminio"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-nonil-fenol">
+                <div class="mp-name">Nonil Fenol</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Hidroxietilcelulosa</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-hidroxietilcelulosa"
-                  data-name="Hidroxietilcelulosa"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-optibright-x">
+                <div class="mp-name">Optibright X</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Hipoclorito al 15%</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-hipoclorito-15"
-                  data-name="Hipoclorito al 15% (MP)"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-parafina">
+                <div class="mp-name">Parafina</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Metasilicato</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-metasilicato"
-                  data-name="Metasilicato"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-pigmento-rojo">
+                <div class="mp-name">Pigmento Rojo</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Nacarante</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-nacarante"
-                  data-name="Nacarante"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-procide">
+                <div class="mp-name">Procide</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Nonil Fenol</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-nonil-fenol"
-                  data-name="Nonil Fenol"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-soda-caustica-escamas">
+                <div class="mp-name">Soda Cáustica Escamas</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Optibright X</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-optibright-x"
-                  data-name="Optibright X"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-soda-liquida">
+                <div class="mp-name">Soda Líquida</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Oxígeno Activo</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-oxigeno-activo"
-                  data-name="Oxígeno Activo (MP)"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-texapon-70">
+                <div class="mp-name">Texapon 70</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Parafina</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-parafina"
-                  data-name="Parafina"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-trietanolamina">
+                <div class="mp-name">Trietanolamina</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Peróxido de Hidrógeno</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-peroxido-hidrogeno"
-                  data-name="Peróxido de Hidrógeno (MP)"
-                >
-                  Agregar
-                </button>
+
+              <div class="mp-card" data-id="mp-zerasella">
+                <div class="mp-name">Zerasella</div>
+                <div class="mp-bottom">
+                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
+                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
+                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
+                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
+                  </div>
+                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
+                </div>
+                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Pigmento Rojo</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-pigmento-rojo"
-                  data-name="Pigmento Rojo"
-                >
-                  Agregar
-                </button>
-              </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Procide</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-procide"
-                  data-name="Procide"
-                >
-                  Agregar
-                </button>
-              </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Soda Cáustica Escamas</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-soda-caustica-escamas"
-                  data-name="Soda Cáustica Escamas"
-                >
-                  Agregar
-                </button>
-              </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Soda Líquida</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-soda-liquida"
-                  data-name="Soda Líquida"
-                >
-                  Agregar
-                </button>
-              </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Texapon 70</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-texapon-70"
-                  data-name="Texapon 70"
-                >
-                  Agregar
-                </button>
-              </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Trietanolamina</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-trietanolamina"
-                  data-name="Trietanolamina"
-                >
-                  Agregar
-                </button>
-              </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Varsol</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-varsol"
-                  data-name="Varsol (MP)"
-                >
-                  Agregar
-                </button>
-              </div>
-              <div class="products__catalog-item">
-                <span class="products__catalog-name">Zerasella</span
-                ><button
-                  class="product-card__add"
-                  data-id="mp-zerasella"
-                  data-name="Zerasella"
-                >
-                  Agregar
-                </button>
-              </div>
+
             </div>
           </div>
         </div>
@@ -2305,6 +2329,74 @@
           });
         });
       });
+    </script>
+    <script>
+    (function () {
+      const TO_KG = { g: 0.001, kg: 1, lb: 0.453592, oz: 0.0283495 };
+
+      function convert(value, fromUnit, toUnit) {
+        if (fromUnit === toUnit) return value;
+        return parseFloat((value * TO_KG[fromUnit] / TO_KG[toUnit]).toFixed(4));
+      }
+
+      document.querySelectorAll('.mp-card').forEach(card => {
+        const group  = card.querySelector('.mp-input-group');
+        const input  = card.querySelector('.mp-qty');
+        const select = card.querySelector('.mp-unit-select');
+        const reset  = card.querySelector('.mp-reset');
+        const addBtn = card.querySelector('.mp-beaker-btn');
+        const error  = card.querySelector('.mp-error');
+
+        input.addEventListener('blur', () => {
+          const val = parseFloat(input.value);
+          if (!isNaN(val) && val > 0) {
+            group.dataset.locked    = 'true';
+            group.dataset.baseValue = val;
+            group.dataset.baseUnit  = select.value;
+          }
+        });
+
+        select.addEventListener('change', () => {
+          if (group.dataset.locked !== 'true') return;
+          const base     = parseFloat(group.dataset.baseValue);
+          const baseUnit = group.dataset.baseUnit;
+          const newUnit  = select.value;
+          const converted = convert(base, baseUnit, newUnit);
+          input.value = converted;
+          group.dataset.baseValue = converted;
+          group.dataset.baseUnit  = newUnit;
+        });
+
+        reset.addEventListener('click', () => {
+          input.value             = '';
+          group.dataset.locked    = 'false';
+          group.dataset.baseValue = '';
+          group.dataset.baseUnit  = 'kg';
+          select.value            = 'kg';
+          error.style.display     = 'none';
+        });
+
+        addBtn.addEventListener('click', () => {
+          const val  = parseFloat(input.value);
+          const unit = select.value;
+          const name = card.querySelector('.mp-name').textContent.trim();
+
+          if (isNaN(val) || val <= 0) {
+            error.style.display = 'inline';
+            input.focus();
+            return;
+          }
+          error.style.display = 'none';
+
+          Cart.add({
+            id:    card.dataset.id,
+            name:  name,
+            size:  val + ' ' + unit,
+            price: 0,
+          });
+        });
+      });
+    })();
     </script>
   </body>
 </html>

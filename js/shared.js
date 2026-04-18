@@ -54,7 +54,9 @@ const Cart = {
     if (existing) existing.qty++;
     else items.push({ ...product, qty: 1 });
     this.save(items);
-    this.showToast(`${product.name} agregado al carrito`);
+    this.showToast(`${product.name} agregado al carrito`, () => {
+      this.updateQty(product.id, product.size, -1);
+    });
   },
 
   remove(id, size) {
@@ -91,7 +93,7 @@ const Cart = {
     badge.classList.toggle('nav__cart-badge--visible', count > 0);
   },
 
-  showToast(msg) {
+  showToast(msg, onUndo) {
     let toast = document.getElementById('cart-toast');
     if (!toast) {
       toast = document.createElement('div');
@@ -100,14 +102,38 @@ const Cart = {
         position: 'fixed', bottom: '2rem', left: '50%',
         transform: 'translateX(-50%) translateY(80px)',
         background: 'var(--color-black)', color: 'var(--color-gold-light)',
-        padding: '0.8rem 2rem',
+        padding: '0.8rem 1.5rem',
         fontFamily: 'var(--font-body)', fontSize: '0.72rem', letterSpacing: '0.1em',
         zIndex: '9999', transition: 'transform 0.3s ease',
-        borderLeft: '3px solid var(--color-gold)'
+        borderLeft: '3px solid var(--color-gold)',
+        display: 'flex', alignItems: 'center', gap: '1.2rem'
       });
       document.body.appendChild(toast);
     }
-    toast.textContent = msg;
+
+    toast.innerHTML = '';
+
+    const msgSpan = document.createElement('span');
+    msgSpan.textContent = msg;
+    toast.appendChild(msgSpan);
+
+    if (onUndo) {
+      const btn = document.createElement('button');
+      btn.textContent = 'Deshacer';
+      Object.assign(btn.style, {
+        background: 'none', border: 'none',
+        color: 'var(--color-gold)', cursor: 'pointer',
+        fontFamily: 'var(--font-body)', fontSize: '0.72rem',
+        letterSpacing: '0.1em', textDecoration: 'underline', padding: '0'
+      });
+      btn.onclick = () => {
+        onUndo();
+        clearTimeout(toast._timer);
+        toast.style.transform = 'translateX(-50%) translateY(80px)';
+      };
+      toast.appendChild(btn);
+    }
+
     toast.style.transform = 'translateX(-50%) translateY(0)';
     clearTimeout(toast._timer);
     toast._timer = setTimeout(() => {
