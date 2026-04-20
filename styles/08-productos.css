@@ -272,6 +272,13 @@
   transform: scale(1.04);
 }
 
+[data-id="perfume-textil"] .product-card__image img {
+  transform: scale(3);
+}
+[data-id="perfume-textil"]:hover .product-card__image img {
+  transform: scale(3.12);
+}
+
 /* "Sin imagen" placeholder shown when the image div is empty */
 .product-card__image:empty::before {
   content: '';
@@ -349,7 +356,7 @@
   color: var(--color-black);
 }
 
-/* Size / price <select> dropdown */
+/* Size / price <select> dropdown (non-liquid cards) */
 .product-card__select option {
   background-color: #fff;
   color: var(--color-charcoal);
@@ -382,6 +389,42 @@
   border-color: rgba(201,168,76,0.5);
   background-color: var(--color-cream);
   color: var(--color-charcoal);
+}
+
+/* Size pill buttons (liquid cards) */
+.product-card__sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.6rem;
+}
+.product-card__size {
+  background: transparent;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 5px;
+  padding: 0.25rem 0.55rem;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-charcoal);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.product-card__size--active,
+.product-card__size:hover {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-black);
+}
+.product-card:hover .product-card__size {
+  border-color: rgba(201,168,76,0.4);
+}
+.product-card:hover .product-card__size--active,
+.product-card:hover .product-card__size:hover {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-black);
 }
 
 /* "Agregar al carrito" button — wine/burgundy with cart icon */

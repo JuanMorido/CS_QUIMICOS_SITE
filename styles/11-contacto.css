@@ -5,17 +5,25 @@
      .contact-info   →  three info cards (address, phone, email)
    ============================================================ */
 
+/* ── Side-by-side wrapper ─────────────────────────────────── */
+.contact-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  background: var(--color-cream);
+}
+
 /* ── Contact section ──────────────────────────────────────── */
 .contact {
-  padding: var(--section-pad);
+  padding: 4rem 3.5rem;
   background: var(--color-cream);
 }
 
 .contact__layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 3.5rem;
-  max-width: 1200px;
+  max-width: 720px;
   margin: 0 auto;
 }
 
@@ -92,32 +100,35 @@
 
 /* ── Info cards ───────────────────────────────────────────── */
 .contact-info {
-  padding: 4rem 7rem;
+  padding: 4rem 3.5rem;
   background: var(--color-cream-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .contact-info__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: fit-content;
 }
 
 .contact-info__card {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  padding: 2rem 1.75rem;
+  gap: 1rem;
+  padding: 0.85rem 1.1rem;
   border: 1px solid rgba(201, 168, 76, 0.3);
   border-radius: 8px;
   background: var(--color-cream);
+  width: 100%;
 }
 
 .contact-info__icon {
   flex-shrink: 0;
-  width: 44px;
-  height: 44px;
+  width: 28px;
+  height: 28px;
   color: var(--color-gold);
 }
 
@@ -149,17 +160,126 @@
   color: var(--color-gold);
 }
 
+/* ── Sedes section ────────────────────────────────────────── */
+.sedes {
+  padding: var(--section-pad);
+  background: var(--color-cream);
+}
+
+.sedes__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.sedes__eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 0.6rem;
+}
+
+.sedes__title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-black);
+  letter-spacing: 0.02em;
+}
+
+.sedes__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sede-card {
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--color-cream);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.sede-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  transform: translateY(-3px);
+}
+
+.sede-card__map {
+  height: 200px;
+  overflow: hidden;
+}
+
+.sede-card__map iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: none;
+}
+
+.sede-card__body {
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.sede-card__badge {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.sede-card__city {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-black);
+  margin-top: 0.15rem;
+}
+
+.sede-card__address {
+  font-size: 0.78rem;
+  color: var(--color-charcoal);
+  line-height: 1.6;
+}
+
+.sede-card__contact {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  transition: color var(--transition);
+}
+
+.sede-card__contact:hover { color: var(--color-gold-light); }
+
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 1023px) {
+  .contact-row { grid-template-columns: 1fr; }
+  .contact { padding: 3rem 2rem; }
   .contact-info { padding: 3rem 2rem; }
+  .sedes { padding: 3rem 2rem; }
+  .sedes__grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 767px) {
-  .contact { padding: 3rem 1.5rem; }
+  .contact-row { grid-template-columns: 1fr; }
+  .contact { padding: 2.5rem 1.5rem; }
   .contact__layout { grid-template-columns: 1fr; }
-  .contact__map { min-height: 300px; }
-  .contact__map iframe { min-height: 300px; }
   .contact__row { grid-template-columns: 1fr; gap: 1.4rem; }
   .contact-info { padding: 2.5rem 1.5rem; }
-  .contact-info__grid { grid-template-columns: 1fr; }
+  .sedes { padding: 2rem 1.5rem; }
+  .sedes__grid { grid-template-columns: 1fr; }
 }
