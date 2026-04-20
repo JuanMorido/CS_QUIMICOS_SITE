@@ -229,6 +229,63 @@
 /* Category badge — disabled */
 .product-card::before { display: none; }
 
+/* Featured card — image left, body right, spans full row */
+.product-card--featured {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  align-items: stretch;
+  padding: 0;
+  gap: 0;
+}
+
+.product-card--featured .product-card__image {
+  width: 280px;
+  min-width: 200px;
+  height: auto;
+  flex-shrink: 0;
+  margin: 0;
+  border-radius: 0;
+  border-right: 1px solid rgba(201,168,76,0.14);
+}
+
+.product-card--featured .product-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.4rem 1.6rem 1.4rem;
+  min-width: 0;
+}
+
+.product-card--featured .product-card__name { font-size: 1.05rem; }
+
+.product-card__ctrl {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+.product-card__ctrl .product-card__sizes { margin-bottom: 0; }
+.product-card__ctrl .product-card__add   { white-space: nowrap; flex-shrink: 0; }
+
+.product-card--featured .product-card__fragrances {
+  flex-wrap: wrap;
+  max-height: 112px;
+  overflow-y: auto;
+}
+
+@media (max-width: 767px) {
+  .product-card--featured {
+    flex-direction: column;
+  }
+  .product-card--featured .product-card__image {
+    width: 100%;
+    height: 180px;
+    border-right: none;
+    border-bottom: 1px solid rgba(201,168,76,0.14);
+  }
+}
+
 /* "Más Vendido" / "Exclusivo" badge — top right corner */
 .product-card__badge {
   position: absolute;
@@ -273,10 +330,12 @@
 }
 
 [data-id="perfume-textil"] .product-card__image img {
-  transform: scale(3);
+  object-fit: cover;
+  object-position: center;
+  padding: 0;
 }
 [data-id="perfume-textil"]:hover .product-card__image img {
-  transform: scale(3.12);
+  transform: scale(1.04);
 }
 
 /* "Sin imagen" placeholder shown when the image div is empty */
@@ -326,6 +385,10 @@
   flex-wrap: wrap;
   gap: 0.3rem;
   margin-bottom: 0.6rem;
+  margin-top: auto;
+}
+.product-card__fragrances + .product-card__add-row {
+  margin-top: 0;
 }
 .product-card__frag {
   background: transparent;
@@ -395,8 +458,88 @@
 .product-card__sizes {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.35rem;
   margin-bottom: 0.6rem;
+}
+
+/* ── Option B: stepper + unit dropdown (sólidos y polvos) ──── */
+.qty-row-b {
+  display: flex;
+  align-items: center;
+  border: 1px solid #E0DAD0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #F5F0E8;
+  height: 40px;
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.product-card__add-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: auto;
+}
+.product-card__add-row .product-card__add {
+  margin-top: 0;
+  width: auto;
+  flex: 1 1 140px;
+  min-width: 0;
+}
+
+.step-btn {
+  width: 38px;
+  height: 100%;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  color: #6B6760;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.12s, color 0.12s;
+  user-select: none;
+}
+.step-btn:hover { background: #E8E0D0; color: #1C1C1A; }
+
+.step-val {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1C1C1A;
+  border: none;
+  background: transparent;
+  outline: none;
+  -moz-appearance: textfield;
+}
+.step-val::-webkit-outer-spin-button,
+.step-val::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.unit-sep {
+  width: 1px;
+  height: 24px;
+  background: #E0DAD0;
+  flex-shrink: 0;
+}
+
+.unit-select-b {
+  padding: 0 10px;
+  height: 100%;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 600;
+  color: #C9A84C;
+  outline: none;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 .product-card__size {
   background: transparent;
@@ -413,18 +556,18 @@
 }
 .product-card__size--active,
 .product-card__size:hover {
-  background: var(--color-gold);
-  border-color: var(--color-gold);
-  color: var(--color-black);
+  background: #1C1C1A;
+  border-color: #1C1C1A;
+  color: #fff;
 }
 .product-card:hover .product-card__size {
   border-color: rgba(201,168,76,0.4);
 }
 .product-card:hover .product-card__size--active,
 .product-card:hover .product-card__size:hover {
-  background: var(--color-gold);
-  border-color: var(--color-gold);
-  color: var(--color-black);
+  background: #1C1C1A;
+  border-color: #1C1C1A;
+  color: #fff;
 }
 
 /* "Agregar al carrito" button — wine/burgundy with cart icon */
@@ -661,6 +804,42 @@
 }
 
 .cart__actions { display: flex; flex-direction: column; gap: 0.8rem; }
+
+#cart-send {
+  background-color: #7B2D42;
+  color: #F0E6CB;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  padding: 13px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+#cart-send:hover { background-color: #9B3A52; transform: none; }
+
+#cart-clear {
+  background: transparent;
+  border: none;
+  color: #9A9690;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .04em;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  padding: 8px 0;
+  width: 100%;
+  transition: color 0.15s;
+}
+#cart-clear:hover { color: #7B2D42; transform: none; }
 
 /* ── Responsive: Tablet ≤1023px ───────────────────────────
    2-column product grid.
