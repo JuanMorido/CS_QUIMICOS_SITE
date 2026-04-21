@@ -351,4 +351,8 @@
   .timeline__side--empty    { display: none; }
   .timeline__item           { padding-left: 1rem; border-left: 2px solid var(--color-gold); }
   .timeline__year           { font-size: 1.6rem; }
+
+  /* Image on left side goes after the text on mobile */
+  .timeline__item--img-below .timeline__side--left  { order: 2; }
+  .timeline__item--img-below .timeline__side--right { order: 1; }
 }

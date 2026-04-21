@@ -93,7 +93,6 @@
       <a href="nosotros.html" class="mobile-menu__link">Nosotros</a>
       <a href="recursos.html" class="mobile-menu__link">Recursos</a>
       <a href="contacto.html" class="mobile-menu__link">Contáctenos</a>
-      <button class="mobile-menu__link" data-cart-open>Ver carrito</button>
     </div>
 
     <div class="page">
@@ -117,13 +116,8 @@
        Active state: filter-bar__btn--active (toggled by JS).
        ──────────────────────────────────────────────────── -->
       <div class="filter-bar">
-        <button
-          class="filter-bar__btn filter-bar__btn--active"
-          data-filter="all"
-        >
-          Todos
-        </button>
-        <button class="filter-bar__btn" data-filter="aseo">Aseo</button>
+        <button class="filter-bar__btn filter-bar__btn--active" data-filter="aseo-liquidos">Aseo Líquidos</button>
+        <button class="filter-bar__btn" data-filter="aseo-solidos">Aseo Sólidos</button>
         <button class="filter-bar__btn" data-filter="aromas">Aromas</button>
         <button class="filter-bar__btn" data-filter="piscinas">Piscinas</button>
         <button class="filter-bar__btn" data-filter="utensilios">
@@ -131,6 +125,12 @@
         </button>
         <button class="filter-bar__btn" data-filter="materias">
           Materias Primas
+        </button>
+        <button
+          class="filter-bar__btn"
+          data-filter="all"
+        >
+          Todos
         </button>
         <div class="filter-bar__search">
           <svg class="filter-bar__search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -160,13 +160,13 @@
       <section class="products">
         <div class="products__grid" id="products-grid">
           <!-- ════ ASEO: LÍQUIDOS ════════════════════════════ -->
-          <div class="products__subcategory" data-cat="aseo">
+          <div class="products__subcategory" data-cat="aseo-liquidos">
             <span class="products__subcategory-title"
               >Aseo · Productos Líquidos</span
             >
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image">
               <img
                 src="images/Productos/Desengrasante.png"
@@ -187,7 +187,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image">
               <img
                 src="images/Productos/Detergente.png"
@@ -212,7 +212,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image">
               <img
                 src="images/Productos/Suavizante.png"
@@ -237,7 +237,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image">
               <img src="images/Productos/Silicona.png" alt="Silicona Líquida" />
             </div>
@@ -254,7 +254,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image">
               <img src="images/Productos/Manos.png" alt="Jabón de Manos" />
             </div>
@@ -277,7 +277,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image">
               <img
                 src="images/Productos/Limpiador Multiusos.png"
@@ -304,7 +304,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Hipoclorito al 5%</h3>
             <p class="product-card__desc">
@@ -319,7 +319,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Jabón Azul Líquido</h3>
             <p class="product-card__desc">
@@ -334,7 +334,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image">
               <img src="images/Productos/Cera.png" alt="Cera Autobrillante" />
             </div>
@@ -351,7 +351,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image">
               <img
                 src="images/Productos/Biovarsol.png"
@@ -371,7 +371,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Desengrasante Petroquímico</h3>
             <p class="product-card__desc">
@@ -387,7 +387,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image">
               <img src="images/Productos/Lavaloza.png" alt="Gel Lavaplatos" />
             </div>
@@ -404,7 +404,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image">
               <img src="images/Productos/Limpiavidrios.png" alt="Vidrios Perfectos" />
             </div>
@@ -421,7 +421,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Vinagre Industrial</h3>
             <p class="product-card__desc">
@@ -436,7 +436,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Hipoclorito al 15%</h3>
             <p class="product-card__desc">
@@ -451,7 +451,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Etanol 96%</h3>
             <p class="product-card__desc">
@@ -466,7 +466,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Varsol Puro</h3>
             <p class="product-card__desc">
@@ -482,7 +482,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Sellador de Pisos</h3>
             <p class="product-card__desc">
@@ -497,7 +497,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Cancún</h3>
             <p class="product-card__desc">
@@ -513,7 +513,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Peróxido de Hidrógeno 50%</h3>
             <p class="product-card__desc">
@@ -529,7 +529,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Creolina</h3>
             <p class="product-card__desc">
@@ -545,7 +545,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Ácido Muriático</h3>
             <p class="product-card__desc">
@@ -561,7 +561,7 @@
           </div>
 
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-liquidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Amoniaco</h3>
             <p class="product-card__desc">
@@ -578,13 +578,13 @@
           </div>
 
                               <!-- ════ ASEO: SÓLIDOS Y POLVOS ════════════════════════ -->
-          <div class="products__subcategory" data-cat="aseo">
+          <div class="products__subcategory" data-cat="aseo-solidos">
             <span class="products__subcategory-title"
               >Aseo · Sólidos y Polvos</span
             >
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-solidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Jabón en Polvo</h3>
             <p class="product-card__desc">
@@ -599,7 +599,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-solidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Oxígeno Activo</h3>
             <p class="product-card__desc">
@@ -614,7 +614,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-solidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Bicarbonato de Sodio</h3>
             <p class="product-card__desc">
@@ -629,7 +629,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-solidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Ácido Oxálico</h3>
             <p class="product-card__desc">
@@ -644,7 +644,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-solidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Ácido Cítrico</h3>
             <p class="product-card__desc">
@@ -659,7 +659,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-solidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Ácido Bórico</h3>
             <p class="product-card__desc">
@@ -674,7 +674,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-solidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Azufre</h3>
             <p class="product-card__desc">
@@ -689,7 +689,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-solidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Naftalina</h3>
             <p class="product-card__desc">
@@ -704,7 +704,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-solidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Pastillas para Baño</h3>
             <p class="product-card__desc">
@@ -719,7 +719,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-solidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Jabón Rey en Barra</h3>
             <p class="product-card__desc">
@@ -734,7 +734,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-solidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Jabón Brillaollas</h3>
             <p class="product-card__desc">
@@ -749,7 +749,7 @@
             </button></div>
           </div>
 
-          <div class="product-card reveal" data-cat="aseo">
+          <div class="product-card reveal" data-cat="aseo-solidos">
             <div class="product-card__image"></div>
             <h3 class="product-card__name">Carbón Activado</h3>
             <p class="product-card__desc">
@@ -1271,20 +1271,6 @@
                 </div>
                 <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-
-              <div class="mp-card" data-id="mp-acido-citrico">
-                <div class="mp-name">Ácido Cítrico</div>
-                <div class="mp-bottom">
-                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
-                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
-                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
-                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
-                  </div>
-                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
-                </div>
-                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
-              </div>
-
               <div class="mp-card" data-id="mp-acido-sulfonico">
                 <div class="mp-name">Ácido Sulfónico</div>
                 <div class="mp-bottom">
@@ -1297,20 +1283,6 @@
                 </div>
                 <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-
-              <div class="mp-card" data-id="mp-alcohol-desodorizado">
-                <div class="mp-name">Alcohol Desodorizado</div>
-                <div class="mp-bottom">
-                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
-                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
-                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
-                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
-                  </div>
-                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
-                </div>
-                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
-              </div>
-
               <div class="mp-card" data-id="mp-amonio-cuaternario">
                 <div class="mp-name">Amonio Cuaternario</div>
                 <div class="mp-bottom">
@@ -1323,20 +1295,6 @@
                 </div>
                 <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-
-              <div class="mp-card" data-id="mp-bicarbonato-sodio">
-                <div class="mp-name">Bicarbonato de Sodio</div>
-                <div class="mp-bottom">
-                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
-                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
-                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
-                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
-                  </div>
-                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
-                </div>
-                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
-              </div>
-
               <div class="mp-card" data-id="mp-butil">
                 <div class="mp-name">Butil</div>
                 <div class="mp-bottom">
@@ -1401,20 +1359,6 @@
                 </div>
                 <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-
-              <div class="mp-card" data-id="mp-cloruro-sodio">
-                <div class="mp-name">Cloruro de Sodio</div>
-                <div class="mp-bottom">
-                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
-                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
-                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
-                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
-                  </div>
-                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
-                </div>
-                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
-              </div>
-
               <div class="mp-card" data-id="mp-cocoamida-liquida">
                 <div class="mp-name">Cocoamida Líquida</div>
                 <div class="mp-bottom">
@@ -1453,33 +1397,6 @@
                 </div>
                 <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-
-              <div class="mp-card" data-id="mp-colorante-azul">
-                <div class="mp-name">Colorante Azul</div>
-                <div class="mp-bottom">
-                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
-                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
-                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
-                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
-                  </div>
-                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
-                </div>
-                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
-              </div>
-
-              <div class="mp-card" data-id="mp-creolina">
-                <div class="mp-name">Creolina</div>
-                <div class="mp-bottom">
-                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
-                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
-                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
-                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
-                  </div>
-                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
-                </div>
-                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
-              </div>
-
               <div class="mp-card" data-id="mp-d-limoneno">
                 <div class="mp-name">D-Limoneno</div>
                 <div class="mp-bottom">
@@ -1531,20 +1448,6 @@
                 </div>
                 <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-
-              <div class="mp-card" data-id="mp-ecorich-en-ld6">
-                <div class="mp-name">Ecorich EN LD 6</div>
-                <div class="mp-bottom">
-                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
-                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
-                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
-                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
-                  </div>
-                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
-                </div>
-                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
-              </div>
-
               <div class="mp-card" data-id="mp-emulsion-silicona-60">
                 <div class="mp-name">Emulsión de Silicona 60%</div>
                 <div class="mp-bottom">
@@ -1596,20 +1499,6 @@
                 </div>
                 <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-
-              <div class="mp-card" data-id="mp-hidroxicloruro-aluminio">
-                <div class="mp-name">Hidroxicloruro de Aluminio</div>
-                <div class="mp-bottom">
-                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
-                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
-                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
-                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
-                  </div>
-                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
-                </div>
-                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
-              </div>
-
               <div class="mp-card" data-id="mp-hidroxietilcelulosa">
                 <div class="mp-name">Hidroxietilcelulosa</div>
                 <div class="mp-bottom">
@@ -1661,20 +1550,6 @@
                 </div>
                 <span class="mp-error" style="display:none">Ingresa una cantidad</span>
               </div>
-
-              <div class="mp-card" data-id="mp-nonil-fenol">
-                <div class="mp-name">Nonil Fenol</div>
-                <div class="mp-bottom">
-                  <div class="mp-input-group" data-locked="false" data-base-value="" data-base-unit="kg">
-                    <input type="number" class="mp-qty" placeholder="Cantidad" min="0.001" step="any">
-                    <select class="mp-unit-select"><option value="kg" selected>kg</option><option value="g">g</option><option value="lb">lb</option><option value="oz">oz</option></select>
-                    <button class="mp-reset" title="Reiniciar" aria-label="Reiniciar"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="1" y1="1" x2="9" y2="9"/><line x1="9" y1="1" x2="1" y2="9"/></svg></button>
-                  </div>
-                  <button class="mp-beaker-btn" title="Agregar al carrito" aria-label="Agregar al carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.4L4.5 18A2 2 0 006.3 21h11.4a2 2 0 001.8-3L14 9.4V3"/><line x1="6.5" y1="15" x2="17.5" y2="15"/></svg></button>
-                </div>
-                <span class="mp-error" style="display:none">Ingresa una cantidad</span>
-              </div>
-
               <div class="mp-card" data-id="mp-optibright-x">
                 <div class="mp-name">Optibright X</div>
                 <div class="mp-bottom">
@@ -1822,6 +1697,11 @@
       <!-- /.products -->
     </div>
     <!-- /.page -->
+
+    <!-- Back-to-top FAB — mobile only (≤767px) -->
+    <button class="sfab" id="sfab" aria-label="Volver arriba" hidden>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
 
     <!-- ══════════════════════════════════════════════════════════
      CART — Slide-in panel from the right.
@@ -2065,7 +1945,7 @@
       })();
 
       // ── Product filter + search ────────────────────────────────
-      let activeFilter = "all";
+      let activeFilter = "aseo-liquidos";
 
       function applyFilters() {
         const query = document.getElementById("product-search").value.trim().toLowerCase();
@@ -2098,6 +1978,19 @@
       });
 
       document.getElementById("product-search").addEventListener("input", applyFilters);
+
+      // ── Back-to-top FAB (mobile only) ─────────────────────────
+      (function () {
+        const btn = document.getElementById("sfab");
+        if (!btn) return;
+        window.addEventListener("scroll", () => {
+          btn.hidden = window.innerWidth > 767 || window.scrollY < 200;
+        }, { passive: true });
+        btn.addEventListener("click", () => {
+          const y = document.querySelector(".filter-bar").getBoundingClientRect().top + window.scrollY - 64;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        });
+      })();
     </script>
     <script>
     (function () {
