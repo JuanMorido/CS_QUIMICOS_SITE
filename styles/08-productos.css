@@ -333,21 +333,32 @@
   overflow: hidden;
   align-self: stretch;
 }
+
+[data-id="lampara-pebetero"] .product-card__image img {
+  object-fit: contain;
+  object-position: center center;
+  padding: 0.5rem;
+  transition: opacity 0.3s ease;
+}
 [data-id="perfume-textil"] .product-card__fragrances {
   margin-top: auto;
-  margin-bottom: 0;
+  margin-bottom: 0.5rem;
+  max-height: none;
+  overflow-y: visible;
+  gap: 0.4rem;
+  flex-wrap: wrap;
 }
 [data-id="perfume-textil"] .product-card__body {
   padding-bottom: 0.6rem;
 }
 [data-id="perfume-textil"] .product-card__image img {
-  object-fit: cover;
-  object-position: center 27%;
-  padding: 0;
-  transform: translateY(-17%) scale(3.5);
+  object-fit: contain;
+  object-position: center center;
+  padding: 0.5rem;
+  transform: none;
 }
 [data-id="perfume-textil"]:hover .product-card__image img {
-  transform: translateY(-17%) scale(3.7);
+  transform: scale(1.04);
 }
 
 /* "Sin imagen" placeholder shown when the image div is empty */
