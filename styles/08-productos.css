@@ -88,7 +88,7 @@
 .products {
   background: var(--color-cream);
   padding: var(--section-pad);
-  padding-top: 3rem;
+  padding-top: 0.17rem;
   overflow-x: hidden;
 }
 
@@ -104,7 +104,7 @@
 /* Subcategory section divider — spans all grid columns */
 .products__subcategory {
   grid-column: 1 / -1;
-  padding: 2rem 2rem 0.8rem;
+  padding: 0.17rem 2rem 0.8rem;
   background: var(--color-cream);
   border-bottom: 1px solid rgba(201,168,76,0.2);
   margin-top: 0.5rem;
@@ -122,7 +122,7 @@
 .products__catalog {
   grid-column: 1 / -1;
   background: var(--color-cream);
-  padding: 1.5rem 2rem 2rem;
+  padding: 0.17rem 2rem 2rem;
 }
 .products__catalog-grid {
   display: grid;
@@ -329,13 +329,25 @@
   transform: scale(1.04);
 }
 
+[data-id="perfume-textil"] .product-card__image {
+  overflow: hidden;
+  align-self: stretch;
+}
+[data-id="perfume-textil"] .product-card__fragrances {
+  margin-top: auto;
+  margin-bottom: 0;
+}
+[data-id="perfume-textil"] .product-card__body {
+  padding-bottom: 0.6rem;
+}
 [data-id="perfume-textil"] .product-card__image img {
   object-fit: cover;
-  object-position: center;
+  object-position: center 27%;
   padding: 0;
+  transform: translateY(-17%) scale(3.5);
 }
 [data-id="perfume-textil"]:hover .product-card__image img {
-  transform: scale(1.04);
+  transform: translateY(-17%) scale(3.7);
 }
 
 /* "Sin imagen" placeholder shown when the image div is empty */
@@ -385,38 +397,38 @@
   flex-wrap: wrap;
   gap: 0.3rem;
   margin-bottom: 0.6rem;
-  margin-top: auto;
 }
 .product-card__fragrances + .product-card__add-row {
   margin-top: 0;
 }
 .product-card__frag {
-  background: transparent;
-  border: 1px solid rgba(0,0,0,0.15);
-  color: var(--color-charcoal);
+  background: var(--color-black);
+  border: 1px solid var(--color-black);
+  color: rgba(255,255,255,0.55);
   font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 500;
-  padding: 0.2rem 0.5rem;
+  padding: 0.17rem 0.5rem;
   cursor: pointer;
   border-radius: 7px;
   transition: all var(--transition);
 }
 .product-card__frag--active,
 .product-card__frag:hover {
-  background: var(--color-gold);
-  border-color: var(--color-gold);
-  color: var(--color-black);
+  background: var(--color-black);
+  border-color: var(--color-black);
+  color: #ffffff;
 }
 .product-card:hover .product-card__frag {
-  border-color: rgba(0,0,0,0.15);
-  color: var(--color-charcoal);
+  background: var(--color-black);
+  border-color: var(--color-black);
+  color: rgba(255,255,255,0.55);
 }
 .product-card:hover .product-card__frag--active,
 .product-card:hover .product-card__frag:hover {
-  background: var(--color-gold);
-  border-color: var(--color-gold);
-  color: var(--color-black);
+  background: var(--color-black);
+  border-color: var(--color-black);
+  color: #ffffff;
 }
 
 /* Size / price <select> dropdown (non-liquid cards) */
@@ -660,7 +672,7 @@
   line-height: 1;
   cursor: pointer;
   transition: color var(--transition);
-  padding: 0.2rem;
+  padding: 0.17rem;
 }
 .cart__close:hover { color: var(--color-gold); }
 
@@ -696,7 +708,7 @@
   font-family: var(--font-display);
   font-size: 1.1rem;
   color: var(--color-black);
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.17rem;
   display: block;
   white-space: nowrap;
   overflow: hidden;

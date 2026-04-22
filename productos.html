@@ -342,6 +342,10 @@
             <p class="product-card__desc">
               Protección y brillo duradero para pisos.
             </p>
+            <div class="product-card__fragrances">
+              <button class="product-card__frag product-card__frag--active" data-frag="Transparente">Transparente</button>
+              <button class="product-card__frag" data-frag="Roja">Roja</button>
+            </div>
             <div class="product-card__add-row"><div class="qty-row-b"><button class="step-btn step-minus" type="button" aria-label="Reducir cantidad">−</button><input class="step-val" type="number" value="1" min="1" step="1" aria-label="Cantidad"><div class="unit-sep"></div><select class="unit-select-b" aria-label="Unidad"><option value="1L" data-price="0">1L</option><option value="2L" data-price="0">2L</option><option value="4L" data-price="0">4L</option><option value="20L" data-price="0">20L</option></select><button class="step-btn step-plus" type="button" aria-label="Aumentar cantidad">+</button></div><button
               class="product-card__add"
               data-id="cera-autobrillante"
@@ -814,7 +818,7 @@
           <div class="product-card product-card--featured reveal" data-cat="aromas" data-id="perfume-textil">
             <div class="product-card__image">
               <img
-                src="images/Productos/Ambientadores 2.png"
+                src="images/Productos/Ambientadores mesa.png"
                 alt="Perfume Textil"
               />
             </div>
@@ -1978,6 +1982,7 @@
       });
 
       document.getElementById("product-search").addEventListener("input", applyFilters);
+      applyFilters();
 
       // ── Back-to-top FAB (mobile only) ─────────────────────────
       (function () {
