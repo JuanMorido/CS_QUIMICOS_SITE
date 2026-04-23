@@ -74,7 +74,7 @@
 
 .contact__field input::placeholder,
 .contact__field textarea::placeholder {
-  color: var(--color-gray);
+  color: #c0bdb9;
 }
 
 .contact__field input:focus,
@@ -199,16 +199,18 @@
 }
 
 .sede-card {
-  border: 1px solid rgba(201,168,76,0.25);
+  border: 1px solid rgba(201, 168, 76, 0.25);
   border-radius: 10px;
   overflow: hidden;
   background: var(--color-cream);
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
 }
 
 .sede-card:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   transform: translateY(-3px);
 }
 
@@ -263,23 +265,50 @@
   transition: color var(--transition);
 }
 
-.sede-card__contact:hover { color: var(--color-gold-light); }
+.sede-card__contact:hover {
+  color: var(--color-gold-light);
+}
 
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 1023px) {
-  .contact-row { grid-template-columns: 1fr; }
-  .contact { padding: 3rem 2rem; }
-  .contact-info { padding: 3rem 2rem; }
-  .sedes { padding: 3rem 2rem; }
-  .sedes__grid { grid-template-columns: 1fr 1fr; }
+  .contact-row {
+    grid-template-columns: 1fr;
+  }
+  .contact {
+    padding: 3rem 2rem;
+  }
+  .contact-info {
+    padding: 3rem 2rem;
+  }
+  .sedes {
+    padding: 3rem 2rem;
+  }
+  .sedes__grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media (max-width: 767px) {
-  .contact-row { grid-template-columns: 1fr; }
-  .contact { padding: 2.5rem 1.5rem; }
-  .contact__layout { grid-template-columns: 1fr; }
-  .contact__row { grid-template-columns: 1fr; gap: 1.4rem; }
-  .contact-info { padding: 2.5rem 1.5rem; }
-  .sedes { padding: 2rem 1.5rem; }
-  .sedes__grid { grid-template-columns: 1fr; }
+  .contact-row {
+    grid-template-columns: 1fr;
+  }
+  .contact {
+    padding: 2.5rem 1.5rem;
+  }
+  .contact__layout {
+    grid-template-columns: 1fr;
+  }
+  .contact__row {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+  .contact-info {
+    padding: 2.5rem 1.5rem;
+  }
+  .sedes {
+    padding: 2rem 1.5rem;
+  }
+  .sedes__grid {
+    grid-template-columns: 1fr;
+  }
 }
