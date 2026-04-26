@@ -50,25 +50,25 @@ const Cart = {
 
   add(product) {
     const items = this.get();
-    const existing = items.find(i => i.id === product.id && i.size === product.size);
+    const existing = items.find(i => i.name === product.name && i.size === product.size);
     if (existing) existing.qty++;
     else items.push({ ...product, qty: 1 });
     this.save(items);
     this.showToast(`${product.name} agregado al carrito`, () => {
-      this.updateQty(product.id, product.size, -1);
+      this.updateQty(product.name, product.size, -1);
     });
   },
 
-  remove(id, size) {
-    this.save(this.get().filter(i => !(i.id === id && i.size === size)));
+  remove(name, size) {
+    this.save(this.get().filter(i => !(i.name === name && i.size === size)));
   },
 
-  updateQty(id, size, delta) {
+  updateQty(name, size, delta) {
     const items = this.get();
-    const item = items.find(i => i.id === id && i.size === size);
+    const item = items.find(i => i.name === name && i.size === size);
     if (!item) return;
     item.qty += delta;
-    if (item.qty <= 0) this.remove(id, size);
+    if (item.qty <= 0) this.remove(name, size);
     else this.save(items);
   },
 
@@ -100,7 +100,7 @@ const Cart = {
       toast.id = 'cart-toast';
       Object.assign(toast.style, {
         position: 'fixed', bottom: '2rem', left: '50%',
-        transform: 'translateX(-50%) translateY(80px)',
+        transform: 'translateX(-50%) translateY(calc(100% + 2rem))',
         background: 'var(--color-black)', color: 'var(--color-gold-light)',
         padding: '0.8rem 1.5rem',
         fontFamily: 'var(--font-body)', fontSize: '0.72rem', letterSpacing: '0.1em',
@@ -129,7 +129,7 @@ const Cart = {
       btn.onclick = () => {
         onUndo();
         clearTimeout(toast._timer);
-        toast.style.transform = 'translateX(-50%) translateY(80px)';
+        toast.style.transform = 'translateX(-50%) translateY(calc(100% + 2rem))';
       };
       toast.appendChild(btn);
     }
@@ -137,7 +137,7 @@ const Cart = {
     toast.style.transform = 'translateX(-50%) translateY(0)';
     clearTimeout(toast._timer);
     toast._timer = setTimeout(() => {
-      toast.style.transform = 'translateX(-50%) translateY(80px)';
+      toast.style.transform = 'translateX(-50%) translateY(calc(100% + 2rem))';
     }, 2500);
   }
 };
@@ -188,25 +188,25 @@ function initCart() {
           <span class="cart__item-name">${item.name}</span>
           <span class="cart__item-size">${item.size}</span>
           <div class="cart__item-qty">
-            <button class="cart__qty-btn" data-id="${item.id}" data-size="${item.size}" data-delta="-1">−</button>
+            <button class="cart__qty-btn" data-name="${item.name}" data-size="${item.size}" data-delta="-1">−</button>
             <span class="cart__qty-num">${item.qty}</span>
-            <button class="cart__qty-btn" data-id="${item.id}" data-size="${item.size}" data-delta="1">+</button>
+            <button class="cart__qty-btn" data-name="${item.name}" data-size="${item.size}" data-delta="1">+</button>
           </div>
         </div>
         <div class="cart__item-right">
-          <button class="cart__item-remove" data-id="${item.id}" data-size="${item.size}">✕ quitar</button>
+          <button class="cart__item-remove" data-name="${item.name}" data-size="${item.size}">✕ quitar</button>
         </div>
       </div>
     `).join('');
     cartItemsEl.querySelectorAll('.cart__qty-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        Cart.updateQty(btn.dataset.id, btn.dataset.size, parseInt(btn.dataset.delta));
+        Cart.updateQty(btn.dataset.name, btn.dataset.size, parseInt(btn.dataset.delta));
         renderCart();
       });
     });
     cartItemsEl.querySelectorAll('.cart__item-remove').forEach(btn => {
       btn.addEventListener('click', () => {
-        Cart.remove(btn.dataset.id, btn.dataset.size);
+        Cart.remove(btn.dataset.name, btn.dataset.size);
         renderCart();
       });
     });

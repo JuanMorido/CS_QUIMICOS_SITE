@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 4rem;
+  padding: 0 4rem 0 1rem;
   height: var(--nav-height);
   background: rgba(245, 240, 232, 0.96);
   backdrop-filter: blur(14px);
@@ -36,23 +36,9 @@
 
 /* Brand name / logo text link */
 .nav__logo {
-  font-family: "Afrah", cursive;
-  font-size: 1.68rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--color-black);
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  white-space: nowrap;
   flex-shrink: 0;
-}
-.nav__logo-accent {
-  color: var(--color-gold);
-  font-family: 'Lora', serif;
-  font-style: italic;
-  font-weight: 600;
 }
 
 /* ── Desktop link list ────────────────────────────────────
@@ -202,6 +188,5 @@ button.mobile-menu__link {
    ──────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
   .nav            { padding: 0 1.2rem; }
-  .nav__logo      { font-size: 1.2rem; }
   .mobile-menu    { padding: 1.2rem 1.2rem; }
 }

@@ -38,40 +38,44 @@
     <link rel="stylesheet" href="styles/main.css" />
     <style>
       .contact__field--error input,
-      .contact__field--error textarea,
-      .contact__field--error input[type="checkbox"] + label::before {
+      .contact__field--error textarea {
         outline: 2px solid #c0392b;
         border-radius: 4px;
-      }
-      #cf-privacy {
-        width: 14px;
-        height: 14px;
-        accent-color: #888;
-        flex-shrink: 0;
-        cursor: pointer;
       }
       .contact__field--checkbox {
         display: flex;
         align-items: center;
         gap: 0.5rem;
       }
-      .contact__field--checkbox label {
-        font-size: 0.72rem;
-        color: #aaa;
+      .contact__field--checkbox input[type="checkbox"] {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+        cursor: pointer;
+        accent-color: #888;
       }
-      #cf-privacy {
-        order: 2;
+      .contact__field--checkbox label {
+        font-size: 0.78rem;
+        color: #aaa;
+        cursor: pointer;
+      }
+      .contact__field--error.contact__field--checkbox label {
+        color: #c0392b;
       }
     </style>
+  <script
+    type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
   </head>
   <body>
     <!-- ══════════════════════════════════════════════════════════
      NAV — Active: Contáctenos
      ══════════════════════════════════════════════════════════ -->
     <nav class="nav">
-      <a href="index.html" class="nav__logo"
-        >CS&nbsp;<span class="nav__logo-accent">Químicos</span></a
-      >
+      <a href="index.html" class="nav__logo">
+        <img src="images/Pagina/LOGO ICONO.png" alt="CS Químicos" style="height:70px;width:auto;" />
+      </a>
       <ul class="nav__links">
         <li><a href="productos.html" class="nav__link">Productos</a></li>
         <li><a href="nosotros.html" class="nav__link">Nosotros</a></li>
@@ -298,20 +302,14 @@
               </div>
 
               <div class="contact__field contact__field--checkbox">
-                <input
-                  type="checkbox"
-                  id="cf-privacy"
-                  name="privacy"
-                  required
-                />
+                <input type="checkbox" id="cf-privacy" name="privacy" required />
                 <label for="cf-privacy">
                   Acepto la
-                  <a
-                    href="privacy-policy.html"
-                    style="color: var(--color-gold); text-decoration: underline"
-                    >Política de privacidad</a
-                  >
-                  de CS Químicos
+                  <a href="privacy-policy.html"
+                     style="color:var(--color-gold);text-decoration:underline">
+                    Política de privacidad
+                  </a>
+                  de CS Químicos.
                 </label>
               </div>
               <button type="submit" class="btn btn--primary contact__submit">
@@ -562,137 +560,156 @@
     ></script>
     <script src="js/shared.js"></script>
     <script>
-      // ─── CONFIGURACIÓN DE PROMOCIÓN ───────────────────────────────────
+      // ─── EMAILJS CONFIGURATION ──────────────────────────────────────
+      emailjs.init("ZLCx6rGdTnty2jE_k");
+
+      // ─── CONFIGURACIÓN DE PROMOCIÓN ─────────────────────────────────
       // Cuando haya una promoción activa, escribe aquí la palabra clave
-      // exacta que el cliente debe poner en el campo "Asunto" del formulario.
+      // exacta que el cliente debe poner en el campo "Asunto".
       // Cuando la promoción termine, deja este valor como cadena vacía "".
       const PROMO_TRIGGER = "";
 
-      // Correo principal que recibe los mensajes de la promoción (campo TO).
-      // Modifica este valor si el responsable de la promo cambia.
-      const PROMO_EMAIL_TO = "gerencia@csquimicos.com";
+      // Template ID que se usa cuando la promoción está activa.
+      // Modifica este valor si creas un template especial para la promo.
+      const PROMO_TEMPLATE_ID = "template_fbscnvc";
 
-      // Texto de apertura del cuerpo del email cuando se activa la promoción.
-      // Personalízalo según el nombre o tipo de promoción activa.
-      const PROMO_BODY_HEADER = "Hola, me interesa la promoción activa:\n\n";
+      // ─── CONFIGURACIÓN GENERAL (sin promoción) ──────────────────────
+      // Template ID para mensajes generales de contacto.
+      const GENERAL_TEMPLATE_ID = "template_fbscnvc";
 
-      // ─── CONFIGURACIÓN GENERAL (contacto sin promoción) ───────────────
-      // Correo principal para mensajes generales de contacto (campo TO).
-      // Este es el correo que recibe todos los mensajes cuando no hay promo.
-      const GENERAL_EMAIL_TO = "csquimicos@gmail.com";
+      // Service ID de EmailJS — no modificar.
+      const SERVICE_ID = "service_auawiwj";
 
+      // ─── FORM RESET ON LOAD ─────────────────────────────────────────
       document.getElementById("contact-form").reset();
 
-      // Clear error state as user corrects each field
-      document
-        .getElementById("cf-nombre")
-        .addEventListener("input", function () {
-          if (this.value.trim())
-            this.closest(".contact__field").classList.remove(
-              "contact__field--error",
-            );
-        });
-      document
-        .getElementById("cf-mensaje")
-        .addEventListener("input", function () {
-          if (this.value.trim())
-            this.closest(".contact__field").classList.remove(
-              "contact__field--error",
-            );
-        });
-      document
-        .getElementById("cf-privacy")
-        .addEventListener("change", function () {
-          if (this.checked)
-            this.closest(".contact__field").classList.remove(
-              "contact__field--error",
-            );
-        });
-
-      ["cf-nombre", "cf-email", "cf-telefono"].forEach(function (id) {
-        document.getElementById(id).addEventListener("input", function () {
-          if (this.value.trim())
-            this.closest(".contact__field").classList.remove(
-              "contact__field--error",
-            );
-        });
-      });
-
+      // ─── SUBMIT HANDLER ─────────────────────────────────────────────
       document
         .getElementById("contact-form")
         .addEventListener("submit", function (e) {
           e.preventDefault();
 
-          // (1) Privacy checkbox
-          if (!document.getElementById("cf-privacy").checked) {
-            document
-              .getElementById("cf-privacy")
-              .closest(".contact__field")
-              .classList.add("contact__field--error");
-            return;
-          }
-
-          const nombre = document.getElementById("cf-nombre").value.trim();
-          const email = document.getElementById("cf-email").value.trim();
+          const nombre   = document.getElementById("cf-nombre").value.trim();
+          const email    = document.getElementById("cf-email").value.trim();
           const telefono = document.getElementById("cf-telefono").value.trim();
-          const empresa = document.getElementById("cf-empresa").value.trim();
-          const ciudad = document.getElementById("cf-ciudad").value.trim();
-          const asunto = document.getElementById("cf-asunto").value.trim();
-          const mensaje = document.getElementById("cf-mensaje").value.trim();
+          const empresa  = document.getElementById("cf-empresa").value.trim();
+          const ciudad   = document.getElementById("cf-ciudad").value.trim();
+          const asunto   = document.getElementById("cf-asunto").value.trim();
+          const mensaje  = document.getElementById("cf-mensaje").value.trim();
+          const privacy  = document.getElementById("cf-privacy");
 
+          // ── Validation ──────────────────────────────────────────────
           let hasError = false;
 
+          if (!privacy.checked) {
+            privacy.closest(".contact__field")
+              .classList.add("contact__field--error");
+            hasError = true;
+          }
           if (!nombre) {
-            document
-              .getElementById("cf-nombre")
+            document.getElementById("cf-nombre")
               .closest(".contact__field")
               .classList.add("contact__field--error");
             hasError = true;
           }
-
           if (!email) {
-            document
-              .getElementById("cf-email")
+            document.getElementById("cf-email")
               .closest(".contact__field")
               .classList.add("contact__field--error");
             hasError = true;
           }
-
           if (!telefono) {
-            document
-              .getElementById("cf-telefono")
+            document.getElementById("cf-telefono")
               .closest(".contact__field")
               .classList.add("contact__field--error");
             hasError = true;
           }
-
           if (hasError) return;
 
+          // ── Promo routing ───────────────────────────────────────────
           const isPromo =
             PROMO_TRIGGER !== "" &&
             asunto.toLowerCase().includes(PROMO_TRIGGER.toLowerCase());
 
-          const emailTo = isPromo ? PROMO_EMAIL_TO : GENERAL_EMAIL_TO;
-          const emailCC = isPromo
-            ? "csquimicos@gmail.com"
-            : "gerencia@csquimicos.com";
-          const subject = asunto || "Contacto desde csquimicos.com";
+          const templateId = isPromo ? PROMO_TEMPLATE_ID : GENERAL_TEMPLATE_ID;
 
-          let body = isPromo
-            ? PROMO_BODY_HEADER
-            : "Hola CS Químicos, me pongo en contacto:\n\n";
-          body += `Nombre: ${nombre}\n`;
-          if (email) body += `Email: ${email}\n`;
-          if (telefono) body += `Teléfono: ${telefono}\n`;
-          if (empresa) body += `Empresa: ${empresa}\n`;
-          if (ciudad) body += `Ciudad: ${ciudad}\n`;
-          body += `\nMensaje:\n${mensaje}`;
+          // ── Build params ────────────────────────────────────────────
+          const templateParams = {
+            nombre,
+            email,
+            telefono,
+            empresa,
+            ciudad,
+            asunto:  asunto || "Contacto desde csquimicos.com",
+            mensaje,
+          };
 
-          window.location.href =
-            `mailto:${emailTo}` +
-            `?cc=${emailCC}` +
-            `&subject=${encodeURIComponent(subject)}` +
-            `&body=${encodeURIComponent(body)}`;
+          // ── Disable button while sending ────────────────────────────
+          const btn = this.querySelector(".contact__submit");
+          btn.disabled = true;
+          btn.textContent = "Enviando…";
+
+          // ── Send via EmailJS ────────────────────────────────────────
+          emailjs
+            .send(SERVICE_ID, templateId, templateParams)
+            .then(function () {
+              btn.textContent = "¡Mensaje enviado!";
+              btn.style.background = "#2d6a4f";
+              document.getElementById("contact-form").reset();
+            })
+            .catch(function (error) {
+              console.error("EmailJS error:", error);
+
+              // ── Fallback: open mailto if EmailJS fails for any reason ──
+              // This covers quota exceeded (402), network errors, and
+              // misconfiguration. The user can still send their message
+              // manually from their email client.
+              const fallbackSubject = asunto || "Contacto desde csquimicos.com";
+              let fallbackBody = "Hola CS Químicos, me pongo en contacto:\n\n";
+              fallbackBody += `Nombre: ${nombre}\n`;
+              if (email)    fallbackBody += `Email: ${email}\n`;
+              if (telefono) fallbackBody += `Teléfono: ${telefono}\n`;
+              if (empresa)  fallbackBody += `Empresa: ${empresa}\n`;
+              if (ciudad)   fallbackBody += `Ciudad: ${ciudad}\n`;
+              fallbackBody += `\nMensaje:\n${mensaje}`;
+
+              // Show user a clear explanation before opening mailto
+              btn.textContent = "Abriendo tu correo como alternativa…";
+              btn.style.background = "#c0392b";
+
+              setTimeout(function () {
+                window.location.href =
+                  "mailto:gerencia@csquimicos.com" +
+                  "?cc=csquimicos@gmail.com" +
+                  "&subject=" + encodeURIComponent(fallbackSubject) +
+                  "&body=" + encodeURIComponent(fallbackBody);
+
+                // Reset button after mailto opens
+                setTimeout(function () {
+                  btn.disabled = false;
+                  btn.textContent = "Enviar mensaje";
+                  btn.style.background = "";
+                }, 3000);
+              }, 1500);
+            });
+        });
+
+      // ── Clear error state on input ─────────────────────────────────
+      ["cf-nombre", "cf-email", "cf-telefono"].forEach(function (id) {
+        document.getElementById(id).addEventListener("input", function () {
+          if (this.value.trim()) {
+            this.closest(".contact__field")
+              .classList.remove("contact__field--error");
+          }
+        });
+      });
+
+      document.getElementById("cf-privacy") &&
+        document.getElementById("cf-privacy").addEventListener("change", function () {
+          if (this.checked) {
+            this.closest(".contact__field")
+              .classList.remove("contact__field--error");
+          }
         });
     </script>
   </body>

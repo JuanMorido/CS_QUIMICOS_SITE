@@ -378,7 +378,7 @@
     if (ppmDes >= 10)
       rows.push({
         n: "⚠  Super-cloración activa",
-        o: "No bañarse hasta que el nivel de cloro baje de 5 ppm",
+        o: "No bañarse hasta que el nivel de cloro baje de 3 ppm",
         v: "",
         c: "w",
       });
