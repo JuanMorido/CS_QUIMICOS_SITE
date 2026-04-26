@@ -23,9 +23,10 @@ Then open `http://localhost:8000`.
 ```
 ├── index.html          # Home/landing page
 ├── nosotros.html       # About the company
-├── servicios.html      # Services offered
 ├── productos.html      # Product catalog + shopping cart
 ├── recursos.html       # Resources: pool calculator + safety data sheets
+├── contacto.html       # Contact form (EmailJS)
+├── privacy-policy.html # Privacy policy
 │
 ├── styles/
 │   ├── main.css        # Imports all stylesheets in order
@@ -35,15 +36,16 @@ Then open `http://localhost:8000`.
 │   ├── 04-layout.css   # Shared layout (hero, grids, footer)
 │   ├── 05-home.css     # Home page styles
 │   ├── 06-nosotros.css # About page styles
-│   ├── 07-servicios.css# Services page styles
 │   ├── 08-productos.css# Products + cart styles
 │   ├── 09-recursos.css # Resources page styles
-│   └── 10-calculator.css # Pool calculator styles
+│   ├── 10-calculator.css # Pool calculator styles
+│   └── 11-contacto.css # Contact page styles
 │
 ├── js/
 │   ├── shared.js       # Cart logic, scroll-reveal, nav — loaded on all pages
 │   └── calculator.js   # Pool chemical dosage calculator (recursos.html only)
 │
+├── articulos/          # Blog articles (HTML)
 ├── images/             # Product and logo images
 └── FDS/                # Safety Data Sheets (PDFs)
 ```

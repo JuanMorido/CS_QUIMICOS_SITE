@@ -1,0 +1,17 @@
+{
+  "name": "CS Químicos",
+  "short_name": "CS Químicos",
+  "description": "Productos químicos, materias primas y soluciones técnicas para industria y consumo institucional en Colombia.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F5F0E8",
+  "theme_color": "#C9A84C",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "csqicongold.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

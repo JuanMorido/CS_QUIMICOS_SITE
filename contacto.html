@@ -561,7 +561,9 @@
     <script src="js/shared.js"></script>
     <script>
       // ─── EMAILJS CONFIGURATION ──────────────────────────────────────
-      emailjs.init("ZLCx6rGdTnty2jE_k");
+      if (typeof emailjs !== "undefined") {
+        emailjs.init("ZLCx6rGdTnty2jE_k");
+      }
 
       // ─── CONFIGURACIÓN DE PROMOCIÓN ─────────────────────────────────
       // Cuando haya una promoción activa, escribe aquí la palabra clave
@@ -650,8 +652,10 @@
           btn.textContent = "Enviando…";
 
           // ── Send via EmailJS ────────────────────────────────────────
-          emailjs
-            .send(SERVICE_ID, templateId, templateParams)
+          (typeof emailjs !== "undefined"
+            ? emailjs.send(SERVICE_ID, templateId, templateParams)
+            : Promise.reject(new Error("EmailJS no disponible"))
+          )
             .then(function () {
               btn.textContent = "¡Mensaje enviado!";
               btn.style.background = "#2d6a4f";
