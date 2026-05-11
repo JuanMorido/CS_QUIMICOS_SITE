@@ -21,7 +21,6 @@ Then open `http://localhost:8000`.
 ### Pages
 - `index.html` — Landing/home page
 - `nosotros.html` — About page
-- `servicios.html` — Services page
 - `productos.html` — Products + shopping cart
 - `recursos.html` — Resources/tools page
 
@@ -95,4 +94,4 @@ Primary breakpoint at `767px` (mobile vs. tablet/desktop).
 - The site uses Cloudflare email obfuscation (`/cdn-cgi/l/email-protection`); email links point to `/cdn-cgi/l/email-protection` and are decoded client-side by Cloudflare's script
 - No framework, no transpilation — vanilla HTML/CSS/JS, ES6+, modern browser APIs only
 - Code style: 2-space indent, LF line endings, UTF-8 (enforced by `.editorconfig`)
-- Incomplete content on `nosotros.html` (timeline, environmental section) and `servicios.html` (all service card descriptions) and `recursos.html` (blog articles) — all have TODO placeholder text
+- Incomplete content on `nosotros.html` (timeline, environmental section) and `recursos.html` (blog articles) — all have TODO placeholder text

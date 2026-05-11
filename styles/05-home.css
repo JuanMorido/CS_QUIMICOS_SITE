@@ -259,18 +259,6 @@
 .why-visual {
   position: relative;
 }
-.why-visual::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: 10px;
-  bottom: 10px;
-  border: 1.5px solid #c9a84c;
-  border-radius: 6px;
-  pointer-events: none;
-  z-index: 0;
-}
 
 /* ── Grid 7 fotos: composición editorial con pieza vertical destacada ── */
 .collage-7 {
@@ -477,9 +465,6 @@
   .collage-7 {
     aspect-ratio: 3 / 2;
   }
-  .why-visual::before {
-    display: none;
-  }
 }
 
 /* Tablet: relación más cuadrada */
@@ -491,9 +476,6 @@
 
 /* Móvil: 2 columnas, 4 filas, ambientadores en fila completa abajo */
 @media (max-width: 600px) {
-  .why-visual::before {
-    display: none;
-  }
   .collage-7 {
     height: 500px;
     aspect-ratio: unset;

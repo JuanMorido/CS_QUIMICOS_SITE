@@ -63,7 +63,7 @@
 /* ─────────────────────────────────────────────────────────
    PAGE HERO
    Dark full-width banner at the top of inner pages.
-   Used on: nosotros, servicios, productos, recursos.
+   Used on: nosotros, productos, recursos.
    (The home page has its own full-screen .hero — see home.css)
    ──────────────────────────────────────────────────────── */
 .page-hero {
@@ -132,7 +132,7 @@
 /* ─────────────────────────────────────────────────────────
    CTA STRIP
    Gold full-width call-to-action band.
-   Used at the bottom of servicios.html and recursos.html.
+   Used at the bottom of recursos.html.
    ──────────────────────────────────────────────────────── */
 .cta-strip {
   background: var(--color-gold);
