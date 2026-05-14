@@ -179,7 +179,7 @@ function initCart() {
   function renderCart() {
     const items = Cart.get();
     if (!items.length) {
-      cartItemsEl.innerHTML = '<p class="cart__empty">Su carrito está vacío.</p>';
+      cartItemsEl.innerHTML = '<p class="cart__empty">Su carrito está vacío. <a href="productos.html" class="cart__empty-link">Ver productos</a></p>';
       return;
     }
     cartItemsEl.innerHTML = items.map(item => `

@@ -705,6 +705,16 @@
   color: var(--color-gray);
 }
 
+.cart__empty-link {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--color-gray);
+  text-decoration: underline;
+}
+
 /* Single cart item row */
 .cart__item {
   display: flex;
