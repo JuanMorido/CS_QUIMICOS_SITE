@@ -1247,8 +1247,45 @@
 .product-card:not(.product-card--featured) .product-card__size--active:hover,
 .product-card:not(.product-card--featured):hover .product-card__size--active,
 .product-card:not(.product-card--featured):hover .product-card__size--active:hover {
+  background: var(--color-gold);
+  color: #1C1C1A;
+}
+
+/* Todas las categorías excepto Aromas (y Materias, que son .mp-card): pills de
+   selección a 12.7px (9px base, +41%), del mismo tamaño que las de líquidos. */
+.product-card:not([data-cat="aromas"]) .product-card__frag,
+.product-card:not([data-cat="aromas"]) .product-card__frag:hover,
+.product-card:not([data-cat="aromas"]):hover .product-card__frag,
+.product-card:not([data-cat="aromas"]):hover .product-card__frag:hover {
+  font-size: 12.7px;
+  padding: 2.8px 11.3px;
+}
+.product-card:not([data-cat="aromas"]) .product-card__size,
+.product-card:not([data-cat="aromas"]) .product-card__size:hover,
+.product-card:not([data-cat="aromas"]):hover .product-card__size,
+.product-card:not([data-cat="aromas"]):hover .product-card__size:hover {
+  font-size: 12.7px;
+  padding: 4.2px 12.7px;
+}
+
+/* Bolsas para Basura: las pills N° indican un TIPO de bolsa (no volumen/peso),
+   por eso van en rojo (vino), como las pills de fragancia, en vez del dorado. */
+.product-card[data-id="bolsas-basura"] .product-card__size--active,
+.product-card[data-id="bolsas-basura"] .product-card__size--active:hover,
+.product-card[data-id="bolsas-basura"]:hover .product-card__size--active,
+.product-card[data-id="bolsas-basura"]:hover .product-card__size--active:hover {
   background: #7b2d42;
   color: #f0e6cb;
+}
+
+/* Jabón de Manos: la ficha se vuelve dorado brillante al interactuar con ella. */
+.product-card[data-id="jabon-manos"] {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease,
+    border-color 0.2s ease;
+}
+.product-card[data-id="jabon-manos"]:focus-within {
+  background: var(--color-gold-light);
+  border-color: var(--color-gold);
 }
 
 /* Caja de agregar: [− qty +] + [🛒] en un solo bloque horizontal */
@@ -1301,22 +1338,13 @@
   display: none;
 }
 
-/* Esencias/Perfume: pills de tamaño a la IZQUIERDA del botón (sizes dentro del add-row,
-   stepper+botón agrupados en .product-card__addbox a la derecha). */
-.product-card:not(.product-card--featured) .product-card__add-row.product-card__add-row--inline {
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.product-card:not(.product-card--featured) .product-card__add-row--inline .product-card__sizes {
-  flex: 1 1 auto;
-  min-width: 0;
-  padding: 0;
-  margin: 0;
-}
-.product-card:not(.product-card--featured) .product-card__add-row--inline .product-card__addbox {
-  display: flex;
-  align-items: stretch;
-  flex: 0 0 auto;
+/* Esencias/Perfume (tarjetas anchas en vista Aromas): la caja de agregar no se
+   estira a todo el ancho de la card; queda compacta y centrada. */
+.products__grid--aromas .product-card[data-id="esencias-fragancias"] .product-card__add-row,
+.products__grid--aromas .product-card[data-id="perfume-textil"] .product-card__add-row {
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ── Featured cards: mismo formato de pills y botón que las estándar ──
@@ -1372,8 +1400,8 @@
 .product-card--featured .product-card__size--active:hover,
 .product-card--featured:hover .product-card__size--active,
 .product-card--featured:hover .product-card__size--active:hover {
-  background: #7b2d42;
-  color: #f0e6cb;
+  background: var(--color-gold);
+  color: #1C1C1A;
 }
 
 /* Caja de agregar: [− qty +] + [🛒] en un bloque horizontal (ancho acotado) */
@@ -1487,12 +1515,15 @@
   padding-right: 16px;
   gap: 7px;
 }
-/* Fragancias +27% (11px → 14px), tamaño fijo (sin reducción en hover).
-   Las pills de tamaño/peso quedan fuera: usan su tamaño original (9px base). */
+/* Fragancias y pills de tamaño/peso al mismo tamaño (14px), fijo (sin reducción en hover). */
 .products__grid--aromas .product-card:not(.product-card--featured) .product-card__frag,
 .products__grid--aromas .product-card:not(.product-card--featured) .product-card__frag:hover,
 .products__grid--aromas .product-card:not(.product-card--featured):hover .product-card__frag,
-.products__grid--aromas .product-card:not(.product-card--featured):hover .product-card__frag:hover {
+.products__grid--aromas .product-card:not(.product-card--featured):hover .product-card__frag:hover,
+.products__grid--aromas .product-card:not(.product-card--featured) .product-card__size,
+.products__grid--aromas .product-card:not(.product-card--featured) .product-card__size:hover,
+.products__grid--aromas .product-card:not(.product-card--featured):hover .product-card__size,
+.products__grid--aromas .product-card:not(.product-card--featured):hover .product-card__size:hover {
   font-size: 14px;
   padding: 5px 14px;
 }
