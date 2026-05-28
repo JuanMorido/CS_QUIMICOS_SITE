@@ -21,9 +21,7 @@
   gap: 0.8rem;
   flex-wrap: wrap;
   border-bottom: 1px solid rgba(201,168,76,0.15);
-  position: sticky;
-  top: var(--nav-height);
-  z-index: 100;
+  position: static;
   overflow-x: hidden;
 }
 
@@ -1090,3 +1088,432 @@
   .sfab:hover  { background: var(--color-gold-light); }
   .sfab:active { transform: scale(0.93); }
 }
+
+/* OPCIÓN A CARDS — revertir eliminando este bloque completo */
+/* Solo afecta a las cards estándar de producto. Quedan EXCLUIDAS:        */
+/*   · Materias Primas (.mp-card / .products__catalog — clases distintas) */
+/*   · Cards destacadas (.product-card--featured, vía :not())             */
+
+/* Grid: 6 columnas desktop */
+.products__grid {
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+}
+
+/* Card base */
+.product-card:not(.product-card--featured) {
+  background: #ffffff;
+  border: 1px solid #e0dad0;
+  border-radius: 14px;
+  overflow: hidden;
+  padding: 0;
+  box-shadow: none;
+}
+.product-card:not(.product-card--featured):hover {
+  box-shadow: 0 6px 24px rgba(28, 28, 26, 0.12);
+  transform: translateY(-3px);
+}
+
+/* Ex-featured (Esencias, Perfume, Lámpara): traen wrapper __body.
+   display:contents lo hace transparente para que nombre/desc/pills/add-row
+   fluyan como hijos directos de la card, igual que las demás. */
+.product-card:not(.product-card--featured) .product-card__body {
+  display: contents;
+}
+
+/* Zona imagen: imagen anclada a la base, sin aire */
+.product-card:not(.product-card--featured) .product-card__image {
+  margin: 0;
+  width: 100%;
+  height: 190px;
+  background: #dcdcdc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  overflow: hidden;
+  border: none;
+  border-bottom: 1px solid #e0dad0;
+}
+/* Mantener centrado el placeholder "Sin imagen" en cards sin foto */
+.product-card:not(.product-card--featured) .product-card__image:empty {
+  justify-content: center;
+}
+.product-card:not(.product-card--featured) .product-card__image img {
+  width: auto;
+  height: auto;
+  max-height: 145px;
+  max-width: 90%;
+  object-fit: contain;
+  padding: 0;
+  display: block;
+  /* Amplía levemente para recortar el aire interno del PNG */
+  transform: scale(1.15);
+  transform-origin: center center;
+}
+/* El overflow:hidden de la zona imagen contiene el scale(1.15) */
+.product-card:not(.product-card--featured):hover .product-card__image img {
+  transform: scale(1.15);
+}
+
+/* Featured (Esencias/Fragancias, Perfume Textil, Lámpara): igualar el fondo de su imagen al resto */
+[data-id="esencias-fragancias"] .product-card__image,
+[data-id="perfume-textil"] .product-card__image,
+[data-id="lampara-pebetero"] .product-card__image {
+  background: #dcdcdc;
+}
+
+/* Nombre */
+.product-card:not(.product-card--featured) .product-card__name {
+  padding: 12px 12px 0;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  color: #1c1c1a;
+  line-height: 1.3;
+}
+
+/* Descripción: máximo 2 líneas */
+.product-card:not(.product-card--featured) .product-card__desc {
+  padding: 0 12px;
+  margin: 6px 0 0;
+  font-size: 11px;
+  color: #6b6760;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Pills de variante (fragancias) */
+.product-card:not(.product-card--featured) .product-card__fragrances {
+  padding: 0 12px;
+  margin: 8px 0 0;
+  gap: 6px;
+}
+/* Pill inactiva (base + hover, con/sin hover de card) */
+.product-card:not(.product-card--featured) .product-card__frag,
+.product-card:not(.product-card--featured) .product-card__frag:hover,
+.product-card:not(.product-card--featured):hover .product-card__frag,
+.product-card:not(.product-card--featured):hover .product-card__frag:hover {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: #dcdcdc;
+  border: none;
+  color: #2a2a28;
+  transition: background 0.12s;
+}
+/* Pill activa (base + hover, con/sin hover de card) */
+.product-card:not(.product-card--featured) .product-card__frag--active,
+.product-card:not(.product-card--featured) .product-card__frag--active:hover,
+.product-card:not(.product-card--featured):hover .product-card__frag--active,
+.product-card:not(.product-card--featured):hover .product-card__frag--active:hover {
+  background: #7b2d42;
+  border: none;
+  color: #f0e6cb;
+}
+
+/* Pills de tamaño (volumen) — debajo de la foto, sobre la caja de agregar.
+   Las construye el JS a partir de las <option> del <select> original. */
+.product-card:not(.product-card--featured) .product-card__sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 12px;
+  margin: 8px 0 0;
+}
+/* Pill de tamaño inactiva (hover-proof) */
+.product-card:not(.product-card--featured) .product-card__size,
+.product-card:not(.product-card--featured) .product-card__size:hover,
+.product-card:not(.product-card--featured):hover .product-card__size,
+.product-card:not(.product-card--featured):hover .product-card__size:hover {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: #dcdcdc;
+  border: none;
+  color: #2a2a28;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+/* Pill de tamaño activa (hover-proof) */
+.product-card:not(.product-card--featured) .product-card__size--active,
+.product-card:not(.product-card--featured) .product-card__size--active:hover,
+.product-card:not(.product-card--featured):hover .product-card__size--active,
+.product-card:not(.product-card--featured):hover .product-card__size--active:hover {
+  background: #7b2d42;
+  color: #f0e6cb;
+}
+
+/* Caja de agregar: [− qty +] + [🛒] en un solo bloque horizontal */
+.product-card:not(.product-card--featured) .product-card__add-row {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 0;
+  padding: 10px 12px 14px;
+  margin-top: auto;
+}
+/* Stepper (− qty +) a la izquierda, mitad izquierda de la caja */
+.product-card:not(.product-card--featured) .product-card__add-row .qty-row-b {
+  flex: 1 1 auto;
+  width: auto;
+  height: 38px;
+  border: 1px solid #e0dad0;
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  background: #f5f0e8;
+  justify-content: space-between;
+}
+.product-card:not(.product-card--featured) .product-card__add-row .step-btn {
+  width: 30px;
+}
+/* Botón agregar = solo ícono (sin texto), mitad derecha de la caja */
+.product-card:not(.product-card--featured) .product-card__add-row .product-card__add--icon {
+  flex: 0 0 46px;
+  width: 46px;
+  height: 38px;
+  min-width: 0;
+  margin-top: 0;
+  padding: 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0;
+  letter-spacing: 0;
+  gap: 0;
+}
+.product-card:not(.product-card--featured) .product-card__add--icon::before {
+  margin: 0;
+}
+.product-card:not(.product-card--featured) .product-card__add:hover,
+.product-card:not(.product-card--featured):hover .product-card__add {
+  background: #9b3a52;
+}
+
+/* Pills de tamaño ocultas (tamaño único): Lámpara, Splash, Ambientador, Base de Incienso.
+   La 1ª pill queda activa (oculta) para que el carrito registre el tamaño. */
+.product-card:not(.product-card--featured) .product-card__sizes.product-card__sizes--hidden {
+  display: none;
+}
+
+/* Esencias/Perfume: pills de tamaño a la IZQUIERDA del botón (sizes dentro del add-row,
+   stepper+botón agrupados en .product-card__addbox a la derecha). */
+.product-card:not(.product-card--featured) .product-card__add-row.product-card__add-row--inline {
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.product-card:not(.product-card--featured) .product-card__add-row--inline .product-card__sizes {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+}
+.product-card:not(.product-card--featured) .product-card__add-row--inline .product-card__addbox {
+  display: flex;
+  align-items: stretch;
+  flex: 0 0 auto;
+}
+
+/* ── Featured cards: mismo formato de pills y botón que las estándar ──
+   Conservan su layout ancho; solo cambian pills (fragancia + tamaño) y
+   la caja de agregar. El __body ya aporta el padding horizontal. */
+
+/* Fragancias: pill gris inactiva (hover-proof) */
+.product-card--featured .product-card__frag,
+.product-card--featured .product-card__frag:hover,
+.product-card--featured:hover .product-card__frag,
+.product-card--featured:hover .product-card__frag:hover {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: #dcdcdc;
+  border: none;
+  color: #2a2a28;
+  transition: background 0.12s, color 0.12s;
+}
+/* Fragancias: pill vino activa (hover-proof) */
+.product-card--featured .product-card__frag--active,
+.product-card--featured .product-card__frag--active:hover,
+.product-card--featured:hover .product-card__frag--active,
+.product-card--featured:hover .product-card__frag--active:hover {
+  background: #7b2d42;
+  border: none;
+  color: #f0e6cb;
+}
+
+/* Pills de tamaño (debajo de fragancias, dentro del body) */
+.product-card--featured .product-card__sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 0;
+}
+.product-card--featured .product-card__size,
+.product-card--featured .product-card__size:hover,
+.product-card--featured:hover .product-card__size,
+.product-card--featured:hover .product-card__size:hover {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: #dcdcdc;
+  border: none;
+  color: #2a2a28;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+.product-card--featured .product-card__size--active,
+.product-card--featured .product-card__size--active:hover,
+.product-card--featured:hover .product-card__size--active,
+.product-card--featured:hover .product-card__size--active:hover {
+  background: #7b2d42;
+  color: #f0e6cb;
+}
+
+/* Caja de agregar: [− qty +] + [🛒] en un bloque horizontal (ancho acotado) */
+.product-card--featured .product-card__add-row {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 0;
+  margin-top: 0.8rem;
+  max-width: 320px;
+}
+.product-card--featured .product-card__add-row .qty-row-b {
+  flex: 1 1 auto;
+  width: auto;
+  height: 38px;
+  border: 1px solid #e0dad0;
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  background: #f5f0e8;
+  justify-content: space-between;
+}
+.product-card--featured .product-card__add-row .step-btn {
+  width: 30px;
+}
+.product-card--featured .product-card__add-row .product-card__add--icon {
+  flex: 0 0 46px;
+  width: 46px;
+  height: 38px;
+  min-width: 0;
+  margin-top: 0;
+  padding: 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0;
+  letter-spacing: 0;
+  gap: 0;
+}
+.product-card--featured .product-card__add--icon::before {
+  margin: 0;
+}
+.product-card--featured .product-card__add:hover {
+  background: #9b3a52;
+}
+
+/* Responsive */
+@media (max-width: 1519px) {
+  .products__grid { grid-template-columns: repeat(5, 1fr); }
+}
+@media (max-width: 1279px) {
+  .products__grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 1024px) {
+  .products__grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 650px) {
+  .products__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 400px) {
+  .products__grid { grid-template-columns: 1fr; }
+}
+
+/* ── Aromas: vista ampliada (3 columnas, cards más grandes y legibles) ──
+   Activada por la clase .products__grid--aromas que pone el JS cuando el
+   filtro "Aromas" está activo. Va al final para ganar a las reglas de grid. */
+.products__grid--aromas {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+/* Esencias/Fragancias y Perfume Textil: 2 columnas amplias (span 2 de 4) en la
+   primera fila; el resto de aromas fluye debajo en 4 columnas. */
+.products__grid--aromas [data-id="esencias-fragancias"],
+.products__grid--aromas [data-id="perfume-textil"] {
+  grid-column: span 2;
+}
+@media (max-width: 1000px) {
+  .products__grid--aromas { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .products__grid--aromas { grid-template-columns: 1fr; }
+  .products__grid--aromas [data-id="esencias-fragancias"],
+  .products__grid--aromas [data-id="perfume-textil"] {
+    grid-column: auto;
+  }
+}
+
+/* Foto más alta */
+.products__grid--aromas .product-card:not(.product-card--featured) .product-card__image {
+  height: 240px;
+}
+.products__grid--aromas .product-card:not(.product-card--featured) .product-card__image img {
+  max-height: 200px;
+}
+/* Perfume Textil: tamaño fijo de la imagen, sin cambio en hover */
+.product-card[data-id="perfume-textil"] .product-card__image img,
+.product-card[data-id="perfume-textil"]:hover .product-card__image img {
+  transform: scale(1.38);
+}
+/* Nombre y descripción más grandes */
+.products__grid--aromas .product-card:not(.product-card--featured) .product-card__name {
+  font-size: 16px;
+  padding: 14px 16px 0;
+}
+.products__grid--aromas .product-card:not(.product-card--featured) .product-card__desc {
+  font-size: 13px;
+  padding: 0 16px;
+  -webkit-line-clamp: 3;
+}
+/* Pills (fragancia + tamaño) más grandes */
+.products__grid--aromas .product-card:not(.product-card--featured) .product-card__fragrances,
+.products__grid--aromas .product-card:not(.product-card--featured) .product-card__sizes {
+  padding-left: 16px;
+  padding-right: 16px;
+  gap: 7px;
+}
+/* Fragancias +27% (11px → 14px), tamaño fijo (sin reducción en hover).
+   Las pills de tamaño/peso quedan fuera: usan su tamaño original (9px base). */
+.products__grid--aromas .product-card:not(.product-card--featured) .product-card__frag,
+.products__grid--aromas .product-card:not(.product-card--featured) .product-card__frag:hover,
+.products__grid--aromas .product-card:not(.product-card--featured):hover .product-card__frag,
+.products__grid--aromas .product-card:not(.product-card--featured):hover .product-card__frag:hover {
+  font-size: 14px;
+  padding: 5px 14px;
+}
+/* Caja de agregar más grande */
+.products__grid--aromas .product-card:not(.product-card--featured) .product-card__add-row {
+  padding: 14px 16px 16px;
+}
+.products__grid--aromas .product-card:not(.product-card--featured) .product-card__add-row .qty-row-b {
+  height: 44px;
+}
+.products__grid--aromas .product-card:not(.product-card--featured) .product-card__add-row .step-btn {
+  width: 38px;
+  font-size: 20px;
+}
+.products__grid--aromas .product-card:not(.product-card--featured) .product-card__add--icon {
+  flex: 0 0 54px;
+  width: 54px;
+  height: 44px;
+}
+.products__grid--aromas .product-card:not(.product-card--featured) .product-card__add--icon::before {
+  width: 18px;
+  height: 18px;
+}
+/* FIN OPCIÓN A CARDS */
