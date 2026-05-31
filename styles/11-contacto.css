@@ -11,12 +11,13 @@
   grid-template-columns: 1fr 1fr;
   align-items: stretch;
   background: var(--color-cream);
+  padding-bottom: 4rem;
 }
 
 /* ── Contact section ──────────────────────────────────────── */
 .contact {
   padding: 4rem 3.5rem;
-  background: var(--color-cream);
+  background: var(--color-cream-dark);
 }
 
 .contact__layout {
@@ -100,14 +101,34 @@
 
 /* ── Info cards ───────────────────────────────────────────── */
 .contact-info {
+  position: relative;
+  overflow: hidden;
   padding: 4rem 3.5rem;
-  background: var(--color-cream-dark);
+  background: var(--color-cream);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* Foto "Vamos" como fondo decorativo, centrada y tenue. */
+.contact-info::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 620px;
+  height: 615px;
+  max-width: 100%;
+  background: url("../images/Pagina/Vamos.jpeg") center / cover no-repeat;
+  opacity: 0.27;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .contact-info__grid {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -214,6 +235,18 @@
   transform: translateY(-3px);
 }
 
+.sede-card__photo {
+  height: 200px;
+  overflow: hidden;
+}
+
+.sede-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .sede-card__map {
   height: 200px;
   overflow: hidden;
@@ -291,6 +324,7 @@
 @media (max-width: 767px) {
   .contact-row {
     grid-template-columns: 1fr;
+    padding-bottom: 2.5rem;
   }
   .contact {
     padding: 2.5rem 1.5rem;
