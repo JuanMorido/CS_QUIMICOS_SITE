@@ -957,6 +957,17 @@
   color: #5a534a;
   flex: 1;
 }
+.mp-more {
+  align-self: flex-start;
+  font-size: 11px;
+  color: #1C1C1A;
+  text-decoration: underline;
+  opacity: 0.45;
+  transition: opacity 0.15s;
+}
+.mp-more:hover {
+  opacity: 0.85;
+}
 .mp-beaker-btn {
   width: 100%;
   background: #7B2D42;
@@ -1225,16 +1236,6 @@
 .product-card[data-id="papel-higienico"]:hover .product-card__frag--active:hover {
   background: var(--color-gold);
   color: #1C1C1A;
-}
-
-/* Jabón de Manos: la ficha se vuelve dorado brillante al interactuar con ella. */
-.product-card[data-id="jabon-manos"] {
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease,
-    border-color 0.2s ease;
-}
-.product-card[data-id="jabon-manos"]:focus-within {
-  background: var(--color-gold-light);
-  border-color: var(--color-gold);
 }
 
 /* Caja de agregar: [− qty +] + [🛒] en un solo bloque horizontal */
@@ -1548,4 +1549,12 @@
   border-color: rgba(201, 168, 76, 0.6);
   opacity: 0.25;
   transform: none;
+}
+
+/* Jabón de Manos — fondo dorado en la foto cuando se selecciona Verbena */
+.product-card[data-id="jabon-manos"] .product-card__image {
+  transition: background-color 0.25s ease;
+}
+.product-card[data-id="jabon-manos"] .product-card__image[data-frag="Verbena"] {
+  background-color: var(--color-gold);
 }

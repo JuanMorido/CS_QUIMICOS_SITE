@@ -294,9 +294,9 @@
                 <div class="contact__field">
                   <input
                     type="text"
-                    id="cf-empresa"
-                    name="empresa"
-                    placeholder="Empresa"
+                    id="cf-direccion"
+                    name="direccion"
+                    placeholder="Dirección"
                   />
                 </div>
               </div>
@@ -622,7 +622,7 @@
           const nombre   = document.getElementById("cf-nombre").value.trim();
           const email    = document.getElementById("cf-email").value.trim();
           const telefono = document.getElementById("cf-telefono").value.trim();
-          const empresa  = document.getElementById("cf-empresa").value.trim();
+          const direccion = document.getElementById("cf-direccion").value.trim();
           const ciudad   = document.getElementById("cf-ciudad").value.trim();
           const asunto   = document.getElementById("cf-asunto").value.trim();
           const mensaje  = document.getElementById("cf-mensaje").value.trim();
@@ -668,7 +668,7 @@
             nombre,
             email,
             telefono,
-            empresa,
+            direccion,
             ciudad,
             asunto:  asunto || "Contacto desde csquimicos.com",
             mensaje,
@@ -701,7 +701,7 @@
               fallbackBody += `Nombre: ${nombre}\n`;
               if (email)    fallbackBody += `Email: ${email}\n`;
               if (telefono) fallbackBody += `Teléfono: ${telefono}\n`;
-              if (empresa)  fallbackBody += `Empresa: ${empresa}\n`;
+              if (direccion) fallbackBody += `Dirección: ${direccion}\n`;
               if (ciudad)   fallbackBody += `Ciudad: ${ciudad}\n`;
               fallbackBody += `\nMensaje:\n${mensaje}`;
 
