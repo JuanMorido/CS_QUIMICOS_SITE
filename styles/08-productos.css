@@ -968,6 +968,14 @@
 .mp-more:hover {
   opacity: 0.85;
 }
+.mp-more--inactive {
+  opacity: 0.25;
+  cursor: default;
+  pointer-events: none;
+}
+.mp-more--inactive:hover {
+  opacity: 0.25;
+}
 .mp-beaker-btn {
   width: 100%;
   background: #7B2D42;
@@ -1539,16 +1547,7 @@
 }
 
 .product-card__more--inactive {
-  opacity: 0.25;
-  cursor: default;
-  pointer-events: none;
-}
-
-.product-card__more--inactive:hover {
-  background: rgba(28, 28, 26, 0.85);
-  border-color: rgba(201, 168, 76, 0.6);
-  opacity: 0.25;
-  transform: none;
+  display: none;
 }
 
 /* Jabón de Manos — fondo dorado en la foto cuando se selecciona Verbena */
