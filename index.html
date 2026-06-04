@@ -77,17 +77,7 @@
         "latitude": 3.9877387526023087,
         "longitude": -73.77030454275977
       },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["/* PENDIENTE: días de atención, ej: Monday, Tuesday... */"],
-          "opens": "/* PENDIENTE: hora apertura, ej: 08:00 */",
-          "closes": "/* PENDIENTE: hora cierre, ej: 18:00 */"
-        }
-      ],
-      "priceRange": "/* PENDIENTE: ej $$ */",
       "currenciesAccepted": "COP",
-      "paymentAccepted": "/* PENDIENTE: ej Efectivo, Transferencia, Nequi */",
       "areaServed": [
         { "@type": "City", "name": "Acacías" },
         { "@type": "City", "name": "Villavicencio" },
@@ -234,7 +224,7 @@
         <!-- Left: photo collage -->
         <div class="reveal">
           <div class="why-visual">
-            <img
+            <img loading="lazy"
               src="images/Pagina/Collage.png"
               alt="Collage CS Químicos — proceso de producción"
               style="width: 100%; border-radius: 8px; display: block"
@@ -315,7 +305,7 @@
 
         <!-- Column 2: brand logo + tagline -->
         <div class="footer__brand">
-          <img
+          <img loading="lazy"
             src="images/CS_Quimicos_Logo_transparent.png"
             alt="CS Químicos"
             style="width: 100px; height: auto"
@@ -405,7 +395,7 @@
           >© 2026 EASI Soluciones · Acacías, Colombia</span
         >
         <span class="footer__copy-text">Todos los derechos reservados</span>
-        <span class="footer__copy-text">1.0.0-alpha.1</span>
+        <span class="footer__copy-text">Versión 1</span>
         <a
           href="privacy-policy.html"
           class="footer__copy-text"
@@ -420,5 +410,14 @@
       src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
     ></script>
     <script src="js/shared.js"></script>
+
+    <!-- Cookie Notice -->
+    <div class="cookie-notice" id="cookieNotice" role="dialog" aria-label="Aviso de cookies">
+      <p class="cookie-notice__text">
+        Este sitio usa cookies de Google Analytics para medir el tráfico.
+        <a href="/privacy-policy.html">Más información</a>
+      </p>
+      <button class="cookie-notice__btn" id="cookieAccept">Entendido</button>
+    </div>
   </body>
 </html>

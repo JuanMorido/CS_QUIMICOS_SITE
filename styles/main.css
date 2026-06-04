@@ -42,3 +42,6 @@
 
 /* 11. Contacto page: map + form, info cards */
 @import url('11-contacto.css');
+
+/* 13. Cookie notice — floating consent banner (all pages) */
+@import url('13-cookie-notice.css');

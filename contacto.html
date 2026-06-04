@@ -455,7 +455,7 @@
             </ul>
           </div>
           <div class="footer__brand">
-            <img
+            <img loading="lazy"
               src="images/CS_Quimicos_Logo_transparent.png"
               alt="CS Químicos"
               style="width: 100px; height: auto"
@@ -688,6 +688,14 @@
               btn.textContent = "¡Mensaje enviado!";
               btn.style.background = "#2d6a4f";
               document.getElementById("contact-form").reset();
+
+              // GA4 conversion event — contact form submit
+              if (typeof gtag === "function") {
+                gtag("event", "generate_lead", {
+                  event_category: "contact",
+                  event_label: "form_contacto",
+                });
+              }
             })
             .catch(function (error) {
               console.error("EmailJS error:", error);
@@ -744,5 +752,14 @@
           }
         });
     </script>
+
+    <!-- Cookie Notice -->
+    <div class="cookie-notice" id="cookieNotice" role="dialog" aria-label="Aviso de cookies">
+      <p class="cookie-notice__text">
+        Este sitio usa cookies de Google Analytics para medir el tráfico.
+        <a href="/privacy-policy.html">Más información</a>
+      </p>
+      <button class="cookie-notice__btn" id="cookieAccept">Entendido</button>
+    </div>
   </body>
 </html>

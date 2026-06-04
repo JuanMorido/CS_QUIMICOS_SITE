@@ -1,0 +1,74 @@
+/* ============================================================
+   13-cookie-notice.css
+   Floating cookie consent banner shown on first visit.
+   Hidden once user clicks "Entendido" (state persisted in
+   localStorage under key `cs_cookies_accepted`).
+   ============================================================ */
+
+.cookie-notice {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92vw, 520px);
+  background: var(--color-black);
+  color: var(--color-cream);
+  padding: 0.9rem 1.1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  z-index: 9999;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.cookie-notice--hidden {
+  display: none;
+}
+
+.cookie-notice__text {
+  margin: 0;
+  flex: 1;
+}
+
+.cookie-notice__text a {
+  color: var(--color-gold);
+  text-decoration: underline;
+}
+
+.cookie-notice__btn {
+  flex-shrink: 0;
+  padding: 0.55rem 1rem;
+  background: var(--color-gold);
+  color: var(--color-black);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: background 0.2s ease;
+}
+
+.cookie-notice__btn:hover,
+.cookie-notice__btn:focus {
+  background: var(--color-gold-light);
+  outline: none;
+}
+
+@media (max-width: 480px) {
+  .cookie-notice {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 0.6rem;
+  }
+  .cookie-notice__btn {
+    width: 100%;
+  }
+}

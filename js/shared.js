@@ -223,10 +223,27 @@ function initCart() {
   });
 }
 
+// ── Cookie notice ──────────────────────────────────────────
+function initCookieNotice() {
+  const notice = document.getElementById('cookieNotice');
+  if (!notice) return;
+  if (localStorage.getItem('cs_cookies_accepted')) {
+    notice.classList.add('cookie-notice--hidden');
+    return;
+  }
+  const accept = document.getElementById('cookieAccept');
+  if (!accept) return;
+  accept.addEventListener('click', () => {
+    localStorage.setItem('cs_cookies_accepted', '1');
+    notice.classList.add('cookie-notice--hidden');
+  });
+}
+
 // ── Init ───────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initNav();
   initCart();
+  initCookieNotice();
   Cart.updateBadge();
 });
