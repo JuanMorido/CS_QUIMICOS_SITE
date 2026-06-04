@@ -173,7 +173,7 @@ function initCart() {
   }
 
   document.querySelectorAll('[data-cart-open]').forEach(el => el.addEventListener('click', openCart));
-  document.getElementById('cart-close').addEventListener('click', closeCart);
+  document.getElementById('cart-close')?.addEventListener('click', closeCart);
   cartOverlay.addEventListener('click', closeCart);
 
   function renderCart() {
@@ -212,12 +212,12 @@ function initCart() {
     });
   }
 
-  document.getElementById('cart-send').addEventListener('click', () => {
+  document.getElementById('cart-send')?.addEventListener('click', () => {
     const msg = buildWhatsAppOrder();
     if (msg) window.open('https://wa.me/573203188602?text=' + encodeURIComponent(msg), '_blank');
   });
 
-  document.getElementById('cart-clear').addEventListener('click', () => {
+  document.getElementById('cart-clear')?.addEventListener('click', () => {
     Cart.clear();
     renderCart();
   });
@@ -227,10 +227,8 @@ function initCart() {
 function initCookieNotice() {
   const notice = document.getElementById('cookieNotice');
   if (!notice) return;
-  if (localStorage.getItem('cs_cookies_accepted')) {
-    notice.classList.add('cookie-notice--hidden');
-    return;
-  }
+  if (localStorage.getItem('cs_cookies_accepted')) return;
+  notice.classList.remove('cookie-notice--hidden');
   const accept = document.getElementById('cookieAccept');
   if (!accept) return;
   accept.addEventListener('click', () => {

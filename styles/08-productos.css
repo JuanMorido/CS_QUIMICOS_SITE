@@ -958,23 +958,7 @@
   flex: 1;
 }
 .mp-more {
-  align-self: flex-start;
-  font-size: 11px;
-  color: #1C1C1A;
-  text-decoration: underline;
-  opacity: 0.45;
-  transition: opacity 0.15s;
-}
-.mp-more:hover {
-  opacity: 0.85;
-}
-.mp-more--inactive {
-  opacity: 0.25;
-  cursor: default;
-  pointer-events: none;
-}
-.mp-more--inactive:hover {
-  opacity: 0.25;
+  display: none;
 }
 .mp-beaker-btn {
   width: 100%;
