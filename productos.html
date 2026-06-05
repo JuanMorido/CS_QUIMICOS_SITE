@@ -5110,6 +5110,81 @@
           }
         });
 
+      // ── Init: sincronizar foto con tamaño/fragancia activos en carga ──
+      // La migración de pills marca por defecto la primera pill de tamaño como
+      // activa. Si esa pill no tiene foto asociada (ni vía combo, ni data-img),
+      // se cambia la selección por defecto a otra pill que sí la tenga, para
+      // evitar mostrar una imagen que no corresponde al tamaño seleccionado.
+      (function () {
+        function hasImage(card, sizePill, fragPill) {
+          const pid = card.querySelector(".product-card__add")?.dataset.id;
+          const combo = pid && COMBO_IMAGES[pid];
+          if (combo && sizePill && fragPill) {
+            const key =
+              (fragPill.dataset.frag || "") + "|" + (sizePill.dataset.size || "");
+            if (combo[key]) return true;
+          }
+          if (sizePill?.dataset.img) return true;
+          if (!sizePill && fragPill?.dataset.img) return true;
+          return false;
+        }
+
+        document.querySelectorAll(".product-card").forEach((card) => {
+          const img = card.querySelector(".product-card__image img");
+          if (!img) return;
+          const sizePills = Array.from(
+            card.querySelectorAll(".product-card__size"),
+          );
+          const fragPills = Array.from(
+            card.querySelectorAll(".product-card__frag"),
+          );
+          let activeSize = card.querySelector(".product-card__size--active");
+          let activeFrag = card.querySelector(".product-card__frag--active");
+
+          // Si el tamaño activo no tiene foto, busca otro tamaño que sí.
+          if (activeSize && !hasImage(card, activeSize, activeFrag)) {
+            const replacement = sizePills.find((s) =>
+              hasImage(card, s, activeFrag),
+            );
+            if (replacement) {
+              sizePills.forEach((p) =>
+                p.classList.remove("product-card__size--active"),
+              );
+              replacement.classList.add("product-card__size--active");
+              activeSize = replacement;
+            }
+          }
+
+          // Si aun así no hay foto y hay fragancias, prueba otra fragancia.
+          if (
+            activeFrag &&
+            !hasImage(card, activeSize, activeFrag) &&
+            fragPills.length
+          ) {
+            const replacement = fragPills.find((f) =>
+              hasImage(card, activeSize, f),
+            );
+            if (replacement && replacement !== activeFrag) {
+              fragPills.forEach((p) =>
+                p.classList.remove("product-card__frag--active"),
+              );
+              replacement.classList.add("product-card__frag--active");
+              activeFrag = replacement;
+              const cardImg = card.querySelector(".product-card__image");
+              if (cardImg) cardImg.dataset.frag = replacement.dataset.frag || "";
+            }
+          }
+
+          // Aplica la foto: combo > size.data-img > frag.data-img.
+          if (applyComboImage(card)) return;
+          const src = activeSize?.dataset.img || activeFrag?.dataset.img;
+          if (src) {
+            img.src = src;
+            if (activeFrag) img.alt = activeFrag.dataset.frag || img.alt;
+          }
+        });
+      })();
+
       // ── Populate search suggestions ───────────────────────────
       (function () {
         const dl = document.getElementById("product-suggestions");
